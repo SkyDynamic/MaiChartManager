@@ -1,5 +1,3 @@
-# MaiChartManager English Translation File
-
 common:
   save: Save
   cancel: Cancel
@@ -20,7 +18,6 @@ common:
   processing: Processing...
   ok: OK
   management: Management
-
 assetDir:
   title: Opt Management
   create: Create Directory
@@ -41,7 +38,9 @@ assetDir:
   storing: Storing
   storingOfficial: Storing Official Charts
   customChart: Custom Charts
-  dataConfigExists: This directory will be marked as storing official charts due to presence of DataConfig.xml
+  dataConfigExists: >-
+    This directory will be marked as storing official charts due to presence of
+    DataConfig.xml
   aquaMaiMarkDesc: Used by AquaMai to mark this directory as storing official charts
   conflict:
     musicId: Music ID
@@ -53,7 +52,6 @@ assetDir:
     deleteError: Error deleting conflict resources
     deleteSelected: Delete Selected
     noConflict: No conflict resources
-
 music:
   list:
     title: Chart List
@@ -68,12 +66,12 @@ music:
     filterStandard: Standard
     filterDX: DX
     filterUtage: Utage
-    filterGreen: Green
-    filterYellow: Yellow
-    filterRed: Red
-    filterPurple: Purple
-    filterWhite: White
     unknown: Unknown
+    filterBasic: Basic
+    filterMaster: Master
+    filterExpert: Expert
+    filterReMaster: Re:Master
+    filterAdvanced: Advanced
   edit:
     name: Song Title
     artist: Artist
@@ -110,8 +108,12 @@ music:
     setOffsetSeconds: Set Offset (seconds)
     audioOffsetHint: Positive value adds silence at beginning, negative value trims beginning
     setPv: Set PV
-    pvFileHint: Any FFmpeg supported video format or single image (premium feature), or pre-converted DAT file
-    offsetHint: Positive value adds black frame at beginning, negative value trims beginning
+    pvFileHint: >-
+      Any FFmpeg supported video format or single image (premium feature), or
+      pre-converted DAT file
+    offsetHint: >-
+      Positive value adds black frame at beginning, negative value trims
+      beginning
     importPvError: Import PV error
   batch:
     title: Batch Actions
@@ -143,7 +145,6 @@ music:
   save:
     saving: Saving...
     saveSuccess: Config saved successfully
-
 genre:
   title: Genre
   management: Genre Management
@@ -158,8 +159,9 @@ genre:
   selectFileType: Select File Type
   setImageFailed: Failed to set genre image
   setImage: Set Image
-  imageHint: Aspect ratio doesn't matter, but preferably a transparent PNG in landscape orientation. Resolution around 332x160 is best.
-
+  imageHint: >-
+    Aspect ratio doesn't matter, but preferably a transparent PNG in landscape
+    orientation. Resolution around 332x160 is best.
 version:
   title: Version
   management: Version Management
@@ -170,7 +172,6 @@ version:
   imageDescription: Image
   selectFileType: Select File Type
   setImageFailed: Failed to set version image
-
 chart:
   import:
     title: Import Chart
@@ -198,18 +199,27 @@ chart:
       advancedOptions: Advanced Options
       shiftMode: Delay Adjustment Mode
       shiftByBar: By Bar
-      shiftByBarDesc: |-
-        If the rest at the beginning of the chart is less than one bar, add one bar of silence
-        Suitable for most charts, prevents first note timing issues and chart shift problems
+      shiftByBarDesc: >-
+        If the rest at the beginning of the chart is less than one bar, add one
+        bar of silence
+
+        Suitable for most charts, prevents first note timing issues and chart
+        shift problems
+
         First note will appear within the second bar
       shiftLegacy: Legacy
-      shiftLegacyDesc: |-
+      shiftLegacyDesc: >-
         Align the first note to the first beat of the second bar
+
         Default handling in v1.1.1 and earlier versions
-        May cause issues with BPM-changing charts due to non-integer chart shifts
+
+        May cause issues with BPM-changing charts due to non-integer chart
+        shifts
       shiftNoMove: Don't Move Chart
-      shiftNoMoveDesc: |-
-        Don't modify the chart at all, remove &first length from audio (if present)
+      shiftNoMoveDesc: >-
+        Don't modify the chart at all, remove &first length from audio (if
+        present)
+
         May cause first note to appear at odd timing, e.g. immediately at start
       ignoreLevel: Ignore constant, exclude from B50 calculation
       disableBga: Don't import BGA even if present
@@ -221,8 +231,12 @@ chart:
       codecForceVP9: Force VP9 USM
     assignId: Assign ID for new imported songs
     currentProcessing: Currently processing
-    folderHint: Folder containing the following files, or a folder containing multiple such folders
-    addPadding: Will add {padding} seconds of silence to ensure first note is in second bar
+    folderHint: >-
+      Folder containing the following files, or a folder containing multiple
+      such folders
+    addPadding: >-
+      Will add {padding} seconds of silence to ensure first note is in second
+      bar
     trimPadding: Will trim {padding} seconds of audio to ensure first note is in second bar
     addFirst: Will add {first} seconds of silence to match &first value
     trimFirst: Will trim {first} seconds of audio to match &first value
@@ -238,7 +252,6 @@ chart:
   preview:
     title: Preview Chart
     loading: Loading...
-
 mod:
   title: Mod Management
   notInstalled: Not Installed
@@ -257,7 +270,9 @@ mod:
   needEnableOption: Need to enable this option
   unsupportedType: 'Unsupported type: {type}'
   notInstalledTitle: AquaMai Not Installed
-  notInstalledWarningMessage: MelonLoader or AquaMai is not installed, music jackets won't load in game. Click Mod Management to install
+  notInstalledWarningMessage: >-
+    MelonLoader or AquaMai is not installed, music jackets won't load in game.
+    Click Mod Management to install
   dontShowAgain: Don't show again
   versionNotFound: Version not found
   installFailed: Failed to install AquaMai, files may be in use?
@@ -281,7 +296,6 @@ mod:
     button3Desc: Downward triangle button
     button4: Button 4
     button4Desc: Bottom round button
-
 tools:
   title: Tools
   audioConvert: Audio Convert (ACB + AWB)
@@ -296,7 +310,6 @@ tools:
     noScale: Don't scale video to 1080 width
     useYuv420p: Use YUV420P color space
     processing: Still processing, please wait...
-
 error:
   title: Error
   unknown: Unknown error occurred
@@ -311,7 +324,6 @@ error:
     confirm: Got it
   file:
     notSelected: No file selected
-
 message:
   notice: Notice
   saveSuccess: Saved successfully
@@ -321,7 +333,6 @@ message:
   convertSuccess: Conversion complete!
   refreshing: Refreshing...
   refreshAll: Refresh All
-
 copy:
   title: Copy To
   selectTarget: Select target directory
@@ -340,7 +351,6 @@ copy:
   idTypeChangeWarningTitle: Continuing may change music properties
   idTypeChangeWarning: Such as DX/Standard chart type, Utage, etc. Continue?
   changeIdError: Error occurred while changing ID
-
 purchase:
   title: Premium Features
   storePurchase: Store Purchase
@@ -359,29 +369,26 @@ purchase:
     changeId: Change music ID
     batchExport: Batch export music as new Opt
     batchMaidata: Batch convert music to Maidata
-
 startup:
   error: Error occurred during startup
   errorList: Error List
   fixPrompt: Please fix these issues, otherwise MaiChartManager may not work as expected
-
 feedback:
   none: None
   thanks: Thanks for your feedback!
-
 about:
   title: About
   version: Version
   gameVersion: Game Version
   vp9Enabled: VP9 hardware acceleration enabled
-  vp9Disabled: VP9 hardware acceleration unavailable (enable Intel iGPU for faster video conversion)
+  vp9Disabled: >-
+    VP9 hardware acceleration unavailable (enable Intel iGPU for faster video
+    conversion)
   h264Encoder: H264 Encoder
   premiumActive: Thank you for your support, premium features activated!
   continueSupport: Click here to continue supporting
-
 jacket:
   upload: Upload Jacket
   select: Select Jacket
   setFailed: Set Failed
   replaceFailed: Failed to replace image
-

@@ -19,7 +19,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const filter = ref('')
     const { t } = useI18n();
-    
+
     const nameColumn = reactive({
       title: t('music.list.tableTitle'), key: 'name',
       filterOptionValue: null as string | null,
@@ -99,7 +99,7 @@ export default defineComponent({
           }
         </NFlex>,
         width: '20em',
-        filterOptions: [t('music.list.filterGreen'), t('music.list.filterYellow'), t('music.list.filterRed'), t('music.list.filterPurple'), t('music.list.filterWhite')].map((label, value) => ({ label, value })),
+        filterOptions: [t('music.list.filterBasic'), t('music.list.filterAdvanced'), t('music.list.filterExpert'), t('music.list.filterMaster'), t('music.list.filterReMaster')].map((label, value) => ({ label, value })),
         filter: (value, row) => row.charts![value as number].enable!
       },
       {

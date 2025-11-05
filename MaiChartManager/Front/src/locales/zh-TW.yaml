@@ -1,5 +1,3 @@
-# MaiChartManager 繁體中文翻譯檔案
-
 common:
   save: 儲存
   cancel: 取消
@@ -20,7 +18,6 @@ common:
   processing: 處理中…
   ok: 知道了
   management: 管理
-
 assetDir:
   title: Opt 管理
   create: 建立目錄
@@ -53,7 +50,6 @@ assetDir:
     deleteError: 刪除衝突資源時出錯
     deleteSelected: 刪除選中
     noConflict: 沒有衝突資源
-
 music:
   list:
     title: 譜面列表
@@ -68,12 +64,12 @@ music:
     filterStandard: 標準
     filterDX: DX
     filterUtage: 宴會場
-    filterGreen: 綠
-    filterYellow: 黃
-    filterRed: 紅
-    filterPurple: 紫
-    filterWhite: 白
     unknown: 未知
+    filterBasic: 綠
+    filterMaster: 紫
+    filterExpert: 紅
+    filterReMaster: 白
+    filterAdvanced: 黃
   edit:
     name: 歌曲名稱
     artist: 作者
@@ -143,7 +139,6 @@ music:
   save:
     saving: 儲存中…
     saveSuccess: 儲存設定檔案成功
-
 genre:
   title: 流派
   management: 流派管理
@@ -159,7 +154,6 @@ genre:
   setImageFailed: 設定分類圖片失敗
   setImage: 設定圖片
   imageHint: 圖片比例無所謂，但是最好是差不多那個比例的橫向透明 PNG 圖片。解析度在 332x160 左右最好。
-
 version:
   title: 版本
   management: 版本管理
@@ -170,7 +164,6 @@ version:
   imageDescription: 圖片
   selectFileType: 選擇檔案類型
   setImageFailed: 設定分類圖片失敗
-
 chart:
   import:
     title: 匯入譜面
@@ -238,7 +231,6 @@ chart:
   preview:
     title: 預覽譜面
     loading: 載入中…
-
 mod:
   title: Mod 管理
   notInstalled: 未安裝
@@ -281,7 +273,6 @@ mod:
     button3Desc: 向下的三角鍵
     button4: 按鍵 4
     button4Desc: 最下方的圓形按鍵
-
 tools:
   title: 工具
   audioConvert: 音訊轉換（ACB + AWB）
@@ -296,7 +287,6 @@ tools:
     noScale: 不要縮放影片到 1080 寬度
     useYuv420p: 使用 YUV420P 色彩空間
     processing: 還在處理，別急…
-
 error:
   title: 錯誤
   unknown: 發生未知錯誤
@@ -311,7 +301,6 @@ error:
   feedbackError: 回饋錯誤
   file:
     notSelected: 未選擇檔案
-
 message:
   notice: 提示
   saveSuccess: 儲存成功
@@ -321,7 +310,6 @@ message:
   convertSuccess: 轉換完成！
   refreshing: 重新整理中…
   refreshAll: 重新整理全部
-
 copy:
   title: 複製到
   selectTarget: 選擇目標目錄
@@ -340,7 +328,6 @@ copy:
   idTypeChangeWarningTitle: 繼續的話可能會改變樂曲屬性
   idTypeChangeWarning: 比如說 DX 和標準樂譜、宴會場之類。要繼續嗎？
   changeIdError: 修改 ID 時出現錯誤
-
 purchase:
   title: 贊助版功能
   storePurchase: Store 購買
@@ -359,16 +346,13 @@ purchase:
     changeId: 修改歌曲 ID
     batchExport: 批次將樂曲匯出成新的 Opt
     batchMaidata: 批次將樂曲轉換成 Maidata
-
 startup:
   error: 啟動過程中發生錯誤
   errorList: 錯誤列表
   fixPrompt: 請盡量修復這些問題，否則 MaiChartManager 可能無法按預期工作
-
 feedback:
   none: 無
   thanks: 感謝大佬的回饋！
-
 about:
   title: 關於
   version: 版本
@@ -378,10 +362,8 @@ about:
   h264Encoder: H264 編碼器
   premiumActive: 感謝你的支援，贊助版功能已啟用！
   continueSupport: 如果還想繼續贊助請點擊
-
 jacket:
   upload: 上傳封面
   select: 選擇封面
   setFailed: 設定失敗
   replaceFailed: 替換圖片失敗
-

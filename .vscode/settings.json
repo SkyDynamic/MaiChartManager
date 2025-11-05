@@ -26,5 +26,7 @@
     "i18n-ally.localesPaths": [
         "D:/Projects/mai/Sitreamai/MaiChartManager/Front/src/locales",
         "MaiChartManager/Front/src/locales"
-    ]
+    ],
+    "i18n-ally.sourceLanguage": "zh",
+    "i18n-ally.keystyle": "nested"
 }
