@@ -5,18 +5,20 @@ import AssetDirDisplay from "@/components/AssetDirsManager/AssetDirDisplay";
 import CreateButton from "./CreateButton";
 import api from "@/client/api";
 import ImportLocalButton from "./ImportLocalButton";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const show = ref(false);
+    const { t } = useI18n();
 
     return () => <NButton secondary onClick={() => show.value = true}>
-      Opt 管理
+      {t('assetDir.title')}
 
       <NModal
         preset="card"
         class="w-80em max-w-100dvw"
-        title="Opt 管理"
+        title={t('assetDir.title')}
         v-model:show={show.value}
       >
         <NFlex vertical size="large">

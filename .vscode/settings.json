@@ -22,5 +22,9 @@
         "titleBar.inactiveBackground": "#f594bb99",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#f594bb"
+    "peacock.color": "#f594bb",
+    "i18n-ally.localesPaths": [
+        "D:/Projects/mai/Sitreamai/MaiChartManager/Front/src/locales",
+        "MaiChartManager/Front/src/locales"
+    ]
 }

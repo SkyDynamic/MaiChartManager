@@ -5,6 +5,7 @@ import EditProps from "@/components/MusicList/BatchActionButton/EditProps";
 import { MusicXmlWithABJacket } from "@/client/apiGen";
 import ChooseAction from "@/components/MusicList/BatchActionButton/ChooseAction";
 import ProgressDisplay from "@/components/MusicList/BatchActionButton/ProgressDisplay";
+import { useI18n } from 'vue-i18n';
 
 export enum STEP {
   None,
@@ -18,6 +19,7 @@ export default defineComponent({
   setup(props) {
     const step = ref(STEP.None);
     const selectedMusic = ref<MusicXmlWithABJacket[]>([]);
+    const { t } = useI18n();
 
     const show = () => {
       step.value = STEP.Select;
@@ -25,12 +27,12 @@ export default defineComponent({
     }
 
     return () => <NButton secondary onClick={show}>
-      批量操作与搜索
+      {t('music.batch.batchAndSearch')}
 
       <NModal
         preset="card"
         class={step.value === STEP.Select ? "w-[min(90vw,120em)]" : "w-[min(50vw,60em)]"}
-        title="批量操作"
+        title={t('music.batch.title')}
         show={step.value !== STEP.None}
         onUpdateShow={() => step.value = STEP.None}
         maskClosable={false}

@@ -8,6 +8,7 @@ import GenreInput from "@/components/GenreInput";
 import VersionInput from "@/components/VersionInput";
 import { UTAGE_GENRE } from "@/consts";
 import MusicIdConflictNotifier from "@/components/MusicIdConflictNotifier";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -20,6 +21,8 @@ export default defineComponent({
     errors: {type: Array as PropType<ImportChartMessageEx[]>, required: true}
   },
   setup(props, {emit}) {
+    const { t } = useI18n();
+    
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -34,7 +37,7 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class="w-[min(50vw,50em)]"
-      title="导入提示"
+      title={t('chart.import.importPrompt')}
       v-model:show={show.value}
     >{{
       default: () => <NFlex vertical size="large">
@@ -82,60 +85,55 @@ export default defineComponent({
           </NFlex>
         </NScrollbar>
         {!!props.meta.length && <>
-            为新导入的歌曲指定 ID
+            {t('chart.import.assignId')}
             <NScrollbar class="max-h-24vh">
                 <NFlex vertical size="large">
                   {props.meta.map((meta, i) => <MusicIdInput key={i} meta={meta} utage={props.savedOptions.genreId === UTAGE_GENRE}/>)}
                 </NFlex>
             </NScrollbar>
-            <NFormItem label="流派" labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.genre')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
                 <GenreInput options={genreList.value} v-model:value={props.savedOptions.genreId}/>
             </NFormItem>
-            <NFormItem label="版本分类" labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.versionCategory')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
                 <GenreInput options={addVersionList.value} v-model:value={props.savedOptions.addVersionId}/>
             </NFormItem>
-            <NFormItem label="版本" labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.version')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
                 <VersionInput v-model:value={props.savedOptions.version}/>
             </NFormItem>
             <NCheckbox v-model:checked={props.savedOptions.ignoreLevel}>
-                忽略定数，不参与 B50 计算
+                {t('chart.import.option.ignoreLevel')}
             </NCheckbox>
             <NCheckbox v-model:checked={props.savedOptions.disableBga}>
-                有 BGA 也不要导入
+                {t('chart.import.option.disableBga')}
             </NCheckbox>
             <NCollapse>
-                <NCollapseItem title="高级选项">
+                <NCollapseItem title={t('chart.import.option.advancedOptions')}>
                     <NFlex vertical>
-                        <NFormItem label="延迟调整模式" labelPlacement="left" showFeedback={false}>
+                        <NFormItem label={t('chart.import.option.shiftMode')} labelPlacement="left" showFeedback={false}>
                             <NFlex vertical class="w-full">
                                 <NFlex class="h-34px" align="center">
                                     <NRadioGroup v-model:value={props.tempOptions.shift}>
                                         <NPopover trigger="hover">
                                           {{
-                                            trigger: () => <NRadio value={ShiftMethod.Bar} label="按小节"/>,
+                                            trigger: () => <NRadio value={ShiftMethod.Bar} label={t('chart.import.option.shiftByBar')}/>,
                                             default: () => <div>
-                                              如果谱面前面的休止符长度小于一小节，那就在前面加上一小节的空白<br/>
-                                              适用于大部分谱面，防止第一个音符出现的时机奇怪和平移谱面引起的奇怪问题<br/>
-                                              第一个音符会在第二小节之内出来
+                                              {t('chart.import.option.shiftByBarDesc')}
                                             </div>
                                           }}
                                         </NPopover>
                                         <NPopover trigger="hover">
                                           {{
-                                            trigger: () => <NRadio value={ShiftMethod.Legacy} label="旧版"/>,
+                                            trigger: () => <NRadio value={ShiftMethod.Legacy} label={t('chart.import.option.shiftLegacy')}/>,
                                             default: () => <div>
-                                              将谱面的第一押对准第二小节的第一拍<br/>
-                                              v1.1.1 及以前版本默认的处理方式<br/>
-                                              可能会因为谱面非整数平移而引起一些比如说 BPM 变化的谱面出现问题
+                                              {t('chart.import.option.shiftLegacyDesc')}
                                             </div>
                                           }}
                                         </NPopover>
                                         <NPopover trigger="hover">
                                           {{
-                                            trigger: () => <NRadio value={ShiftMethod.NoShift} label="不移动谱面"/>,
+                                            trigger: () => <NRadio value={ShiftMethod.NoShift} label={t('chart.import.option.shiftNoMove')}/>,
                                             default: () => <div>
-                                              完全不修改谱面，从音频中删除 &first 的长度（如果有）<br/>
-                                              可能会导致第一个音符出现的时机比较奇怪，比如说刚开始就有音符
+                                              {t('chart.import.option.shiftNoMoveDesc')}
                                             </div>
                                           }}
                                         </NPopover>
@@ -144,21 +142,21 @@ export default defineComponent({
                             </NFlex>
                         </NFormItem>
                         <NCheckbox v-model:checked={props.savedOptions.noScale}>
-                            不要缩放 BGA 到 1080 宽度，此选项会记住
+                            {t('chart.import.option.noScale')}
                         </NCheckbox>
-                        <NFormItem label="PV 编码" labelPlacement="left" showFeedback={false}>
+                        <NFormItem label={t('chart.import.option.pvCodec')} labelPlacement="left" showFeedback={false}>
                             <NFlex vertical class="w-full">
                                 <NFlex class="h-34px" align="center">
                                     <NSelect v-model:value={props.savedOptions.movieCodec} options={[
-                                      {label: '优先 H264', value: MOVIE_CODEC.PreferH264},
-                                      {label: '强制 H264', value: MOVIE_CODEC.ForceH264},
-                                      {label: '强制 VP9 USM', value: MOVIE_CODEC.ForceVP9},
+                                      {label: t('chart.import.option.codecPreferH264'), value: MOVIE_CODEC.PreferH264},
+                                      {label: t('chart.import.option.codecForceH264'), value: MOVIE_CODEC.ForceH264},
+                                      {label: t('chart.import.option.codecForceVP9'), value: MOVIE_CODEC.ForceVP9},
                                     ]}/>
                                 </NFlex>
                             </NFlex>
                         </NFormItem>
                         <NCheckbox v-model:checked={props.savedOptions.yuv420p}>
-                            转换 USM 时使用 YUV420P 颜色空间
+                            {t('chart.import.option.yuv420p')}
                         </NCheckbox>
                     </NFlex>
                 </NCollapseItem>
@@ -166,8 +164,8 @@ export default defineComponent({
         </>}
       </NFlex>,
       footer: () => <NFlex justify="end">
-        <NButton onClick={() => show.value = false}>{props.meta.length ? '取消' : '关闭'}</NButton>
-        {!!props.meta.length && <NButton onClick={props.proceed}>继续</NButton>}
+        <NButton onClick={() => show.value = false}>{props.meta.length ? t('common.cancel') : t('common.close')}</NButton>
+        {!!props.meta.length && <NButton onClick={props.proceed}>{t('purchase.continue')}</NButton>}
       </NFlex>
     }}</NModal>;
   }

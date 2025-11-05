@@ -17,19 +17,24 @@ public class LocaleController(StaticSettings settings, ILogger<LocaleController>
     [HttpPost]
     public void SetLocale([FromBody] string locale)
     {
-        if (locale != "zh" && locale != "en")
+        if (locale != "zh" && locale != "zh-TW" && locale != "en")
         {
-            throw new ArgumentException("Invalid locale. Must be 'zh' or 'en'");
+            throw new ArgumentException("Invalid locale. Must be 'zh', 'zh-TW', or 'en'");
         }
 
         StaticSettings.CurrentLocale = locale;
         StaticSettings.Config.Locale = locale;
-
+        
         // 设置当前线程的 Culture
-        var culture = new CultureInfo(locale == "zh" ? "zh-CN" : "en-US");
+        var culture = locale switch
+        {
+            "zh" => new CultureInfo("zh-CN"),
+            "zh-TW" => new CultureInfo("zh-TW"),
+            _ => new CultureInfo("en-US")
+        };
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
-
+        
         // 保存配置文件
         try
         {

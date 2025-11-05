@@ -4,18 +4,13 @@ import GenreInput from "@/components/GenreInput";
 import { addVersionList, genreList, globalCapture, selectedADir, selectMusicId, updateMusicList, version } from "@/store/refs";
 import api from "@/client/api";
 import { MusicXmlWithABJacket } from "@/client/apiGen";
+import { useI18n } from 'vue-i18n';
 
 enum VERSION_OPTION {
   NotChange,
   B35,
   B15
 }
-
-const versionOptions = [
-  {label: '不修改', value: VERSION_OPTION.NotChange},
-  {label: 'B35', value: VERSION_OPTION.B35},
-  {label: 'B15', value: VERSION_OPTION.B15},
-]
 
 export default defineComponent({
   props: {
@@ -28,6 +23,13 @@ export default defineComponent({
     const genre = ref(-1);
     const removeLevels = ref(false);
     const loading = ref(false);
+    const { t } = useI18n();
+    
+    const versionOptions = [
+      {label: t('music.batch.notChange'), value: VERSION_OPTION.NotChange},
+      {label: 'B35', value: VERSION_OPTION.B35},
+      {label: 'B15', value: VERSION_OPTION.B15},
+    ];
 
     const save = async () => {
       loading.value = true;
@@ -49,7 +51,7 @@ export default defineComponent({
         selectMusicId.value = 0;
         updateMusicList();
       } catch (e) {
-        globalCapture(e, "批量修改失败");
+        globalCapture(e, t('music.batch.editFailed'));
       } finally {
         loading.value = false;
       }
@@ -57,24 +59,24 @@ export default defineComponent({
 
     return () => <NForm showFeedback={false} labelPlacement="top" disabled={loading.value}>
       <NFlex vertical>
-        <NFormItem label="版本">
+        <NFormItem label={t('music.edit.version')}>
           <NSelect v-model:value={versionOpt.value} options={versionOptions}/>
         </NFormItem>
-        <NFormItem label="流派">
+        <NFormItem label={t('music.edit.genre')}>
           <GenreInput options={[
-            {id: -1, genreName: '不修改'},
+            {id: -1, genreName: t('music.batch.notChange')},
             ...genreList.value
           ]} v-model:value={genre.value}/>
         </NFormItem>
-        <NFormItem label="版本分类">
+        <NFormItem label={t('music.edit.versionCategory')}>
           <GenreInput options={[
-            {id: -1, genreName: '不修改'},
+            {id: -1, genreName: t('music.batch.notChange')},
             ...addVersionList.value
           ]} v-model:value={addVersion.value}/>
         </NFormItem>
-        <NCheckbox v-model:checked={removeLevels.value}>移除定数，不计入 B50</NCheckbox>
+        <NCheckbox v-model:checked={removeLevels.value}>{t('music.batch.removeLevels')}</NCheckbox>
         <NFlex justify="end">
-          <NButton loading={loading.value} onClick={save}>保存</NButton>
+          <NButton loading={loading.value} onClick={save}>{t('common.save')}</NButton>
         </NFlex>
       </NFlex>
     </NForm>

@@ -3,6 +3,7 @@ import { NButton, NFlex, NFormItem, NInput, NModal } from "naive-ui";
 import { GetAssetsDirsResult } from "@/client/apiGen";
 import api from "@/client/api";
 import { selectMusicId, updateAssetDirs, updateMusicList } from "@/store/refs";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -19,6 +20,7 @@ export default defineComponent({
     const content = ref('');
     const name = ref('');
     const load = ref(false);
+    const { t } = useI18n();
 
     watch(() => props.show, async (newValue, oldValue) => {
       if (newValue) {
@@ -60,13 +62,13 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class="w-[min(60vw,80em)]"
-      title="编辑"
+      title={t('common.edit')}
       v-model:show={show.value}
       maskClosable={false}
     >{{
       default: () =>
         <NFlex vertical size="large">
-          {props.name === 'add' && <NFormItem label="名称" labelPlacement="left" showFeedback={false}>
+          {props.name === 'add' && <NFormItem label={t('assetDir.memoName')} labelPlacement="left" showFeedback={false}>
             <NInput v-model:value={name.value}/>
           </NFormItem>}
           <NInput type="textarea" v-model:value={content.value} class="h-60vh" disabled={load.value} resizable={false}/>
@@ -75,8 +77,8 @@ export default defineComponent({
         <NFlex justify="space-between">
           {props.name !== 'add' ? <NButton secondary onClick={del} loading={deleteLoading.value} type={deleteConfirm.value ? 'error' : 'default'}
             // @ts-ignore
-                                           onMouseleave={() => deleteConfirm.value = false}>删除</NButton> : <div/>}
-          <NButton secondary onClick={save}>保存</NButton>
+                                           onMouseleave={() => deleteConfirm.value = false}>{t('common.delete')}</NButton> : <div/>}
+          <NButton secondary onClick={save}>{t('common.save')}</NButton>
         </NFlex>
     }}</NModal>;
   }

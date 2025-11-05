@@ -3,6 +3,7 @@ import {IEntryState, ISectionState} from "@/client/apiGen";
 import api from "@/client/api";
 import {modInfo, updateModInfo} from "@/store/refs";
 import {NButton, NFlex} from "naive-ui";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -11,6 +12,7 @@ export default defineComponent({
   },
   setup(props, {emit}) {
     const load = ref(false)
+    const { t } = useI18n();
 
     const installAssets = async () => {
       load.value = true
@@ -20,9 +22,9 @@ export default defineComponent({
     }
 
     return () => <NFlex class="p-l-10em translate-y--5" align="center">
-      {modInfo.value?.isJudgeDisplay4BInstalled ? <NFlex class="c-green-6">资源已安装</NFlex> : <NFlex class="c-orange">资源未安装</NFlex>}
+      {modInfo.value?.isJudgeDisplay4BInstalled ? <NFlex class="c-green-6">{t('mod.resourcesInstalled')}</NFlex> : <NFlex class="c-orange">{t('mod.resourcesNotInstalled')}</NFlex>}
       <NButton secondary onClick={installAssets} loading={load.value}>
-        {modInfo.value?.isJudgeDisplay4BInstalled ? "重新安装" : "安装资源"}
+        {modInfo.value?.isJudgeDisplay4BInstalled ? t('mod.reinstall') : t('mod.installResources')}
       </NButton>
     </NFlex>;
   },

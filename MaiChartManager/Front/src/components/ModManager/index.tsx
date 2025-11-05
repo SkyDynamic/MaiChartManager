@@ -5,12 +5,14 @@ import ModNotInstalledWarning from "@/components/ModManager/ModNotInstalledWarni
 import ConfigEditor from "@/components/ModManager/ConfigEditor";
 import { modInfo } from "@/store/refs";
 import { shouldShowUpdate } from "@/components/ModManager/shouldShowUpdateController";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const isWarningConfirmed = useStorage('isWarningConfirmed', false);
     const showWarning = ref(false);
     const showConfigurator = ref(false);
+    const { t } = useI18n();
 
     watchOnce(() => modInfo.value, async (info) => {
       if (!info) return;
@@ -27,7 +29,7 @@ export default defineComponent({
     return () => <>
       <NBadge dot show={!!badgeType.value} type={badgeType.value as any}>
         <NButton secondary onClick={() => showConfigurator.value = true}>
-          Mod 管理
+          {t('mod.title')}
         </NButton>
       </NBadge>
       <ModNotInstalledWarning show={showWarning.value} closeModal={(dismiss: boolean) => {

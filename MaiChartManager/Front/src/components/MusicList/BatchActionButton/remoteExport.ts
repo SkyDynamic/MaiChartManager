@@ -7,6 +7,7 @@ import { MAIDATA_SUBDIR, OPTIONS } from "@/components/MusicList/BatchActionButto
 import { useNotification } from "naive-ui";
 import { getUrl } from "@/client/api";
 import { addVersionList, genreList } from "@/store/refs";
+import { t } from '@/locales';
 
 export default async (setStep: (step: STEP) => void, musicList: MusicXmlWithABJacket[], action: OPTIONS, notify: ReturnType<typeof useNotification>, dirOption: MAIDATA_SUBDIR) => {
   let folderHandle: FileSystemDirectoryHandle;
@@ -65,10 +66,10 @@ export default async (setStep: (step: STEP) => void, musicList: MusicXmlWithABJa
           let dir = '';
           switch (dirOption) {
             case MAIDATA_SUBDIR.Genre:
-              dir = genreList.value.find(genre => genre.id === music.genreId)?.genreName || '未知';
+              dir = genreList.value.find(genre => genre.id === music.genreId)?.genreName || t('music.list.unknown');
               break;
             case MAIDATA_SUBDIR.Version:
-              dir = addVersionList.value.find(version => version.id === music.addVersionId)?.genreName || '未知';
+              dir = addVersionList.value.find(version => version.id === music.addVersionId)?.genreName || t('music.list.unknown');
               break;
           }
           if (dir) {
@@ -82,7 +83,7 @@ export default async (setStep: (step: STEP) => void, musicList: MusicXmlWithABJa
       } catch (e) {
         console.error(e);
         notify.error({
-          title: '导出失败',
+          title: t('error.exportFailed'),
           content: music.name!,
         })
       }

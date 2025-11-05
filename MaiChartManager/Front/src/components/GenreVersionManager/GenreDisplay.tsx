@@ -6,6 +6,7 @@ import { updateAddVersionList, updateGenreList } from "@/store/refs";
 import Color from "color";
 import SetImageButton from "./SetImageButton";
 import { EDIT_TYPE } from "./index";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -22,6 +23,7 @@ export default defineComponent({
       set: value => _color.value = value,
     })
     const dialog = useDialog();
+    const { t } = useI18n();
 
     const save = async () => {
       props.setEdit(false);
@@ -51,7 +53,7 @@ export default defineComponent({
       }
       if (res.error) {
         const error = res.error as any;
-        dialog.warning({title: '删除失败', content: error.message || error});
+        dialog.warning({title: t('music.delete.deleteFailed'), content: error.message || error});
         return;
       }
       updateGenreList();

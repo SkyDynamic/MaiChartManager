@@ -8,6 +8,7 @@ import { LEVEL_COLOR, LEVELS } from "@/consts";
 import _ from "lodash";
 import { watchDebounced } from "@vueuse/core";
 import { dxdata } from '@gekichumai/dxdata';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -17,8 +18,10 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const filter = ref('')
+    const { t } = useI18n();
+    
     const nameColumn = reactive({
-      title: '标题', key: 'name',
+      title: t('music.list.tableTitle'), key: 'name',
       filterOptionValue: null as string | null,
       filter: (value, row) => {
         if (!value) return true;
@@ -40,14 +43,14 @@ export default defineComponent({
         key: 'id',
         width: '7em',
         sorter: 'default',
-        filterOptions: ['标准', 'DX', '宴会场'].map(it => ({ label: it, value: it })),
+        filterOptions: [t('music.list.filterStandard'), t('music.list.filterDX'), t('music.list.filterUtage')].map(it => ({ label: it, value: it })),
         filter: (value, row) => {
           switch (value) {
-            case '标准':
+            case t('music.list.filterStandard'):
               return row.id! < 1e4;
-            case 'DX':
+            case t('music.list.filterDX'):
               return row.id! >= 1e4 && row.id! < 1e5;
-            case '宴会场':
+            case t('music.list.filterUtage'):
               return row.id! >= 1e5;
             default:
               throw new Error('Invalid filter value');
@@ -55,14 +58,14 @@ export default defineComponent({
         }
       },
       {
-        title: '封面',
+        title: t('music.list.tableCover'),
         key: 'jacket',
         render: (row) => <JacketBox info={row} upload={false} class="h-20"/>,
         width: '8rem'
       },
       nameColumn,
       {
-        title: '版本',
+        title: t('music.list.tableVersion'),
         key: 'version',
         width: '8em',
         sorter: 'default',
@@ -73,21 +76,21 @@ export default defineComponent({
         }
       },
       {
-        title: '添加版本',
+        title: t('music.list.tableAddVersion'),
         key: 'addVersionId',
         render: (row) => <GenreOption genre={addVersionList.value.find(it => it.id === row.addVersionId)}/>,
         filter: (value, row) => row.addVersionId === value,
         filterOptions: addVersionList.value.map(it => ({ label: it.genreName!, value: it.id! }))
       },
       {
-        title: '流派',
+        title: t('music.list.tableGenre'),
         key: 'genreId',
         render: (row) => <GenreOption genre={genreList.value.find(it => it.id === row.genreId)}/>,
         filter: (value, row) => row.genreId === value,
         filterOptions: genreList.value.map(it => ({ label: it.genreName!, value: it.id! }))
       },
       {
-        title: '谱面',
+        title: t('music.list.tableCharts'),
         key: 'charts',
         render: (row) => <NFlex class="pt-1 text-sm" size="small">
           {
@@ -96,11 +99,11 @@ export default defineComponent({
           }
         </NFlex>,
         width: '20em',
-        filterOptions: ['绿', '黄', '红', '紫', '白'].map((label, value) => ({ label, value })),
+        filterOptions: [t('music.list.filterGreen'), t('music.list.filterYellow'), t('music.list.filterRed'), t('music.list.filterPurple'), t('music.list.filterWhite')].map((label, value) => ({ label, value })),
         filter: (value, row) => row.charts![value as number].enable!
       },
       {
-        title: '跳转',
+        title: t('music.list.tableJump'),
         key: 'jump',
         width: '5em',
         render: (row) => <NButton quaternary class="p-2" onClick={() => {
@@ -135,7 +138,7 @@ export default defineComponent({
       {/*    emit('update:selectedMusicIds', musicListAll.value.filter(it => !props.selectedMusicIds!.includes(it)));*/}
       {/*  }}>反选</NButton>*/}
       {/*</NFlex>*/}
-      <NInput placeholder="搜索名称 / 作曲 / 谱师 / 别名 / ID" v-model:value={filter.value}/>
+      <NInput placeholder={t('music.list.searchPlaceholder')} v-model:value={filter.value}/>
       <NDataTable
         columns={columns.value}
         data={musicListAll.value}
@@ -147,7 +150,7 @@ export default defineComponent({
         v-model:checkedRowKeys={selectedMusicIds.value}
       />
       <NFlex justify="end">
-        <NButton onClick={() => props.continue()} disabled={!selectedMusicIds.value.length}>继续</NButton>
+        <NButton onClick={() => props.continue()} disabled={!selectedMusicIds.value.length}>{t('purchase.continue')}</NButton>
       </NFlex>
     </NFlex>;
   }

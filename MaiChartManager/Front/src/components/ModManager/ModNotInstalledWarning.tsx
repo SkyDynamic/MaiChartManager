@@ -1,5 +1,6 @@
 import { computed, defineComponent } from "vue";
 import { NButton, NFlex, NModal } from "naive-ui";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -7,6 +8,8 @@ export default defineComponent({
     closeModal: {type: Function, required: true}
   },
   setup(props, {emit}) {
+    const { t } = useI18n();
+    
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -14,12 +17,12 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class="w-[min(35vw,45em)]"
-      title="没有安装 AquaMai"
+      title={t('mod.notInstalledTitle')}
       v-model:show={show.value}
     >{{
-      default: () => '没有安装 MelonLoader 或者 AquaMai，在游戏中将无法加载歌曲封面。请点击 Mod 管理来安装',
+      default: () => t('mod.notInstalledWarningMessage'),
       footer: () => <NFlex justify="end">
-        <NButton onClick={() => props.closeModal(true)}>不再提示</NButton>
+        <NButton onClick={() => props.closeModal(true)}>{t('mod.dontShowAgain')}</NButton>
       </NFlex>
     }}</NModal>;
   }

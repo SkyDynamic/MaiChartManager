@@ -6,6 +6,7 @@ import { KeyCodeName } from "./types/KeyCodeName";
 import { getNameForPath } from "./utils";
 import comments from "./modComments.yaml";
 import { KeyCodeID } from "./types/KeyCodeID";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -13,6 +14,7 @@ export default defineComponent({
     entryState: { type: Object as PropType<IEntryState>, required: true },
   },
   setup(props, { emit }) {
+    const { t } = useI18n();
     return () => <NFormItem label={getNameForPath(props.entry.path!, props.entry.name!, props.entry.attribute?.comment?.nameZh)} labelPlacement="left" labelWidth="9em" showFeedback={false}
       // @ts-ignore
                             title={props.entry.path!}
@@ -45,9 +47,9 @@ export default defineComponent({
               case 'AquaMai.Config.Types.KeyCodeID':
                 return <NSelect v-model:value={props.entryState.value} options={Object.entries(KeyCodeID).map(([label, value]) => ({label, value}))}/>;
             }
-            return `不支持的类型: ${props.entry.fieldType}`;
+            return t('mod.unsupportedType', { type: props.entry.fieldType });
           })()}
-          {comments.shouldEnableOptions[props.entry.path!] && !props.entryState.value && <ProblemsDisplay problems={['需要开启此选项']}/>}
+          {comments.shouldEnableOptions[props.entry.path!] && !props.entryState.value && <ProblemsDisplay problems={[t('mod.needEnableOption')]}/>}
         </NFlex>
         {comments.commentOverrides[props.entry.path!] || props.entry.attribute?.comment?.commentZh}
       </NFlex>

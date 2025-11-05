@@ -3,15 +3,7 @@ import { CheckConflictEntry } from "@/client/apiGen";
 import api from "@/client/api";
 import { DataTableColumns, NButton, NDataTable, NFlex } from "naive-ui";
 import { globalCapture } from "@/store/refs";
-
-const columns: DataTableColumns<CheckConflictEntry> = [
-  {type: 'selection'},
-  {title: '歌曲 ID', key: 'musicId'},
-  {title: '歌曲名称', key: 'musicName'},
-  {title: '被覆盖的资源', key: 'lowerDir'},
-  {title: '覆盖的资源', key: 'upperDir'},
-  {title: '文件名', key: 'fileName'},
-]
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -21,6 +13,16 @@ export default defineComponent({
     const data = ref<(CheckConflictEntry & { key: number })[]>([]);
     const selectedIds = ref<number[]>([]);
     const load = ref(true);
+    const { t } = useI18n();
+    
+    const columns: DataTableColumns<CheckConflictEntry> = [
+      {type: 'selection'},
+      {title: t('assetDir.conflict.musicId'), key: 'musicId'},
+      {title: t('assetDir.conflict.musicName'), key: 'musicName'},
+      {title: t('assetDir.conflict.lowerDir'), key: 'lowerDir'},
+      {title: t('assetDir.conflict.upperDir'), key: 'upperDir'},
+      {title: t('assetDir.conflict.fileName'), key: 'fileName'},
+    ];
 
     const update = async () => {
       selectedIds.value = [];
@@ -29,7 +31,7 @@ export default defineComponent({
         data.value = req.data.map((it, idx) => ({...it, key: idx}));
         load.value = false;
       } catch (e) {
-        globalCapture(e, '检查冲突时出错');
+        globalCapture(e, t('assetDir.conflict.checkError'));
       }
     }
 
@@ -46,13 +48,13 @@ export default defineComponent({
         selectedIds.value = [];
         await api.DeleteAssets(req);
       } catch (e) {
-        globalCapture(e, '删除冲突资源时出错');
+        globalCapture(e, t('assetDir.conflict.deleteError'));
       }
       update();
     }
 
     return () => <NFlex size="large">
-      <NButton onClick={requestDelete} disabled={!selectedIds.value.length}>删除选中</NButton>
+      <NButton onClick={requestDelete} disabled={!selectedIds.value.length}>{t('assetDir.conflict.deleteSelected')}</NButton>
       <NDataTable
         columns={columns}
         data={data.value}
@@ -60,7 +62,7 @@ export default defineComponent({
         loading={load.value}
         max-height="70vh"
       >{{
-        empty: () => <div class="c-neutral">没有冲突资源</div>,
+        empty: () => <div class="c-neutral">{t('assetDir.conflict.noConflict')}</div>,
       }}</NDataTable>
     </NFlex>;
   }

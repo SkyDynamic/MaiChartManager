@@ -14,11 +14,13 @@ import { HardwareAccelerationStatus, LicenseStatus } from "@/client/apiGen";
 import CopyToButton from "@/components/CopyToButton";
 import TransitionOpacity from '@/components/TransitionOpacity';
 import Tools from '@/components/Tools';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup() {
     const notification = useNotification();
     const dialog = useDialog();
+    const { t } = useI18n();
 
     onMounted(async () => {
       document.title = `MaiChartManager (${location.host})`
@@ -34,14 +36,14 @@ export default defineComponent({
       if (window.showDirectoryPicker === undefined) {
         const showError = () => {
           dialog.error({
-            title: '警告：不支持的浏览器',
-            content: '部分功能可能受到限制，请使用最新版电脑端的 Chrome 或 Edge 浏览器',
-            positiveText: '知道了',
+            title: t('error.browserUnsupported.title'),
+            content: t('error.browserUnsupported.content'),
+            positiveText: t('error.browserUnsupported.confirm'),
           })
         }
         window.showDirectoryPicker = () => {
           showError()
-          throw new DOMException('不支持的浏览器', 'AbortError')
+          throw new DOMException(t('error.browserUnsupported.title'), 'AbortError')
         }
         showError()
       }
@@ -54,7 +56,7 @@ export default defineComponent({
       try {
         await updateAll();
       } catch (err) {
-        globalCapture(err, "初始化失败")
+        globalCapture(err, t('error.initFailed'))
       }
     })
 
@@ -88,7 +90,7 @@ export default defineComponent({
 
             {!!selectedMusic.value && <CopyToButton />}
             {selectedADir.value === 'A000' ?
-              '请选择一个 A000 以外的目录来编辑' :
+              t('assetDir.selectNonA000') :
               <>
                 <MusicSelectedTopRightToolbar />
                 <ImportCreateChartButton />

@@ -2,19 +2,21 @@ import { NButton, NButtonGroup, NDropdown } from "naive-ui";
 import { defineComponent, ref } from "vue";
 import ImportChartButton from "./ImportChartButton";
 import CreateMusicModal from "@/components/ImportCreateChartButton/CreateMusicModal";
+import { useI18n } from 'vue-i18n';
 
 enum OPTION {
   None,
   CreateMusic,
 }
 
-const options = [
-  {label: "创建乐曲", key: OPTION.CreateMusic},
-]
-
 export default defineComponent({
   setup(props) {
     const current = ref(OPTION.None)
+    const { t } = useI18n();
+    
+    const options = [
+      {label: t('chart.import.create'), key: OPTION.CreateMusic},
+    ];
 
     const handleSelect = (key: OPTION) => {
       current.value = key;

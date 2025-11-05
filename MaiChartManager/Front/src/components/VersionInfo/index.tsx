@@ -5,11 +5,13 @@ import { version } from "@/store/refs";
 import StorePurchaseButton from "@/components/StorePurchaseButton";
 import AfdianIcon from "@/icons/afdian.svg";
 import { HardwareAccelerationStatus, LicenseStatus } from "@/client/apiGen";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const show = ref(false);
     const displayVersion = computed(() => version.value?.version?.split('+')[0]);
+    const { t } = useI18n();
 
     return () => version.value && <NButton quaternary round onClick={() => show.value = true}>
       v{displayVersion.value}
@@ -17,7 +19,7 @@ export default defineComponent({
       <NModal
         preset="card"
         class="w-60em max-w-100dvw"
-        title="关于"
+        title={t('about.title')}
         v-model:show={show.value}
       >
         <NFlex vertical class="text-4" size="large">
@@ -33,36 +35,36 @@ export default defineComponent({
             </NPopover>
           </div>
           <div>
-            版本: {version.value.version}
+            {t('about.version')}: {version.value.version}
           </div>
           <div>
-            游戏版本: 1.{version.value.gameVersion}
+            {t('about.gameVersion')}: 1.{version.value.gameVersion}
           </div>
           {version.value.hardwareAcceleration === HardwareAccelerationStatus.Enabled && <div>
-            VP9 硬件加速作用中
+            {t('about.vp9Enabled')}
           </div>}
           {version.value.hardwareAcceleration === HardwareAccelerationStatus.Disabled && <div>
-            VP9 硬件加速不可用（开启英特尔核显可加速视频转码）
+            {t('about.vp9Disabled')}
           </div>}
           <div>
-            H264 编码器: {version.value.h264Encoder}
+            {t('about.h264Encoder')}: {version.value.h264Encoder}
           </div>
           {version.value.license === LicenseStatus.Active && <div>
-            感谢你的支持，赞助版功能已启用！
+            {t('about.premiumActive')}
             <NA
               // @ts-ignore
               href="https://afdian.com/a/Clansty"
               target="_blank"
-            >如果还想继续赞助请点击</NA>
+            >{t('about.continueSupport')}</NA>
           </div>}
           {version.value.license === LicenseStatus.Inactive && <NFlex align="center">
-            赞助以帮助开发并获取更多功能
+            {t('purchase.supportDev')}
             <StorePurchaseButton/>
             <NButton secondary onClick={() => window.open("https://afdian.com/item/90b4d1fe70e211efab3052540025c377")}>
               <span class="text-lg c-#946ce6 mr-2 translate-y-.25">
                 <AfdianIcon/>
               </span>
-              爱发电
+              {t('purchase.afdian')}
             </NButton>
           </NFlex>}
         </NFlex>

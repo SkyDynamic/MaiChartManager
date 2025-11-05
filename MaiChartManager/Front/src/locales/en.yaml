@@ -1,0 +1,387 @@
+# MaiChartManager English Translation File
+
+common:
+  save: Save
+  cancel: Cancel
+  confirm: Confirm
+  delete: Delete
+  edit: Edit
+  create: Create
+  import: Import
+  export: Export
+  refresh: Refresh
+  close: Close
+  back: Back
+  next: Next
+  previous: Previous
+  selectAll: Select All
+  deselectAll: Deselect All
+  loading: Loading...
+  processing: Processing...
+  ok: OK
+  management: Management
+
+assetDir:
+  title: Opt Management
+  create: Create Directory
+  delete: Delete Directory
+  import: Import Local Directory
+  selectNonA000: Please select a directory other than A000 to edit
+  conflictOverrides: Overrides music with same ID in following directories
+  conflictOverriddenBy: Overridden by music with same ID in following directories
+  memo: Memo
+  memos: Memos
+  memoName: Name
+  officialChart: Official Chart
+  checkConflict: Check Conflicts
+  conflictCheck: Resource Conflict Check
+  checking: Checking...
+  noConflict: No conflicts found
+  dirExists: Directory with same name already exists
+  storing: Storing
+  storingOfficial: Storing Official Charts
+  customChart: Custom Charts
+  dataConfigExists: This directory will be marked as storing official charts due to presence of DataConfig.xml
+  aquaMaiMarkDesc: Used by AquaMai to mark this directory as storing official charts
+  conflict:
+    musicId: Music ID
+    musicName: Music Name
+    lowerDir: Overridden Resource
+    upperDir: Overriding Resource
+    fileName: File Name
+    checkError: Error checking conflicts
+    deleteError: Error deleting conflict resources
+    deleteSelected: Delete Selected
+    noConflict: No conflict resources
+
+music:
+  list:
+    title: Chart List
+    searchPlaceholder: Search title / composer / charter / alias / ID
+    tableTitle: Title
+    tableCover: Cover
+    tableVersion: Version
+    tableAddVersion: Add Version
+    tableGenre: Genre
+    tableCharts: Charts
+    tableJump: Jump
+    filterStandard: Standard
+    filterDX: DX
+    filterUtage: Utage
+    filterGreen: Green
+    filterYellow: Yellow
+    filterRed: Red
+    filterPurple: Purple
+    filterWhite: White
+    unknown: Unknown
+  edit:
+    name: Song Title
+    artist: Artist
+    bpm: BPM
+    genre: Genre
+    version: Version
+    versionCategory: Version Category
+    addVersion: Add Version
+    utageType: Utage Type
+    utageComment: Utage Comment
+    jacket: Jacket
+    audioPreview: Preview
+    editPreview: Edit Preview
+    movie: Movie
+    charts: Charts
+    chartEnable: Enable
+    chartAuthor: Author
+    chartLevel: Display Level
+    chartConstant: Constant
+    chartNoteCount: Note Count
+    supportedFileTypes: Supported File Types
+    selectFileTypes: Selectable File Types
+    audioImportError: Audio import error
+    audioPreviewError: Audio preview time error
+    audioPreviewStartGtEnd: Start time cannot be greater than end time
+    audioPreviewEndLtStart: End time cannot be less than start time
+    audioPreviewSaveFailed: Failed to save audio preview
+    setAudio: Set Audio
+    replaceAudio: Replace Audio
+    cueIdNotMatch: Custom CueID set in XML, cannot replace audio here
+    cueIdNotMatchPreview: Custom CueID set in XML, cannot modify settings here
+    movieIdNotMatch: Custom MovieID set in XML, cannot replace PV here
+    selectAwb: Please select corresponding AWB file
+    setOffsetSeconds: Set Offset (seconds)
+    audioOffsetHint: Positive value adds silence at beginning, negative value trims beginning
+    setPv: Set PV
+    pvFileHint: Any FFmpeg supported video format or single image (premium feature), or pre-converted DAT file
+    offsetHint: Positive value adds black frame at beginning, negative value trims beginning
+    importPvError: Import PV error
+  batch:
+    title: Batch Actions
+    batchAndSearch: Batch Actions & Search
+    selectMusic: Select Music
+    editProperties: Edit Properties
+    removeLevels: Remove constants, exclude from B50
+    exportOriginal: Export as Opt (Original)
+    exportPreserveFormat: Export as Opt (Preserve Format, Remove Events)
+    exportMa2Format: Export as Opt (Ma2 103 Format, Remove Events)
+    convertToMaidata: Convert to Maidata
+    convertToMaidataNoVideo: Convert to Maidata (No BGA)
+    subdirOption:
+      none: Flat
+      genre: Group by Genre
+      version: Group by Version
+    selectedA000Warning: You selected songs from A000 directory
+    chooseAction: Choose Action
+    progress: Progress
+    exporting: Exporting...
+    notChange: Not Change
+    editFailed: Batch edit failed
+  delete:
+    confirm: Confirm
+    confirmDelete: Confirm Delete
+    confirmMessage: Are you sure you want to delete this music?
+    deleteFailed: Delete failed
+    deleteError: Failed to delete music
+  save:
+    saving: Saving...
+    saveSuccess: Config saved successfully
+
+genre:
+  title: Genre
+  management: Genre Management
+  categoryManagement: Category Management
+  showBuiltIn: Show Built-in
+  create: Create Genre
+  createFailed: Creation failed
+  edit: Edit Genre
+  delete: Delete Genre
+  image: Genre Icon
+  imageDescription: Image
+  selectFileType: Select File Type
+  setImageFailed: Failed to set genre image
+  setImage: Set Image
+  imageHint: Aspect ratio doesn't matter, but preferably a transparent PNG in landscape orientation. Resolution around 332x160 is best.
+
+version:
+  title: Version
+  management: Version Management
+  create: Create Version
+  edit: Edit Version
+  delete: Delete Version
+  image: Version Icon
+  imageDescription: Image
+  selectFileType: Select File Type
+  setImageFailed: Failed to set version image
+
+chart:
+  import:
+    title: Import Chart
+    create: Create Music
+    selectFiles: Select Files
+    checking: Checking...
+    checkingTitle: Checking...
+    importing: Importing...
+    importingTitle: Importing...
+    importPrompt: Import Prompt
+    chartType: Chart Type
+    cancel: Cancel
+    close: Close
+    step:
+      selectFolder: Select Folder
+      checking: Checking Charts
+      importing: Importing
+      done: Done
+      createMusic: Create Music
+      convertChart: Convert Charts
+      convertAudio: Convert Audio
+      convertVideo: Convert Video
+      importJacket: Import Jacket
+    option:
+      advancedOptions: Advanced Options
+      shiftMode: Delay Adjustment Mode
+      shiftByBar: By Bar
+      shiftByBarDesc: |-
+        If the rest at the beginning of the chart is less than one bar, add one bar of silence
+        Suitable for most charts, prevents first note timing issues and chart shift problems
+        First note will appear within the second bar
+      shiftLegacy: Legacy
+      shiftLegacyDesc: |-
+        Align the first note to the first beat of the second bar
+        Default handling in v1.1.1 and earlier versions
+        May cause issues with BPM-changing charts due to non-integer chart shifts
+      shiftNoMove: Don't Move Chart
+      shiftNoMoveDesc: |-
+        Don't modify the chart at all, remove &first length from audio (if present)
+        May cause first note to appear at odd timing, e.g. immediately at start
+      ignoreLevel: Ignore constant, exclude from B50 calculation
+      disableBga: Don't import BGA even if present
+      noScale: Don't scale BGA to 1080 width, this option will be remembered
+      pvCodec: PV Codec
+      yuv420p: Use YUV420P color space when converting USM
+      codecPreferH264: Prefer H264
+      codecForceH264: Force H264
+      codecForceVP9: Force VP9 USM
+    assignId: Assign ID for new imported songs
+    currentProcessing: Currently processing
+    folderHint: Folder containing the following files, or a folder containing multiple such folders
+    addPadding: Will add {padding} seconds of silence to ensure first note is in second bar
+    trimPadding: Will trim {padding} seconds of audio to ensure first note is in second bar
+    addFirst: Will add {first} seconds of silence to match &first value
+    trimFirst: Will trim {first} seconds of audio to match &first value
+    error:
+      noMaidata: maidata.txt not found
+      noAudio: Audio file not found
+      noBackground: Background image not found
+      convertPaidFeature: Converting PV is currently a premium feature, click to get
+      videoConvertFailed: Video conversion failed
+      notFoundImportable: No importable music found
+      importError: Import music error
+      importErrorGlobal: Import music error (global)
+  preview:
+    title: Preview Chart
+    loading: Loading...
+
+mod:
+  title: Mod Management
+  notInstalled: Not Installed
+  notInstalledWarning: AquaMai or MelonLoader not installed
+  updateAvailable: Update Available
+  config: Configuration
+  install: Install
+  reinstall: Reinstall
+  installResources: Install Resources
+  resourcesInstalled: Resources installed
+  resourcesNotInstalled: Resources not installed
+  update: Update
+  search: Search
+  searchPlaceholder: Search config...
+  other: Other
+  needEnableOption: Need to enable this option
+  unsupportedType: 'Unsupported type: {type}'
+  notInstalledTitle: AquaMai Not Installed
+  notInstalledWarningMessage: MelonLoader or AquaMai is not installed, music jackets won't load in game. Click Mod Management to install
+  dontShowAgain: Don't show again
+  versionNotFound: Version not found
+  installFailed: Failed to install AquaMai, files may be in use?
+  installMelonLoaderFailed: Failed to install MelonLoader
+  saveConfigFailed: Failed to save AquaMai config
+  reinstallUpdate: Reinstall / Update
+  adxHid:
+    disabled: Disabled
+    select1P: 1P Select
+    select2P: 2P Select
+    service: Service
+    test: Test
+    conflictDetected: Conflicting mod detected
+    oneClickDelete: One-click Delete
+    noConflict: No conflicts detected
+    button1: Button 1
+    button1Desc: Upward triangle button
+    button2: Button 2
+    button2Desc: Round button in middle of triangle
+    button3: Button 3
+    button3Desc: Downward triangle button
+    button4: Button 4
+    button4Desc: Bottom round button
+
+tools:
+  title: Tools
+  audioConvert: Audio Convert (ACB + AWB)
+  videoConvert: Video Convert (DAT)
+  converting: Converting...
+  convertSuccess: Conversion complete!
+  convertFailed: Conversion failed
+  videoConvertError: Video conversion error
+  videoOptions:
+    title: Video Conversion Options
+    onlyForUsm: The following options only apply to converting to USM from common formats
+    noScale: Don't scale video to 1080 width
+    useYuv420p: Use YUV420P color space
+    processing: Still processing, please wait...
+
+error:
+  title: Error
+  unknown: Unknown error occurred
+  initFailed: Initialization failed
+  deleteFailed: Delete failed
+  refreshFailed: Refresh failed
+  exportFailed: Export failed
+  feedbackError: Feedback error
+  browserUnsupported:
+    title: 'Warning: Unsupported Browser'
+    content: Some features may be limited, please use latest desktop Chrome or Edge
+    confirm: Got it
+  file:
+    notSelected: No file selected
+
+message:
+  notice: Notice
+  saveSuccess: Saved successfully
+  deleteSuccess: Deleted successfully
+  importSuccess: Imported successfully
+  exportSuccess: Exported successfully
+  convertSuccess: Conversion complete!
+  refreshing: Refreshing...
+  refreshAll: Refresh All
+
+copy:
+  title: Copy To
+  selectTarget: Select target directory
+  changeId: Change ID
+  newId: New ID
+  exportZip: Export Zip
+  exportMaidata: Export as Maidata
+  exportMaidataZip: Export Zip (Maidata)
+  exportMaidataNoVideo: Export as Maidata (No BGA)
+  exportMaidataZipNoVideo: Export Zip (Maidata, No BGA)
+  showInExplorer: Show in Explorer
+  exportError: Export song failed (remote)
+  idExists: ID already exists
+  idExistsConfirm: Overwrite?
+  overwrite: Overwrite
+  idTypeChangeWarningTitle: Continuing may change music properties
+  idTypeChangeWarning: Such as DX/Standard chart type, Utage, etc. Continue?
+  changeIdError: Error occurred while changing ID
+
+purchase:
+  title: Premium Features
+  storePurchase: Store Purchase
+  needPurchase: This feature requires premium version
+  description: This is a premium feature, premium users can use it permanently
+  featuresTitle: 'Currently available premium features include:'
+  moreComingSoon: More features coming soon
+  supportDev: Support development and get more features
+  afdian: Afdian
+  qqGroup: QQ Group
+  needServerSide: You need to purchase on the device running the server
+  continue: Continue
+  feature:
+    convertPv: Convert PV
+    audioPreview: Set audio preview segment
+    changeId: Change music ID
+    batchExport: Batch export music as new Opt
+    batchMaidata: Batch convert music to Maidata
+
+startup:
+  error: Error occurred during startup
+  errorList: Error List
+  fixPrompt: Please fix these issues, otherwise MaiChartManager may not work as expected
+
+feedback:
+  none: None
+  thanks: Thanks for your feedback!
+
+about:
+  title: About
+  version: Version
+  gameVersion: Game Version
+  vp9Enabled: VP9 hardware acceleration enabled
+  vp9Disabled: VP9 hardware acceleration unavailable (enable Intel iGPU for faster video conversion)
+  h264Encoder: H264 Encoder
+  premiumActive: Thank you for your support, premium features activated!
+  continueSupport: Click here to continue supporting
+
+jacket:
+  upload: Upload Jacket
+  select: Select Jacket
+  setFailed: Set Failed
+  replaceFailed: Failed to replace image
+

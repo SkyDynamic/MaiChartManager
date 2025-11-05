@@ -2,6 +2,7 @@ import { defineComponent, PropType, ref, computed, watch } from 'vue';
 import { NFlex, NList, NListItem, NModal } from 'naive-ui';
 import useAsync from "@/hooks/useAsync";
 import api from "@/client/api";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   // props: {
@@ -9,6 +10,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const errors = useAsync(() => api.GetAppStartupErrors())
     const show = ref(false)
+    const { t } = useI18n();
 
     watch(() => errors.data.value, value => {
       if (!value) return
@@ -20,7 +22,7 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class="w-[min(50vw,60em)] bg-#FCEEEE!"
-      title="启动过程中发生错误"
+      title={t('startup.error')}
       v-model:show={show.value}
     >
       <NFlex vertical class="max-h-70vh overflow-y-auto">
@@ -33,7 +35,7 @@ export default defineComponent({
             </NListItem>
           })}
         </NList>
-        请尽量修复这些问题，否则 MaiChartManager 可能无法按预期工作
+        {t('startup.fixPrompt')}
       </NFlex>
     </NModal>;
   },

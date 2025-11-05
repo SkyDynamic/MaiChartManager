@@ -2,6 +2,7 @@ import api from '@/client/api';
 import { NDropdown, NButton, useMessage } from 'naive-ui';
 import { defineComponent, ref } from 'vue';
 import VideoConvertButton from './VideoConvertButton';
+import { useI18n } from 'vue-i18n';
 
 enum DROPDOWN_OPTIONS {
   AudioConvert,
@@ -14,10 +15,11 @@ export default defineComponent({
   setup(props, { emit }) {
     const message = useMessage();
     const videoConvertRef = ref<{ trigger: () => void }>();
+    const { t } = useI18n();
 
     const options = [
-      { label: "音频转换（ACB + AWB）", key: DROPDOWN_OPTIONS.AudioConvert },
-      { label: "视频转换（DAT）", key: DROPDOWN_OPTIONS.VideoConvert },
+      { label: t('tools.audioConvert'), key: DROPDOWN_OPTIONS.AudioConvert },
+      { label: t('tools.videoConvert'), key: DROPDOWN_OPTIONS.VideoConvert },
     ]
 
     const handleOptionClick = async (key: DROPDOWN_OPTIONS) => {
@@ -25,9 +27,9 @@ export default defineComponent({
         case DROPDOWN_OPTIONS.AudioConvert: {
           const res = await api.AudioConvertTool();
           if (res.status === 200) {
-            message.success("转换成功");
+            message.success(t('tools.convertSuccess'));
           } else {
-            message.error("转换失败");
+            message.error(t('tools.convertFailed'));
           }
           break;
         }
@@ -41,7 +43,7 @@ export default defineComponent({
     return () => (location.hostname === 'mcm.invalid' || import.meta.env.DEV) && <>
       <NDropdown options={options} trigger="click" onSelect={handleOptionClick}>
         <NButton secondary>
-          工具
+          {t('tools.title')}
         </NButton>
       </NDropdown>
       <VideoConvertButton ref={videoConvertRef} />

@@ -1,0 +1,387 @@
+# MaiChartManager 繁體中文翻譯檔案
+
+common:
+  save: 儲存
+  cancel: 取消
+  confirm: 確認
+  delete: 刪除
+  edit: 編輯
+  create: 建立
+  import: 匯入
+  export: 匯出
+  refresh: 重新整理
+  close: 關閉
+  back: 返回
+  next: 下一步
+  previous: 上一步
+  selectAll: 全選
+  deselectAll: 取消全選
+  loading: 載入中…
+  processing: 處理中…
+  ok: 知道了
+  management: 管理
+
+assetDir:
+  title: Opt 管理
+  create: 建立目錄
+  delete: 刪除目錄
+  import: 匯入本機目錄
+  selectNonA000: 請選擇一個 A000 以外的目錄來編輯
+  conflictOverrides: 覆蓋了以下目錄中同 ID 的樂曲
+  conflictOverriddenBy: 被以下目錄中同 ID 的樂曲覆蓋
+  memo: 備註
+  memos: 備註
+  memoName: 名稱
+  officialChart: 官譜
+  checkConflict: 檢查衝突
+  conflictCheck: 資源衝突檢查
+  checking: 檢查中…
+  noConflict: 沒有發現衝突
+  dirExists: 相同名稱的目錄已存在
+  storing: 存放
+  storingOfficial: 存放官譜
+  customChart: 自製譜
+  dataConfigExists: 由於存在 DataConfig.xml，該目錄將標記為存放官譜
+  aquaMaiMarkDesc: 用於 AquaMai 標識此目錄存放官譜
+  conflict:
+    musicId: 歌曲 ID
+    musicName: 歌曲名稱
+    lowerDir: 被覆蓋的資源
+    upperDir: 覆蓋的資源
+    fileName: 檔案名稱
+    checkError: 檢查衝突時出錯
+    deleteError: 刪除衝突資源時出錯
+    deleteSelected: 刪除選中
+    noConflict: 沒有衝突資源
+
+music:
+  list:
+    title: 譜面列表
+    searchPlaceholder: 搜尋名稱 / 作曲 / 譜師 / 別名 / ID
+    tableTitle: 標題
+    tableCover: 封面
+    tableVersion: 版本
+    tableAddVersion: 追加版本
+    tableGenre: 流派
+    tableCharts: 譜面
+    tableJump: 跳轉
+    filterStandard: 標準
+    filterDX: DX
+    filterUtage: 宴會場
+    filterGreen: 綠
+    filterYellow: 黃
+    filterRed: 紅
+    filterPurple: 紫
+    filterWhite: 白
+    unknown: 未知
+  edit:
+    name: 歌曲名稱
+    artist: 作者
+    bpm: BPM
+    genre: 流派
+    version: 版本
+    versionCategory: 版本分類
+    addVersion: 追加版本
+    utageType: 宴譜種類
+    utageComment: 宴譜備註
+    jacket: 封面
+    audioPreview: 試聽
+    editPreview: 編輯預覽
+    movie: 影片
+    charts: 譜面
+    chartEnable: 啟用
+    chartAuthor: 作者
+    chartLevel: 顯示等級
+    chartConstant: 定數
+    chartNoteCount: 音符數量
+    supportedFileTypes: 支援的檔案類型
+    selectFileTypes: 可以選擇的檔案類型
+    audioImportError: 匯入音訊出錯
+    audioPreviewError: 音訊預覽時間錯誤
+    audioPreviewStartGtEnd: 開始時間不能大於結束時間
+    audioPreviewEndLtStart: 結束時間不能小於開始時間
+    audioPreviewSaveFailed: 儲存音訊預覽失敗
+    setAudio: 設定音訊
+    replaceAudio: 替換音訊
+    cueIdNotMatch: 由於 XML 內自行設定了不同的 CueID，不支援在這裡替換音訊
+    cueIdNotMatchPreview: 由於 XML 內自行設定了不同的 CueID，不支援在這裡修改設定
+    movieIdNotMatch: 由於 XML 內自行設定了不同的 MovieID，不支援在這裡替換 PV
+    selectAwb: 請選擇對應的 AWB 檔案
+    setOffsetSeconds: 設定偏移（秒）
+    audioOffsetHint: 設為正數可以在歌曲前面添加空白，設為負數則裁掉歌曲前面的一部分
+    setPv: 設定 PV
+    pvFileHint: 任何 FFmpeg 支援的影片格式或單張圖片（贊助版功能），或者已經自行轉換好的 DAT 檔案
+    offsetHint: 設為正數可以在影片前面添加黑場空白，設為負數則裁掉影片前面的一部分
+    importPvError: 匯入 PV 出錯
+  batch:
+    title: 批次操作
+    batchAndSearch: 批次操作與搜尋
+    selectMusic: 選擇樂曲
+    editProperties: 編輯屬性
+    removeLevels: 移除定數，不計入 B50
+    exportOriginal: 匯出為 Opt（原始）
+    exportPreserveFormat: 匯出為 Opt（保持譜面格式，移除 Event 等）
+    exportMa2Format: 匯出為 Opt（Ma2 103 格式，移除 Event 等）
+    convertToMaidata: 轉換為 Maidata
+    convertToMaidataNoVideo: 轉換為 Maidata（無 BGA）
+    subdirOption:
+      none: 平鋪資料夾
+      genre: 按流派分組
+      version: 按版本分組
+    selectedA000Warning: 你選擇了 A000 目錄中的歌曲
+    chooseAction: 選擇操作
+    progress: 進度
+    exporting: 匯出中…
+    notChange: 不修改
+    editFailed: 批次修改失敗
+  delete:
+    confirm: 確認
+    confirmDelete: 確認刪除
+    confirmMessage: 確定要刪除這首樂曲嗎？
+    deleteFailed: 刪除失敗
+    deleteError: 刪除樂曲失敗
+  save:
+    saving: 儲存中…
+    saveSuccess: 儲存設定檔案成功
+
+genre:
+  title: 流派
+  management: 流派管理
+  categoryManagement: 分類管理
+  showBuiltIn: 顯示內建
+  create: 建立流派
+  createFailed: 建立失敗
+  edit: 編輯流派
+  delete: 刪除流派
+  image: 流派圖示
+  imageDescription: 圖片
+  selectFileType: 選擇檔案類型
+  setImageFailed: 設定分類圖片失敗
+  setImage: 設定圖片
+  imageHint: 圖片比例無所謂，但是最好是差不多那個比例的橫向透明 PNG 圖片。解析度在 332x160 左右最好。
+
+version:
+  title: 版本
+  management: 版本管理
+  create: 建立版本
+  edit: 編輯版本
+  delete: 刪除版本
+  image: 版本圖示
+  imageDescription: 圖片
+  selectFileType: 選擇檔案類型
+  setImageFailed: 設定分類圖片失敗
+
+chart:
+  import:
+    title: 匯入譜面
+    create: 建立樂曲
+    selectFiles: 選擇檔案
+    checking: 檢查中…
+    checkingTitle: 正在檢查...
+    importing: 匯入中…
+    importingTitle: 正在匯入...
+    importPrompt: 匯入提示
+    chartType: 譜面類型
+    cancel: 取消
+    close: 關閉
+    step:
+      selectFolder: 選擇資料夾
+      checking: 檢查譜面
+      importing: 匯入中
+      done: 完成
+      createMusic: 建立樂曲
+      convertChart: 轉換譜面
+      convertAudio: 轉碼音訊
+      convertVideo: 轉碼影片
+      importJacket: 匯入封面
+    option:
+      advancedOptions: 進階選項
+      shiftMode: 延遲調整模式
+      shiftByBar: 按小節
+      shiftByBarDesc: |-
+        如果譜面前面的休止符長度小於一小節，那就在前面加上一小節的空白
+        適用於大部分譜面，防止第一個音符出現的時機奇怪和平移譜面引起的奇怪問題
+        第一個音符會在第二小節之內出來
+      shiftLegacy: 舊版
+      shiftLegacyDesc: |-
+        將譜面的第一押對準第二小節的第一拍
+        v1.1.1 及以前版本預設的處理方式
+        可能會因為譜面非整數平移而引起一些比如說 BPM 變化的譜面出現問題
+      shiftNoMove: 不移動譜面
+      shiftNoMoveDesc: |-
+        完全不修改譜面，從音訊中刪除 &first 的長度（如果有）
+        可能會導致第一個音符出現的時機比較奇怪，比如說剛開始就有音符
+      ignoreLevel: 忽略定數，不參與 B50 計算
+      disableBga: 有 BGA 也不要匯入
+      noScale: 不要縮放 BGA 到 1080 寬度，此選項會記住
+      pvCodec: PV 編碼
+      yuv420p: 轉換 USM 時使用 YUV420P 色彩空間
+      codecPreferH264: 優先 H264
+      codecForceH264: 強制 H264
+      codecForceVP9: 強制 VP9 USM
+    assignId: 為新匯入的歌曲指定 ID
+    currentProcessing: 目前正在處理的項目
+    folderHint: 包含以下檔案的資料夾，或者，一個包含一些這樣的資料夾的資料夾
+    addPadding: 將在音訊前面加上 {padding} 秒空白以保證第一押在第二小節
+    trimPadding: 將裁剪 {padding} 秒音訊以保證第一押在第二小節
+    addFirst: 將在音訊前面加上 {first} 秒空白以對應 &first 的值
+    trimFirst: 將裁剪 {first} 秒音訊以對應 &first 的值
+    error:
+      noMaidata: 未找到 maidata.txt
+      noAudio: 未找到音訊檔案
+      noBackground: 未找到背景圖片
+      convertPaidFeature: 轉換 PV 目前是贊助版功能，點擊獲取
+      videoConvertFailed: 影片轉換失敗
+      notFoundImportable: 沒有找到可以匯入的樂曲
+      importError: 匯入樂曲出錯
+      importErrorGlobal: 匯入樂曲出錯（全域）
+  preview:
+    title: 預覽譜面
+    loading: 載入中…
+
+mod:
+  title: Mod 管理
+  notInstalled: 未安裝
+  notInstalledWarning: AquaMai 或 MelonLoader 未安裝
+  updateAvailable: 有可用更新
+  config: 設定
+  install: 安裝
+  reinstall: 重新安裝
+  installResources: 安裝資源
+  resourcesInstalled: 資源已安裝
+  resourcesNotInstalled: 資源未安裝
+  update: 更新
+  search: 搜尋
+  searchPlaceholder: 搜尋設定…
+  other: 其他
+  needEnableOption: 需要開啟此選項
+  unsupportedType: '不支援的類型: {type}'
+  notInstalledTitle: 沒有安裝 AquaMai
+  notInstalledWarningMessage: 沒有安裝 MelonLoader 或者 AquaMai，在遊戲中將無法載入歌曲封面。請點擊 Mod 管理來安裝
+  dontShowAgain: 不再提示
+  versionNotFound: 未找到對應版本
+  installFailed: 安裝 AquaMai 失敗，檔案可能被占用了？
+  installMelonLoaderFailed: 安裝 MelonLoader 失敗
+  saveConfigFailed: 儲存 AquaMai 設定失敗
+  reinstallUpdate: 重新安裝 / 更新
+  adxHid:
+    disabled: 停用
+    select1P: 1P 選擇
+    select2P: 2P 選擇
+    service: 服務
+    test: 測試
+    conflictDetected: 檢測到衝突的 Mod
+    oneClickDelete: 一鍵刪除
+    noConflict: 沒有檢測到衝突
+    button1: 按鍵 1
+    button1Desc: 向上的三角鍵
+    button2: 按鍵 2
+    button2Desc: 三角鍵中間的圓形按鍵
+    button3: 按鍵 3
+    button3Desc: 向下的三角鍵
+    button4: 按鍵 4
+    button4Desc: 最下方的圓形按鍵
+
+tools:
+  title: 工具
+  audioConvert: 音訊轉換（ACB + AWB）
+  videoConvert: 影片轉換（DAT）
+  converting: 正在轉換…
+  convertSuccess: 轉換完成！
+  convertFailed: 轉換失敗
+  videoConvertError: 影片轉換出錯
+  videoOptions:
+    title: 影片轉換選項
+    onlyForUsm: 以下選項僅對通用格式轉換為 USM 生效
+    noScale: 不要縮放影片到 1080 寬度
+    useYuv420p: 使用 YUV420P 色彩空間
+    processing: 還在處理，別急…
+
+error:
+  title: 錯誤
+  unknown: 發生未知錯誤
+  initFailed: 初始化失敗
+  deleteFailed: 刪除失敗
+  refreshFailed: 重新整理失敗
+  browserUnsupported:
+    title: 警告：不支援的瀏覽器
+    content: 部分功能可能受到限制，請使用最新版電腦端的 Chrome 或 Edge 瀏覽器
+    confirm: 知道了
+  exportFailed: 匯出失敗
+  feedbackError: 回饋錯誤
+  file:
+    notSelected: 未選擇檔案
+
+message:
+  notice: 提示
+  saveSuccess: 儲存成功
+  deleteSuccess: 刪除成功
+  importSuccess: 匯入成功
+  exportSuccess: 匯出成功
+  convertSuccess: 轉換完成！
+  refreshing: 重新整理中…
+  refreshAll: 重新整理全部
+
+copy:
+  title: 複製到
+  selectTarget: 選擇目標目錄
+  changeId: 修改 ID
+  newId: 新 ID
+  exportZip: 匯出 Zip
+  exportMaidata: 匯出為 Maidata
+  exportMaidataZip: 匯出 Zip (Maidata)
+  exportMaidataNoVideo: 匯出為 Maidata（無 BGA）
+  exportMaidataZipNoVideo: 匯出 Zip (Maidata，無 BGA)
+  showInExplorer: 在資源管理員中顯示
+  exportError: 匯出歌曲失敗（遠端）
+  idExists: ID 已存在
+  idExistsConfirm: 要覆蓋嗎？
+  overwrite: 覆蓋
+  idTypeChangeWarningTitle: 繼續的話可能會改變樂曲屬性
+  idTypeChangeWarning: 比如說 DX 和標準樂譜、宴會場之類。要繼續嗎？
+  changeIdError: 修改 ID 時出現錯誤
+
+purchase:
+  title: 贊助版功能
+  storePurchase: Store 購買
+  needPurchase: 此功能需要贊助版
+  description: 此功能為贊助版功能，贊助版使用者可永久使用
+  featuresTitle: 目前已推出的贊助版功能包括：
+  moreComingSoon: 更多功能敬請期待
+  supportDev: 贊助以幫助開發並獲取更多功能
+  afdian: 愛發電
+  qqGroup: QQ 群
+  needServerSide: 你需要在執行伺服器端的裝置上操作購買
+  continue: 繼續
+  feature:
+    convertPv: 轉換 PV
+    audioPreview: 設定音訊的預覽片段
+    changeId: 修改歌曲 ID
+    batchExport: 批次將樂曲匯出成新的 Opt
+    batchMaidata: 批次將樂曲轉換成 Maidata
+
+startup:
+  error: 啟動過程中發生錯誤
+  errorList: 錯誤列表
+  fixPrompt: 請盡量修復這些問題，否則 MaiChartManager 可能無法按預期工作
+
+feedback:
+  none: 無
+  thanks: 感謝大佬的回饋！
+
+about:
+  title: 關於
+  version: 版本
+  gameVersion: 遊戲版本
+  vp9Enabled: VP9 硬體加速作用中
+  vp9Disabled: VP9 硬體加速不可用（開啟 Intel 核顯可加速影片轉碼）
+  h264Encoder: H264 編碼器
+  premiumActive: 感謝你的支援，贊助版功能已啟用！
+  continueSupport: 如果還想繼續贊助請點擊
+
+jacket:
+  upload: 上傳封面
+  select: 選擇封面
+  setFailed: 設定失敗
+  replaceFailed: 替換圖片失敗
+

@@ -2,10 +2,12 @@ import { computed, defineComponent, ref, watch } from "vue";
 import { NButton, NFlex, NFormItem, NInput, NModal, useMessage } from "naive-ui";
 import { error, errorContext, errorId } from "@/store/refs";
 import { captureFeedback } from "@sentry/vue";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const nMessage = useMessage();
+    const { t } = useI18n();
 
     const message = computed(() => {
       let msg: string;
@@ -32,16 +34,16 @@ export default defineComponent({
     const report = () => {
       captureFeedback({
         associatedEventId: errorId.value,
-        message: userInput.value || "无",
+        message: userInput.value || t('feedback.none'),
       })
-      nMessage.success("感谢大佬的反馈！");
+      nMessage.success(t('feedback.thanks'));
       error.value = null;
     }
 
     return () => <NModal
       preset="card"
       class="w-[min(50vw,60em)]"
-      title="出错了！"
+      title={t('error.title') + '！'}
       show={!!error.value}
       onUpdateShow={() => error.value = null}
     >

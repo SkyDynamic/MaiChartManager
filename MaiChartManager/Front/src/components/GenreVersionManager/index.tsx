@@ -4,6 +4,7 @@ import GenreDisplay from "./GenreDisplay";
 import { addVersionList, genreList } from "@/store/refs";
 import { useStorage } from "@vueuse/core";
 import CreateButton from "@/components/GenreVersionManager/CreateButton";
+import { useI18n } from 'vue-i18n';
 
 export enum EDIT_TYPE {
   None,
@@ -11,17 +12,18 @@ export enum EDIT_TYPE {
   Version,
 }
 
-const options = [
-  {label: "流派管理", key: EDIT_TYPE.Genre},
-  {label: "版本管理", key: EDIT_TYPE.Version},
-]
-
 export default defineComponent({
   setup(props) {
     const show = ref(EDIT_TYPE.None);
     const showBuiltIn = useStorage('showBuiltInGenre', true);
-    const text = computed(() => show.value === EDIT_TYPE.Genre ? '流派' : '版本');
+    const { t } = useI18n();
+    const text = computed(() => show.value === EDIT_TYPE.Genre ? t('genre.title') : t('version.title'));
     const editingId = ref(-1);
+    
+    const options = [
+      {label: t('genre.management'), key: EDIT_TYPE.Genre},
+      {label: t('version.management'), key: EDIT_TYPE.Version},
+    ];
 
     const list = computed(() => {
       const data = show.value === EDIT_TYPE.Genre ? genreList : addVersionList;
@@ -35,19 +37,19 @@ export default defineComponent({
     return () => (
       <NDropdown options={options} trigger="click" onSelect={handleSelect} placement="bottom-end">
         <NButton secondary class="pr-1">
-          分类管理
+          {t('genre.categoryManagement')}
           <span class="i-mdi-arrow-down-drop text-6 translate-y-.25"/>
 
           <NModal
             preset="card"
             class="w-80em max-w-100dvw"
-            title={`${text.value}管理`}
+            title={`${text.value}${t('common.management')}`}
             show={show.value !== EDIT_TYPE.None}
             onUpdateShow={() => show.value = EDIT_TYPE.None}
           >
             <NFlex vertical>
               <NFlex align="center">
-                <NCheckbox v-model:checked={showBuiltIn.value}>显示内置</NCheckbox>
+                <NCheckbox v-model:checked={showBuiltIn.value}>{t('genre.showBuiltIn')}</NCheckbox>
                 <CreateButton setEditId={id => editingId.value = id} type={show.value}/>
               </NFlex>
               <NScrollbar class="h-80vh">

@@ -2,6 +2,7 @@ import { NButton, NFlex, NFormItem, NInput, NModal } from "naive-ui";
 import { defineComponent, ref } from "vue";
 import AudioPreviewEditor from "@/components/MusicEdit/AudioPreviewEditor";
 import { showNeedPurchaseDialog, version } from "@/store/refs";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -9,6 +10,7 @@ export default defineComponent({
   },
   setup(props) {
     const show = ref(false)
+    const { t } = useI18n();
 
     const handleClick = () => {
       if (version.value?.license !== 'Active') {
@@ -19,12 +21,12 @@ export default defineComponent({
     }
 
     return () => <NButton secondary onClick={handleClick} disabled={props.disabled}>
-      编辑预览
+      {t('music.edit.editPreview')}
 
       <NModal
         preset="card"
         class="w-[min(60vw,80em)]"
-        title="编辑预览"
+        title={t('music.edit.editPreview')}
         v-model:show={show.value}
         maskClosable={false}
         closeOnEsc={false}

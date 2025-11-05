@@ -36,7 +36,7 @@ export default defineComponent({
       <NModal
         preset="card"
         class="w-60vw"
-        title="谱面预览"
+        title={t('chart.preview.title')}
         v-model:show={show.value}
       >
         <NFlex vertical>

@@ -8,6 +8,7 @@ import { useStorage } from "@vueuse/core";
 import _ from "lodash";
 import ModInstallDropdown from "@/components/ModManager/ModInstallDropdown";
 import styles from "./styles.module.sass";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -25,6 +26,7 @@ export default defineComponent({
     const dialog = useDialog()
     const installingMelonLoader = ref(false)
     const message = useMessage();
+    const { t } = useI18n();
 
     const updateAquaMaiConfig = async () => {
       try {
@@ -68,7 +70,7 @@ export default defineComponent({
         await api.InstallMelonLoader()
         await updateModInfo()
       } catch (e: any) {
-        globalCapture(e, "安装 MelonLoader 失败")
+        globalCapture(e, t('mod.installMelonLoaderFailed'))
       } finally {
         installingMelonLoader.value = false
       }
@@ -79,9 +81,9 @@ export default defineComponent({
       try {
         await api.SetAquaMaiConfig(config.value)
         await updateMusicList()
-        message.success("保存配置文件成功")
+        message.success(t('music.save.saveSuccess'))
       } catch (e) {
-        globalCapture(e, "保存 AquaMai 配置失败")
+        globalCapture(e, t('mod.saveConfigFailed'))
       }
     }
     const save = _.debounce(saveImpl, 2000);

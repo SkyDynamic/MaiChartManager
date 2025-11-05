@@ -7,6 +7,7 @@ import { showNeedPurchaseDialog, updateMusicList, version } from "@/store/refs";
 import remoteExport from "@/components/MusicList/BatchActionButton/remoteExport";
 import TransitionVertical from "@/components/TransitionVertical.vue";
 import { useStorage } from "@vueuse/core";
+import { useI18n } from 'vue-i18n';
 
 export enum OPTIONS {
   None,
@@ -32,10 +33,10 @@ export default defineComponent({
   },
   setup(props) {
     const selectedOption = ref(OPTIONS.None);
-    // 导出为 Maidata 的子目录选项
     const selectedMaidataSubdir = useStorage('selectedMaidataSubdir', MAIDATA_SUBDIR.None);
     const load = ref(false);
     const notify = useNotification();
+    const { t } = useI18n();
 
     const proceed = async () => {
       switch (selectedOption.value) {
@@ -81,52 +82,52 @@ export default defineComponent({
                 <NPopover trigger="hover" placement="top-start">{{
                   trigger: () =>
                     <NRadio disabled>
-                      编辑属性
+                      {t('music.batch.editProperties')}
                     </NRadio>,
-                  default: () => '你选择了 A000 目录中的歌曲'
+                  default: () => t('music.batch.selectedA000Warning')
                 }}</NPopover>
                 <NPopover trigger="hover" placement="top-start">{{
                   trigger: () =>
                     <NRadio disabled>
-                      删除
+                      {t('common.delete')}
                     </NRadio>,
-                  default: () => '你选择了 A000 目录中的歌曲'
+                  default: () => t('music.batch.selectedA000Warning')
                 }}</NPopover>
               </> :
               <>
                 <NRadio value={OPTIONS.EditProps}>
-                  编辑属性
+                  {t('music.batch.editProperties')}
                 </NRadio>
                 <NRadio value={OPTIONS.Delete}>
-                  删除
+                  {t('common.delete')}
                 </NRadio>
               </>
           }
           <NRadio value={OPTIONS.CreateNewOpt}>
-            导出为 Opt（原始）
+            {t('music.batch.exportOriginal')}
           </NRadio>
           <NRadio value={OPTIONS.CreateNewOptCompatible}>
-            导出为 Opt（保持谱面格式，移除 Event 等）
+            {t('music.batch.exportPreserveFormat')}
           </NRadio>
           <NRadio value={OPTIONS.CreateNewOptMa2_103}>
-            导出为 Opt（Ma2 103 格式，移除 Event 等）
+            {t('music.batch.exportMa2Format')}
           </NRadio>
           <NRadio value={OPTIONS.ConvertToMaidata}>
-            转换为 Maidata
+            {t('music.batch.convertToMaidata')}
           </NRadio>
           <NRadio value={OPTIONS.ConvertToMaidataIgnoreVideo}>
-            转换为 Maidata（无 BGA）
+            {t('music.batch.convertToMaidataNoVideo')}
           </NRadio>
 
           <TransitionVertical>
             {(selectedOption.value === OPTIONS.ConvertToMaidata || selectedOption.value === OPTIONS.ConvertToMaidataIgnoreVideo) &&
-              <NSelect v-model:value={selectedMaidataSubdir.value} options={[{label: '平铺文件夹', value: MAIDATA_SUBDIR.None}, {label: '按流派分组', value: MAIDATA_SUBDIR.Genre}, {label: '按版本分组', value: MAIDATA_SUBDIR.Version}]}/>}
+              <NSelect v-model:value={selectedMaidataSubdir.value} options={[{label: t('music.batch.subdirOption.none'), value: MAIDATA_SUBDIR.None}, {label: t('music.batch.subdirOption.genre'), value: MAIDATA_SUBDIR.Genre}, {label: t('music.batch.subdirOption.version'), value: MAIDATA_SUBDIR.Version}]}/>}
           </TransitionVertical>
         </NFlex>
       </NRadioGroup>
       <NFlex justify="end">
-        <NButton onClick={() => props.continue(STEP.Select)} disabled={load.value}>上一步</NButton>
-        <NButton onClick={proceed} loading={load.value} disabled={selectedOption.value === OPTIONS.None}>继续</NButton>
+        <NButton onClick={() => props.continue(STEP.Select)} disabled={load.value}>{t('common.previous')}</NButton>
+        <NButton onClick={proceed} loading={load.value} disabled={selectedOption.value === OPTIONS.None}>{t('purchase.continue')}</NButton>
       </NFlex>
     </NFlex>;
   }

@@ -5,6 +5,7 @@ import api, { getUrl } from "@/client/api";
 import SelectFileTypeTip from "@/components/GenreVersionManager/SelectFileTypeTip";
 import { globalCapture, selectedMusic, updateAddVersionList, updateGenreList } from "@/store/refs";
 import { EDIT_TYPE } from "./index";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -14,6 +15,7 @@ export default defineComponent({
   setup(props) {
     const imageUrl = ref('');
     const showTip = ref(false);
+    const { t } = useI18n();
 
     const refresh = async () => {
       if (!props.genre.fileName) return;
@@ -33,7 +35,7 @@ export default defineComponent({
           startIn: 'downloads',
           types: [
             {
-              description: "图片",
+              description: t('genre.imageDescription'),
               accept: {
                 "application/jpeg": [".jpeg", ".jpg"],
                 "application/png": [".png"],
@@ -53,7 +55,7 @@ export default defineComponent({
       } catch (e: any) {
         if (e.name === 'AbortError') return
         console.log(e)
-        globalCapture(e, "设置分类图片失败")
+        globalCapture(e, t('genre.setImageFailed'))
       } finally {
         showTip.value = false;
       }
@@ -63,7 +65,7 @@ export default defineComponent({
       {imageUrl.value ?
         <img src={imageUrl.value} class="max-w-full max-h-3em object-cover cursor-pointer" onClick={startProcess}/> :
         <NButton secondary onClick={startProcess}>
-          设置图片
+          {t('genre.setImage')}
         </NButton>
       }
       <SelectFileTypeTip show={showTip.value}/>

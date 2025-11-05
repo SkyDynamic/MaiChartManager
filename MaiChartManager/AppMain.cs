@@ -73,7 +73,23 @@ public class AppMain : ISingleInstance
             {
                 // 首次启动，从系统语言检测
                 var systemCulture = System.Globalization.CultureInfo.CurrentUICulture;
-                StaticSettings.CurrentLocale = systemCulture.TwoLetterISOLanguageName == "zh" ? "zh" : "en";
+                var cultureName = systemCulture.Name;
+                
+                // 检测语言：简体中文、繁体中文、英文
+                if (cultureName.StartsWith("zh-CN") || cultureName.StartsWith("zh-Hans") || cultureName == "zh")
+                {
+                    StaticSettings.CurrentLocale = "zh";
+                }
+                else if (cultureName.StartsWith("zh-TW") || cultureName.StartsWith("zh-HK") || cultureName.StartsWith("zh-Hant"))
+                {
+                    StaticSettings.CurrentLocale = "zh-TW";
+                }
+                else
+                {
+                    // 非中文系统默认英文
+                    StaticSettings.CurrentLocale = "en";
+                }
+                
                 StaticSettings.Config.Locale = StaticSettings.CurrentLocale;
                 // 保存配置
                 try
@@ -92,7 +108,12 @@ public class AppMain : ISingleInstance
             }
 
             // 设置当前线程的 Culture
-            var culture = new System.Globalization.CultureInfo(StaticSettings.CurrentLocale == "zh" ? "zh-CN" : "en-US");
+            var culture = StaticSettings.CurrentLocale switch
+            {
+                "zh" => new System.Globalization.CultureInfo("zh-CN"),
+                "zh-TW" => new System.Globalization.CultureInfo("zh-TW"),
+                _ => new System.Globalization.CultureInfo("en-US")
+            };
             System.Globalization.CultureInfo.CurrentCulture = culture;
             System.Globalization.CultureInfo.CurrentUICulture = culture;
 

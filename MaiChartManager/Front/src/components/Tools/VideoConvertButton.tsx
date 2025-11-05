@@ -5,6 +5,7 @@ import { useStorage } from '@vueuse/core';
 import { LicenseStatus } from '@/client/apiGen';
 import { globalCapture, showNeedPurchaseDialog, version } from '@/store/refs';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
+import { useI18n } from 'vue-i18n';
 
 enum STEP {
   None,
@@ -24,6 +25,7 @@ export default defineComponent({
     const step = ref(STEP.None);
     const progress = ref(0);
     const videoConvertOptions = useStorage('videoConvertOptions', defaultVideoConvertOptions, undefined, { mergeDefaults: true });
+    const { t } = useI18n();
 
     const handleVideoConvert = async () => {
       step.value = STEP.Progress;
@@ -55,7 +57,7 @@ export default defineComponent({
                 case 'Success':
                   console.log("success", e.data);
                   controller.abort();
-                  message.success("转换完成！");
+                  message.success(t('tools.convertSuccess'));
                   resolve();
                   break;
                 case 'Error':
@@ -69,8 +71,8 @@ export default defineComponent({
       } catch (e: any) {
         if (e?.name === 'AbortError') return;
         console.log(e);
-        if (e.message === '未选择文件') return;
-        globalCapture(e, "视频转换出错");
+        if (e.message === t('error.file.notSelected')) return;
+        globalCapture(e, t('tools.videoConvertError'));
       } finally {
         step.value = STEP.None;
       }
@@ -96,29 +98,29 @@ export default defineComponent({
       <NModal
         preset="card"
         class="w-[min(30vw,25em)]"
-        title="视频转换选项"
+        title={t('tools.videoOptions.title')}
         show={step.value === STEP.Options}
         onUpdateShow={() => step.value = STEP.None}
       >{{
         default: () => <NFlex vertical size="large">
-          <div>以下选项仅对通用格式转换为 USM 生效</div>
+          <div>{t('tools.videoOptions.onlyForUsm')}</div>
           <NCheckbox v-model:checked={videoConvertOptions.value.noScale}>
-            不要缩放视频到 1080 宽度
+            {t('tools.videoOptions.noScale')}
           </NCheckbox>
           <NCheckbox v-model:checked={videoConvertOptions.value.yuv420p}>
-            使用 YUV420P 颜色空间
+            {t('tools.videoOptions.useYuv420p')}
           </NCheckbox>
         </NFlex>,
         footer: () => <NFlex justify="end">
-          <NButton onClick={() => step.value = STEP.None}>取消</NButton>
-          <NButton type="primary" onClick={handleVideoConvert}>确定</NButton>
+          <NButton onClick={() => step.value = STEP.None}>{t('common.cancel')}</NButton>
+          <NButton type="primary" onClick={handleVideoConvert}>{t('common.confirm')}</NButton>
         </NFlex>
       }}</NModal>
 
       <NModal
         preset="card"
         class="w-[min(40vw,40em)]"
-        title="正在转换…"
+        title={t('tools.converting')}
         show={step.value === STEP.Progress}
         closable={false}
         maskClosable={false}
@@ -131,7 +133,7 @@ export default defineComponent({
           indicator-placement="inside"
           processing
         >
-          {progress.value === 100 ? '还在处理，别急…' : `${progress.value}%`}
+          {progress.value === 100 ? t('tools.videoOptions.processing') : `${progress.value}%`}
         </NProgress>
       </NModal>
     </>;

@@ -1,0 +1,156 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <!-- Music Controller -->
+    <data name="MusicIdExists" xml:space="preserve">
+    <value>目前資源目錄裡已經存在這個 ID 了</value>
+  </data>
+    <data name="UnsupportedImageFormat" xml:space="preserve">
+    <value>不支援的圖片格式</value>
+  </data>
+    <!-- Genre Controller -->
+    <data name="GenreIdExists" xml:space="preserve">
+    <value>相同的資源目錄裡已經存在一個 ID 相同的流派了</value>
+  </data>
+    <data name="GenreIdExistsHigherPriority" xml:space="preserve">
+    <value>一個優先級更高的資源目錄裡已經存在一個 ID 相同的流派了，這樣的話，新建立的流派不會被識別
+如果你確實想新建的話，請先刪除以下目錄中已存在的流派</value>
+  </data>
+    <!-- Version Controller -->
+    <data name="VersionIdExists" xml:space="preserve">
+    <value>相同的資源目錄裡已經存在一個 ID 相同的版本了</value>
+  </data>
+    <data name="VersionIdExistsHigherPriority" xml:space="preserve">
+    <value>一個優先級更高的資源目錄裡已經存在一個 ID 相同的版本了，這樣的話，新建立的版本不會被識別
+如果你確實想新建的話，請先刪除以下目錄中已存在的版本</value>
+  </data>
+    <!-- Audio/Video Convert Controller -->
+    <data name="FileNotSelected" xml:space="preserve">
+    <value>未選擇檔案</value>
+  </data>
+    <data name="BrowserNotInitialized" xml:space="preserve">
+    <value>瀏覽器視窗未初始化</value>
+  </data>
+    <data name="ConvertSuccess" xml:space="preserve">
+    <value>轉換完成！</value>
+  </data>
+    <data name="ConvertFailed" xml:space="preserve">
+    <value>轉換失敗: {0}</value>
+  </data>
+    <data name="AcbNotFound" xml:space="preserve">
+    <value>找不到配對的 ACB 檔案: {0}</value>
+  </data>
+    <data name="AwbNotFound" xml:space="preserve">
+    <value>找不到配對的 AWB 檔案: {0}</value>
+  </data>
+    <!-- AssetDir Controller -->
+    <data name="SelectAssetDirectory" xml:space="preserve">
+    <value>請選擇資源目錄（OPT）的資料夾</value>
+  </data>
+    <!-- AppMain -->
+    <data name="ConfigCorrupted" xml:space="preserve">
+    <value>看起來設定檔案損壞了…已經重置設定檔案</value>
+  </data>
+    <data name="ConfigCorruptedTitle" xml:space="preserve">
+    <value>不太對勁</value>
+  </data>
+    <data name="WebView2NotInstalled" xml:space="preserve">
+    <value>WebView2 執行階段未安裝，在啟動之後可能會白屏…
+
+如果你覺得你已經安裝了 WebView2 執行階段，請嘗試重新啟動電腦。
+
+要嘗試安裝一下 WebView2 嗎？</value>
+  </data>
+    <data name="WebView2NotInstalledTitle" xml:space="preserve">
+    <value>WebView2 未安裝</value>
+  </data>
+    <!-- Launcher -->
+    <data name="LauncherSelectGameDir" xml:space="preserve">
+    <value>選擇遊戲目錄</value>
+  </data>
+    <data name="LauncherStart" xml:space="preserve">
+    <value>啟動</value>
+  </data>
+    <data name="LauncherStop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+    <data name="LauncherExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+    <data name="LauncherGameDir" xml:space="preserve">
+    <value>遊戲目錄</value>
+  </data>
+    <data name="LauncherOpenToLan" xml:space="preserve">
+    <value>開放到區域網路</value>
+  </data>
+    <data name="LauncherStartup" xml:space="preserve">
+    <value>開機自動執行</value>
+  </data>
+    <data name="LauncherNeedLogin" xml:space="preserve">
+    <value>需要登入</value>
+  </data>
+    <data name="PathNotExist" xml:space="preserve">
+    <value>選擇的路徑不存在！</value>
+  </data>
+    <data name="PathContainsSpecialChars" xml:space="preserve">
+    <value>警告：路徑中包含特殊字元或中文，可能會導致 MelonLoader 之類的工具出現相容性問題，請將目錄移動至英文路徑！</value>
+  </data>
+    <data name="PathContainsSpecialCharsTitle" xml:space="preserve">
+    <value>警告</value>
+  </data>
+    <data name="PathNotGameDir" xml:space="preserve">
+    <value>選擇的路徑中看起來不包含遊戲檔案，請選擇 Sinmai.exe 所在的資料夾</value>
+  </data>
+    <data name="OfflineActivationPrompt" xml:space="preserve">
+    <value>請輸入啟用碼</value>
+  </data>
+    <data name="OfflineActivationTitle" xml:space="preserve">
+    <value>離線啟用</value>
+  </data>
+    <data name="ActivationCodeInvalid" xml:space="preserve">
+    <value>啟用碼無效</value>
+  </data>
+    <data name="ActivationSuccess" xml:space="preserve">
+    <value>贊助版功能已啟用，謝謝你</value>
+  </data>
+    <!-- StaticSettings -->
+    <data name="GameDirNotSpecified" xml:space="preserve">
+    <value>未指定遊戲目錄</value>
+  </data>
+    <data name="InitDataDirError" xml:space="preserve">
+    <value>初始化資料目錄時出錯</value>
+  </data>
+    <data name="LoadMusicDataFailed" xml:space="preserve">
+    <value>載入樂曲資料 {0} 失敗: {1}</value>
+  </data>
+    <data name="LoadGenreDataFailed" xml:space="preserve">
+    <value>載入分類資料 {0} 失敗: {1}</value>
+  </data>
+    <data name="LoadVersionDataFailed" xml:space="preserve">
+    <value>載入版本資料 {0} 失敗: {1}</value>
+  </data>
+    <data name="GameVersionNotFound" xml:space="preserve">
+    <value>無法取得遊戲版本號，解析資料失敗</value>
+  </data>
+    <data name="GameVersionNotFoundTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+    <data name="GameVersionError" xml:space="preserve">
+    <value>無法取得遊戲版本號，可能是因為 A000\DataConfig.xml 找不到或者有錯誤</value>
+  </data>
+    <!-- ServerManager -->
+    <data name="UnknownError" xml:space="preserve">
+    <value>未知錯誤</value>
+  </data>
+</root>
+

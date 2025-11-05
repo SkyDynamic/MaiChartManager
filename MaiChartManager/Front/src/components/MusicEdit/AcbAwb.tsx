@@ -36,7 +36,7 @@ export default defineComponent({
           startIn: 'downloads',
           types: [
             {
-              description: "支持的文件类型",
+              description: t('music.edit.supportedFileTypes'),
               accept: {
                 "application/x-supported": [".mp3", ".wav", ".ogg", ".acb"],
               },
@@ -55,7 +55,7 @@ export default defineComponent({
             startIn: 'downloads',
             types: [
               {
-                description: "支持的文件类型",
+                description: t('music.edit.supportedFileTypes'),
                 accept: {
                   "application/x-supported": [".awb"],
                 },
@@ -80,7 +80,7 @@ export default defineComponent({
         }
         if (res.error) {
           const error = res.error as any;
-          dialog.warning({ title: '设置失败', content: error.message || error });
+          dialog.warning({ title: t('jacket.setFailed'), content: error.message || error });
           return;
         }
         updateTime.value = Date.now()
@@ -88,7 +88,7 @@ export default defineComponent({
       } catch (e: any) {
         if (e.name === 'AbortError') return
         console.log(e)
-        globalCapture(e, "导入音频出错")
+        globalCapture(e, t('music.edit.audioImportError'))
       } finally {
         tipShow.value = false;
         tipSelectAwbShow.value = false;
@@ -101,26 +101,26 @@ export default defineComponent({
       {props.song.isAcbAwbExist && <audio controls src={url.value} class="w-0 grow"/>}
       {selectedADir.value !== 'A000' &&
         <NPopover trigger="hover" disabled={!cueIdNotMatch.value}>{{
-          trigger: () => <NButton secondary class={`${!props.song.isAcbAwbExist && "w-full"}`} onClick={uploadFlow} loading={load.value} disabled={cueIdNotMatch.value}>{props.song.isAcbAwbExist ? '替换' : '设置'}音频</NButton>,
-          default: () => '由于 XML 内自行设置了不同的 CueID，不支持在这里替换音频'
+          trigger: () => <NButton secondary class={`${!props.song.isAcbAwbExist && "w-full"}`} onClick={uploadFlow} loading={load.value} disabled={cueIdNotMatch.value}>{props.song.isAcbAwbExist ? t('music.edit.replaceAudio') : t('music.edit.setAudio')}</NButton>,
+          default: () => t('music.edit.cueIdNotMatch')
         }}</NPopover>
       }
       {selectedADir.value !== 'A000' && props.song.isAcbAwbExist &&
         <NPopover trigger="hover" disabled={!cueIdNotMatch.value}>{{
           trigger: () => <AudioPreviewEditorButton disabled={cueIdNotMatch.value}/>,
-          default: () => '由于 XML 内自行设置了不同的 CueID，不支持在这里修改设置'
+          default: () => t('music.edit.cueIdNotMatchPreview')
         }}</NPopover>
       }
       {selectedADir.value !== 'A000' && props.song.isAcbAwbExist &&
         <NPopover trigger="hover" disabled={!movieIdNotMatch.value}>{{
           trigger: () => <SetMovieButton song={props.song} disabled={movieIdNotMatch.value}/>,
-          default: () => '由于 XML 内自行设置了不同的 MovieID，不支持在这里替换 PV'
+          default: () => t('music.edit.movieIdNotMatch')
         }}</NPopover>
       }
 
       {/* 打开文件对话框一般在左上角，所以在下边显示一个 Drawer */}
       <NDrawer v-model:show={tipShow.value} height={200} placement="bottom">
-        <NDrawerContent title="可以选择的文件类型">
+        <NDrawerContent title={t('music.edit.selectFileTypes')}>
           <div class="grid cols-4 justify-items-center text-8em gap-10">
             <FileTypeIcon type="WAV"/>
             <FileTypeIcon type="MP3"/>
@@ -130,20 +130,20 @@ export default defineComponent({
         </NDrawerContent>
       </NDrawer>
       <NDrawer v-model:show={tipSelectAwbShow.value} width={500} placement="right">
-        <NDrawerContent title="请选择对应的 AWB 文件"/>
+        <NDrawerContent title={t('music.edit.selectAwb')}/>
       </NDrawer>
       <NModal
         preset="card"
         class="w-[min(30vw,25em)]"
-        title="设置偏移（秒）"
+        title={t('music.edit.setOffsetSeconds')}
         v-model:show={setOffsetShow.value}
       >{{
         default: () => <NFlex vertical size="large">
-          <div>设为正数可以在歌曲前面添加空白，设为负数则裁掉歌曲前面的一部分</div>
+          <div>{t('music.edit.audioOffsetHint')}</div>
           <NInputNumber v-model:value={offset.value} class="w-full" step={0.01}/>
         </NFlex>,
         footer: () => <NFlex justify="end">
-          <NButton onClick={okResolve.value as any}>确定</NButton>
+          <NButton onClick={okResolve.value as any}>{t('common.confirm')}</NButton>
         </NFlex>
       }}</NModal>
     </NFlex>

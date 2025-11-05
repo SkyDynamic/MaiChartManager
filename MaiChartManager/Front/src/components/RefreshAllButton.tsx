@@ -2,10 +2,12 @@ import { defineComponent, ref } from "vue";
 import { NButton } from "naive-ui";
 import { globalCapture, updateAll } from "@/store/refs";
 import api from "@/client/api";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const load = ref(false);
+    const { t } = useI18n();
 
     const reload = async () => {
       load.value = true;
@@ -13,7 +15,7 @@ export default defineComponent({
         await api.ReloadAll();
         await updateAll();
       } catch (err) {
-        globalCapture(err, "刷新失败")
+        globalCapture(err, t('error.refreshFailed'))
       } finally {
         load.value = false;
       }

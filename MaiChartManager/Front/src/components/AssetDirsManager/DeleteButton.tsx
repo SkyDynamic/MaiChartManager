@@ -3,6 +3,7 @@ import api from "@/client/api";
 import { selectedADir, selectMusicId, updateAssetDirs, updateMusicList } from "@/store/refs";
 import { NButton, useDialog } from "naive-ui";
 import { GetAssetsDirsResult } from "@/client/apiGen";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -12,6 +13,7 @@ export default defineComponent({
     const deleteLoading = ref(false);
     const deleteConfirm = ref(false);
     const dialog = useDialog();
+    const { t } = useI18n();
 
     const del = async () => {
       if (!deleteConfirm.value) {
@@ -23,7 +25,7 @@ export default defineComponent({
       const res = await api.DeleteAssetDir(props.dir.dirName!);
       if (res.error) {
         const error = res.error as any;
-        dialog.warning({title: '删除失败', content: error.message || error});
+        dialog.warning({title: t('error.deleteFailed'), content: error.message || error});
         return;
       }
       if (selectedADir.value === props.dir.dirName) {
@@ -38,7 +40,7 @@ export default defineComponent({
     return () => <NButton secondary onClick={del} loading={deleteLoading.value} type={deleteConfirm.value ? 'error' : 'default'}
       // @ts-ignore
                           onMouseleave={() => deleteConfirm.value = false}>
-      {deleteConfirm.value ? '确认' : '删除'}
+      {deleteConfirm.value ? t('common.confirm') : t('common.delete')}
     </NButton>;
   }
 });

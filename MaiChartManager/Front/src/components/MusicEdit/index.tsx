@@ -68,38 +68,38 @@ const Component = defineComponent({
                         <span class="select-text">{info.value.id}</span>
                     </div>
                 </NFlex>
-                <NFormItem label="歌曲名称">
+                <NFormItem label={t('music.edit.name')}>
                     <div class="flex items-center gap-2 w-full">
                         <NInput v-model:value={info.value.name} class="w-0 grow"/>
                         <NSwitch v-model:value={info.value.longMusic}/>
                         LongMusic
                     </div>
                 </NFormItem>
-                <NFormItem label="作者">
+                <NFormItem label={t('music.edit.artist')}>
                     <NInput v-model:value={info.value.artist}/>
                 </NFormItem>
             </NFlex>
             <JacketBox info={info.value} class="h-12em w-12em"/>
         </div>
         <NFlex vertical>
-            <NFormItem label="BPM">
+            <NFormItem label={t('music.edit.bpm')}>
                 <NInputNumber showButton={false} class="w-full" v-model:value={info.value.bpm} min={0}/>
             </NFormItem>
-            <NFormItem label="版本">
+            <NFormItem label={t('music.edit.version')}>
                 <VersionInput v-model:value={info.value.version}/>
             </NFormItem>
-            <NFormItem label="流派">
+            <NFormItem label={t('music.edit.genre')}>
                 <GenreInput options={genreList.value} v-model:value={info.value.genreId}/>
             </NFormItem>
-            <NFormItem label="版本分类">
+            <NFormItem label={t('music.edit.versionCategory')}>
                 <GenreInput options={addVersionList.value} v-model:value={info.value.addVersionId}/>
             </NFormItem>
           {info.value.genreId === UTAGE_GENRE && // 宴会场
               <>
-                  <NFormItem label="宴谱种类">
+                  <NFormItem label={t('music.edit.utageType')}>
                       <NInput v-model:value={info.value.utageKanji}/>
                   </NFormItem>
-                  <NFormItem label="宴谱备注">
+                  <NFormItem label={t('music.edit.utageComment')}>
                       <NInput v-model:value={info.value.comment}/>
                   </NFormItem>
               </>}

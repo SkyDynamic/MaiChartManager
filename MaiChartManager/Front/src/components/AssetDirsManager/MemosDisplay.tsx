@@ -2,22 +2,24 @@ import { computed, defineComponent, PropType, ref } from "vue";
 import { GetAssetsDirsResult } from "@/client/apiGen";
 import { NButton, NDropdown, NFlex } from "naive-ui";
 import MemoBox from "@/components/AssetDirsManager/MemoBox";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
     dir: {type: Object as PropType<GetAssetsDirsResult>, required: true}
   },
   setup(props) {
+    const { t } = useI18n();
     const memos = computed(() => props.dir.subFiles!.filter(f => f.toLowerCase().endsWith('.txt')));
     const options = computed(() => [
         ...memos.value.map(it => ({
           label: it,
           key: it
         })),
-        {
-          label: () => <span class="c-blue-5 flex items-center">添加</span>,
-          key: 'add'
-        }
+      {
+        label: () => <span class="c-blue-5 flex items-center">{t('common.create')}</span>,
+        key: 'add'
+      }
       ]
     );
 

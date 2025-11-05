@@ -12,6 +12,7 @@ import { captureException } from "@sentry/vue";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { defaultSavedOptions, defaultTempOptions, dummyMeta, IMPORT_STEP, ImportChartMessageEx, ImportMeta, MOVIE_CODEC, STEP } from "./types";
 import getNextUnusedMusicId from "@/utils/getNextUnusedMusicId";
+import { useI18n } from 'vue-i18n';
 
 const tryGetFile = async (dir: FileSystemDirectoryHandle, file: string) => {
   try {
@@ -35,6 +36,7 @@ export default defineComponent({
     const meta = ref<ImportMeta[]>([]);
     const currentProcessing = ref<ImportMeta>(dummyMeta);
     const currentMovieProgress = ref(0);
+    const { t } = useI18n();
 
     const closeModal = () => {
       step.value = STEP.none;
@@ -47,21 +49,21 @@ export default defineComponent({
       const maidata = await tryGetFile(dir, 'maidata.txt');
       if (!maidata) {
         reject = true;
-        errors.value.push({level: MessageLevel.Fatal, message: '未找到 maidata.txt', name: dir.name});
+        errors.value.push({level: MessageLevel.Fatal, message: t('chart.import.error.noMaidata'), name: dir.name});
       }
       const track = await tryGetFile(dir, 'track.mp3') || await tryGetFile(dir, 'track.wav') || await tryGetFile(dir, 'track.ogg');
       if (!track) {
         reject = true;
-        errors.value.push({level: MessageLevel.Fatal, message: '未找到音频文件', name: dir.name});
+        errors.value.push({level: MessageLevel.Fatal, message: t('chart.import.error.noAudio'), name: dir.name});
       }
       const bg = await tryGetFile(dir, 'bg.jpg') || await tryGetFile(dir, 'bg.png') || await tryGetFile(dir, 'bg.jpeg');
       if (!bg) {
-        errors.value.push({level: MessageLevel.Warning, message: '未找到背景图片', name: dir.name});
+        errors.value.push({level: MessageLevel.Warning, message: t('chart.import.error.noBackground'), name: dir.name});
       }
       let movie = await tryGetFile(dir, 'pv.mp4') || await tryGetFile(dir, 'mv.mp4') || await tryGetFile(dir, 'bg.mp4');
       if (movie && appVersion.value?.license !== LicenseStatus.Active) {
         movie = undefined;
-        errors.value.push({level: MessageLevel.Warning, message: '转换 PV 目前是赞助版功能，点击获取', name: dir.name, isPaid: true});
+        errors.value.push({level: MessageLevel.Warning, message: t('chart.import.error.convertPaidFeature'), name: dir.name, isPaid: true});
       }
 
       let musicPadding = 0, first = 0, bar = 0, name = dir.name, isDx = false;
@@ -190,7 +192,7 @@ export default defineComponent({
           try {
             await uploadMovie(music.id, music.movie, padding);
           } catch (e: any) {
-            errors.value.push({level: MessageLevel.Warning, message: `视频转换失败: ${e.error?.message || e.error?.detail || e?.message || e?.toString() || '我也不知道为什么'}`, name: music.name});
+            errors.value.push({level: MessageLevel.Warning, message: t('chart.import.error.videoConvertFailed') + `: ${e.error?.message || e.error?.detail || e?.message || e?.toString() || t('error.unknown')}`, name: music.name});
           }
         }
 
@@ -202,7 +204,7 @@ export default defineComponent({
         console.log(music, e)
         captureException(e.error || e, {
           tags: {
-            context: '导入乐曲出错',
+            context: t('chart.import.error.importError'),
             step: music.importStep,
           }
         })
@@ -242,7 +244,7 @@ export default defineComponent({
         }
 
         if (!meta.value.length && !errors.value.length)
-          throw new Error('没有找到可以导入的乐曲');
+          throw new Error(t('chart.import.error.notFoundImportable'));
 
         step.value = STEP.showWarning;
 
@@ -269,7 +271,7 @@ export default defineComponent({
       } catch (e: any) {
         if (e.name === 'AbortError') return
         console.log(e)
-        globalCapture(e, "导入乐曲出错（全局）")
+        globalCapture(e, t('chart.import.error.importErrorGlobal'))
       } finally {
         if (step.value !== STEP.showResultError)
           step.value = STEP.none
@@ -277,9 +279,9 @@ export default defineComponent({
     }
 
     return () => <NButton onClick={startProcess} secondary>
-      导入乐曲
+      {t('chart.import.title')}
       <SelectFileTypeTip show={step.value === STEP.selectFile} closeModal={closeModal}/>
-      <CheckingModal title="正在检查..." show={step.value === STEP.checking} closeModal={closeModal}/>
+      <CheckingModal title={t('chart.import.checkingTitle')} show={step.value === STEP.checking} closeModal={closeModal}/>
       <ErrorDisplayIdInput show={step.value === STEP.showWarning} closeModal={closeModal} proceed={modalResolve.value!} meta={meta.value} errors={errors.value}
                            savedOptions={savedOptions.value} tempOptions={tempOptions.value}/>
       <ImportStepDisplay show={step.value === STEP.importing} closeModal={closeModal} current={currentProcessing.value} movieProgress={currentMovieProgress.value}/>

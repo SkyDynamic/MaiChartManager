@@ -1,18 +1,20 @@
 import { defineComponent } from "vue";
 import { NButton, useDialog } from "naive-ui";
 import api from "@/client/api";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const dialog = useDialog();
+    const { t } = useI18n();
 
     const onClick = () => {
       if (location.hostname !== 'mcm.invalid') {
         dialog.info({
-          title: '提示',
-          content: '你需要在运行服务器端的设备上操作购买',
-          positiveText: '继续',
-          negativeText: '取消',
+          title: t('message.notice'),
+          content: t('purchase.needServerSide'),
+          positiveText: t('purchase.continue'),
+          negativeText: t('common.cancel'),
           onPositiveClick: () => {
             api.RequestPurchase()
           }

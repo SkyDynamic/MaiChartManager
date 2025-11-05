@@ -6,6 +6,7 @@ import { selectedADir, selectedMusic } from "@/store/refs";
 import { LEVELS } from "@/consts";
 import ProblemsDisplay from "@/components/ProblemsDisplay";
 import PreviewChartButton from "@/components/MusicEdit/PreviewChartButton";
+import { useI18n } from 'vue-i18n';
 
 const LEVELS_OPTIONS = LEVELS.map((level, index) => ({label: level, value: index}));
 
@@ -16,6 +17,7 @@ export default defineComponent({
     chart: {type: Object as PropType<Chart>, required: true},
   },
   setup(props) {
+    const { t } = useI18n();
     const levelValue = computed({
       get: () => props.chart.level! + props.chart.levelDecimal! / 10,
       set: (value: number) => {
@@ -42,22 +44,22 @@ export default defineComponent({
         <NFlex align="center" class="absolute right-0 top-0 m-xy mt-2 z-2">
           <PreviewChartButton songId={props.songId} level={props.chartIndex}/>
         </NFlex>
-        <NFormItem label="启用" labelPlacement="left" class="ml-2px">
+        <NFormItem label={t('music.edit.chartEnable')} labelPlacement="left" class="ml-2px">
           <NFlex align="center">
             <NSwitch v-model:value={props.chart.enable}/>
             <ProblemsDisplay problems={props.chart.problems!}/>
           </NFlex>
         </NFormItem>
-        <NFormItem label="作者">
+        <NFormItem label={t('music.edit.chartAuthor')}>
           <NInput v-model:value={props.chart.designer} placeholder=""/>
         </NFormItem>
-        <NFormItem label="显示等级">
+        <NFormItem label={t('music.edit.chartLevel')}>
           <NSelect options={LEVELS_OPTIONS as any} v-model:value={props.chart.levelId}/>
         </NFormItem>
-        <NFormItem label="定数">
+        <NFormItem label={t('music.edit.chartConstant')}>
           <NInputNumber showButton={false} class="w-full" precision={1} v-model:value={levelValue.value} min={0}/>
         </NFormItem>
-        <NFormItem label="音符数量">
+        <NFormItem label={t('music.edit.chartNoteCount')}>
           <NInputNumber showButton={false} class="w-full" precision={0} v-model:value={props.chart.maxNotes} min={0}/>
         </NFormItem>
       </NFlex>

@@ -32,7 +32,7 @@ export default defineComponent({
         const req = await api.GetAudioPreviewTime(selectMusicId.value, selectedADir.value)
         savedRegion = req.data
         if (savedRegion.startTime! >= savedRegion.endTime!) {
-          throw new Error("音频预览时间错误")
+          throw new Error(t('music.edit.audioPreviewError'))
         }
       } catch (e) {
         savedRegion = {startTime: -1, endTime: -1}
@@ -71,13 +71,13 @@ export default defineComponent({
         const time = ws.value?.getDuration()! * e;
         if (ctrl.value) {
           if (time >= region.value!.end) {
-            message.warning("开始时间不能大于结束时间")
+            message.warning(t('music.edit.audioPreviewStartGtEnd'))
             return
           }
           region.value!.setOptions({start: time})
         } else if (shift.value) {
           if (time <= region.value!.start) {
-            message.warning("结束时间不能小于开始时间")
+            message.warning(t('music.edit.audioPreviewEndLtStart'))
             return
           }
           region.value!.setOptions({end: time, start: region.value!.start})
@@ -101,7 +101,7 @@ export default defineComponent({
         await api.SetAudioPreview(selectMusicId.value, selectedADir.value, {startTime: region.value!.start, endTime: region.value!.end})
         props.closeModel()
       } catch (e) {
-        globalCapture(e, "保存音频预览失败")
+        globalCapture(e, t('music.edit.audioPreviewSaveFailed'))
       } finally {
         load.value = false
       }

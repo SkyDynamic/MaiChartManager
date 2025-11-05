@@ -2,6 +2,7 @@ import { computed, defineComponent } from "vue";
 import { NDrawer, NDrawerContent, NFlex } from "naive-ui";
 import FileTypeIcon from "@/components/FileTypeIcon";
 import FileContentIcon from "@/components/FileContentIcon";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -9,15 +10,17 @@ export default defineComponent({
     closeModal: {type: Function, required: true}
   },
   setup(props, {emit}) {
+    const { t } = useI18n();
+    
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
     })
 
     return () => <NDrawer v-model:show={show.value} height={350} placement="bottom">
-      <NDrawerContent title="可以选择的文件类型">
+      <NDrawerContent title={t('music.edit.selectFileTypes')}>
         <NFlex vertical size="large">
-          包含以下文件的文件夹，或者，一个包含一些这样的文件夹的文件夹
+          {t('chart.import.folderHint')}
           <div class="grid cols-[2fr_1fr] justify-items-center h-50 gap-5 w-50%">
             <NFlex vertical align="center" class="w-full" size="small">
               <FileContentIcon type="maidata"/>

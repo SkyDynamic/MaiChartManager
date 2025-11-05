@@ -1,6 +1,7 @@
 import { computed, defineComponent, PropType } from "vue";
 import { NButton, NFlex, NInputNumber, NModal, NProgress } from "naive-ui";
 import { IMPORT_STEP, ImportMeta } from "./types";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -10,6 +11,8 @@ export default defineComponent({
     current: {type: Object as PropType<ImportMeta>, required: true},
   },
   setup(props, {emit}) {
+    const { t } = useI18n();
+    
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -17,7 +20,7 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class="w-[min(40vw,40em)]"
-      title="正在导入..."
+      title={t('chart.import.importingTitle')}
       closable={false}
       maskClosable={false}
       closeOnEsc={false}
@@ -25,22 +28,22 @@ export default defineComponent({
     >
       <NFlex vertical class="text-4">
         <div>
-          <span class="op-90">当前正在处理的项目：</span>
+          <span class="op-90">{t('chart.import.currentProcessing')}：</span>
           {props.current.name}
         </div>
-        <Step step={IMPORT_STEP.create} current={props.current.importStep} name="创建乐曲"/>
-        <Step step={IMPORT_STEP.chart} current={props.current.importStep} name="转换谱面"/>
-        <Step step={IMPORT_STEP.music} current={props.current.importStep} name="转码音频"/>
-        {props.current.movie && <Step step={IMPORT_STEP.movie} current={props.current.importStep} name="转码视频"/>}
+        <Step step={IMPORT_STEP.create} current={props.current.importStep} name={t('chart.import.step.createMusic')}/>
+        <Step step={IMPORT_STEP.chart} current={props.current.importStep} name={t('chart.import.step.convertChart')}/>
+        <Step step={IMPORT_STEP.music} current={props.current.importStep} name={t('chart.import.step.convertAudio')}/>
+        {props.current.movie && <Step step={IMPORT_STEP.movie} current={props.current.importStep} name={t('chart.import.step.convertVideo')}/>}
         {props.current.movie && !!props.movieProgress && <NProgress
             type="line"
             percentage={props.movieProgress}
             indicator-placement="inside"
             processing
         >
-          {props.movieProgress === 100 ? '还在处理，别急…' : `${props.movieProgress}%`}
+          {props.movieProgress === 100 ? t('tools.videoOptions.processing') : `${props.movieProgress}%`}
         </NProgress>}
-        <Step step={IMPORT_STEP.jacket} current={props.current.importStep} name="导入封面"/>
+        <Step step={IMPORT_STEP.jacket} current={props.current.importStep} name={t('chart.import.step.importJacket')}/>
       </NFlex>
     </NModal>
   }

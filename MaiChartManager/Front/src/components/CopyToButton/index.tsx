@@ -5,6 +5,7 @@ import { NButton, NButtonGroup, NDropdown, useDialog, useMessage } from "naive-u
 import { ZipReader } from "@zip.js/zip.js";
 import ChangeIdDialog from "./ChangeIdDialog";
 import getSubDirFile from "@/utils/getSubDirFile";
+import { useI18n } from 'vue-i18n';
 
 enum DROPDOWN_OPTIONS {
   export,
@@ -23,34 +24,35 @@ export default defineComponent({
     const dialog = useDialog();
     const message = useMessage();
     const showChangeId = ref(false);
+    const { t } = useI18n();
 
     const options = computed(() => [
       {
-        label: () => <a href={getUrl(`ExportOptApi/${selectedADir.value}/${selectMusicId.value}`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name}.zip`}>导出 Zip</a>,
+        label: () => <a href={getUrl(`ExportOptApi/${selectedADir.value}/${selectMusicId.value}`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name}.zip`}>{t('copy.exportZip')}</a>,
         key: DROPDOWN_OPTIONS.exportZip,
       },
       {
-        label: '导出为 Maidata',
+        label: t('copy.exportMaidata'),
         key: DROPDOWN_OPTIONS.exportMaidata,
       },
       {
-        label: () => <a href={getUrl(`ExportAsMaidataApi/${selectedADir.value}/${selectMusicId.value}`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name} - Maidata.zip`}>导出 Zip (Maidata)</a>,
+        label: () => <a href={getUrl(`ExportAsMaidataApi/${selectedADir.value}/${selectMusicId.value}`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name} - Maidata.zip`}>{t('copy.exportMaidataZip')}</a>,
         key: DROPDOWN_OPTIONS.exportMaiDataZip,
       },
       {
-        label: '导出为 Maidata（无 BGA）',
+        label: t('copy.exportMaidataNoVideo'),
         key: DROPDOWN_OPTIONS.exportMaidataIgnoreVideo,
       },
       {
-        label: () => <a href={getUrl(`ExportAsMaidataApi/${selectedADir.value}/${selectMusicId.value}?ignoreVideo=true`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name} - Maidata.zip`}>导出 Zip (Maidata，无 BGA)</a>,
+        label: () => <a href={getUrl(`ExportAsMaidataApi/${selectedADir.value}/${selectMusicId.value}?ignoreVideo=true`)} download={`${selectMusicId.value} - ${selectedMusic.value?.name} - Maidata.zip`}>{t('copy.exportMaidataZipNoVideo')}</a>,
         key: DROPDOWN_OPTIONS.exportMaiDataZipIgnoreVideo,
       },
       ...(selectedADir.value === 'A000' ? [] : [{
-        label: '修改 ID',
+        label: t('copy.changeId'),
         key: DROPDOWN_OPTIONS.changeId,
       }]),
       {
-        label: '在资源管理器中显示',
+        label: t('copy.showInExplorer'),
         key: DROPDOWN_OPTIONS.showExplorer,
       }
     ])
@@ -106,9 +108,9 @@ export default defineComponent({
             const writable = await fileHandle.createWritable();
             await entry.getData!(writable);
           }
-          message.success('成功');
+          message.success(t('message.exportSuccess'));
         } catch (e) {
-          globalCapture(e, "导出歌曲失败（远程）")
+          globalCapture(e, t('copy.exportError'))
         } finally {
           wait.value = false;
         }
@@ -128,7 +130,7 @@ export default defineComponent({
     return () =>
       <NButtonGroup>
         <NButton secondary onClick={() => copy(DROPDOWN_OPTIONS.export)} loading={wait.value}>
-          复制到...
+          {t('copy.title')}...
         </NButton>
         <NDropdown options={options.value} trigger="click" placement="bottom-end" onSelect={handleOptionClick}>
           <NButton secondary class="px-.5 b-l b-l-solid b-l-[rgba(255,255,255,0.5)]">

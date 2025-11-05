@@ -6,6 +6,7 @@ import stdIcon from "@/assets/stdIcon.png";
 import api from "@/client/api";
 import MusicIdConflictNotifier from "@/components/MusicIdConflictNotifier";
 import getNextUnusedMusicId from "@/utils/getNextUnusedMusicId";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   props: {
@@ -13,6 +14,8 @@ export default defineComponent({
     closeModal: {type: Function, required: true},
   },
   setup(props) {
+    const { t } = useI18n();
+    
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -35,7 +38,7 @@ export default defineComponent({
       <NModal
         preset="card"
         class="w-25em"
-        title={`创建乐曲`}
+        title={t('chart.import.create')}
         v-model:show={show.value}
       >{{
         default: () => <NForm label-placement="left" labelWidth="5em" showFeedback={false}>
@@ -46,7 +49,7 @@ export default defineComponent({
                 <MusicIdConflictNotifier id={id.value}/>
               </NFlex>
             </NFormItem>
-            <NFormItem label="谱面类型">
+            <NFormItem label={t('chart.import.chartType')}>
               <NFlex>
                 <NRadio checked={id.value < 1e4} onUpdateChecked={() => id.value -= 1e4}>
                   <img src={stdIcon} class="h-1.5em mt--0.6"/>
@@ -59,7 +62,7 @@ export default defineComponent({
           </NFlex>
         </NForm>,
         footer: () => <NFlex justify="end">
-          <NButton onClick={save}>确定</NButton>
+          <NButton onClick={save}>{t('common.confirm')}</NButton>
         </NFlex>
       }}</NModal>
     );

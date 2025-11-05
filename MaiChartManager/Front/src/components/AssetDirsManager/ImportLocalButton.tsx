@@ -4,6 +4,7 @@ import api, { getUrl } from "@/client/api";
 import { updateAssetDirs } from "@/store/refs";
 import axios from "axios";
 import { UploadAssetDirResult } from "@/client/apiGen";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
@@ -12,6 +13,7 @@ export default defineComponent({
     const message = useMessage();
     const showProgress = ref(false);
     const progress = ref(0);
+    const { t } = useI18n();
 
     const importLocal = async () => {
       importWait.value = true;
@@ -52,7 +54,7 @@ export default defineComponent({
             responseType: 'json'
           })
           showProgress.value = false;
-          message.success(`导入 ${res.data.dirName} 成功`);
+          message.success(t('message.importSuccess') + ` ${res.data.dirName}`);
           updateAssetDirs();
         } catch (e) {
           console.log(e)
@@ -72,11 +74,11 @@ export default defineComponent({
     }
 
     return () => <NButton onClick={importLocal} loading={importWait.value}>
-      导入
+      {t('common.import')}
       <NModal
         preset="card"
         class="w-[min(60vw,80em)]"
-        title="进度"
+        title={t('music.batch.progress')}
         show={showProgress.value}
         maskClosable={false}
         closable={false}

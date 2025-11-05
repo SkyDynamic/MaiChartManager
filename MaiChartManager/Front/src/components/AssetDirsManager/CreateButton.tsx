@@ -2,11 +2,13 @@ import { NButton, NFlex, NForm, NFormItem, NInputGroup, NInputGroupLabel, NInput
 import { computed, defineComponent, PropType, ref } from "vue";
 import { addVersionList, assetDirs, genreList, selectedADir, updateAddVersionList, updateAssetDirs, updateGenreList } from "@/store/refs";
 import api from "@/client/api";
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   setup(props) {
     const show = ref(false);
     const dialog = useDialog();
+    const { t } = useI18n();
 
     const id = ref(0)
 
@@ -31,7 +33,7 @@ export default defineComponent({
     const save = async () => {
       if (id.value < 1 || id.value > 999) return;
       if (assetDirs.value.find(v => v.dirName === `A${id.value.toString().padStart(3, '0')}`)) {
-        dialog.info({title: '提示', content: '相同名称的目录已存在'});
+        dialog.info({title: t('message.notice'), content: t('assetDir.dirExists')});
         return;
       }
       show.value = false
@@ -41,12 +43,12 @@ export default defineComponent({
 
     return () => (
       <NButton onClick={setShow}>
-        新建
+        {t('common.create')}
 
         <NModal
           preset="card"
           class="w-[min(30vw,25em)]"
-          title="新建 Opt"
+          title={t('assetDir.create')}
           v-model:show={show.value}
         >{{
           default: () => <NForm label-placement="left" labelWidth="5em" showFeedback={false}>
@@ -60,7 +62,7 @@ export default defineComponent({
             </NFlex>
           </NForm>,
           footer: () => <NFlex justify="end">
-            <NButton onClick={save}>确定</NButton>
+            <NButton onClick={save}>{t('common.confirm')}</NButton>
           </NFlex>
         }}</NModal>
       </NButton>
