@@ -43,13 +43,12 @@ public class GenreController(StaticSettings settings, ILogger<StaticSettings> lo
             var existed = StaticSettings.GenreList.First(x => x.Id == req.id);
             if (existed.AssetDir == req.assetDir)
             {
-                return "相同的资源目录里已经存在一个 ID 相同的流派了";
+                return Locale.GenreIdExists;
             }
 
             if (string.Compare(existed.AssetDir, req.assetDir, StringComparison.Ordinal) > 0)
             {
-                return "一个优先级更高的资源目录里已经存在一个 ID 相同的流派了，这样的话，新创建的流派不会被识别\n" +
-                       "如果要覆盖现有的流派，请在一个数字更大的资源目录中创建";
+                return Locale.GenreIdExistsHigherPriority;
             }
 
             StaticSettings.GenreList.Remove(existed);

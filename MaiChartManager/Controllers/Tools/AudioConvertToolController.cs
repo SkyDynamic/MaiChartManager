@@ -10,7 +10,7 @@ public class AudioConvertToolController : ControllerBase
     [HttpPost]
     public IActionResult AudioConvertTool()
     {
-        if (AppMain.BrowserWin is null) return BadRequest("浏览器窗口未初始化");
+        if (AppMain.BrowserWin is null) return BadRequest(Locale.BrowserNotInitialized);
 
         var dialog = new OpenFileDialog()
         {
@@ -19,7 +19,7 @@ public class AudioConvertToolController : ControllerBase
         };
 
         if (AppMain.BrowserWin.Invoke(() => dialog.ShowDialog(AppMain.BrowserWin)) != DialogResult.OK)
-            return BadRequest("未选择文件");
+            return BadRequest(Locale.FileNotSelected);
 
         var inputFile = dialog.FileName;
         var extension = Path.GetExtension(inputFile).ToLowerInvariant();
@@ -39,7 +39,7 @@ public class AudioConvertToolController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"转换失败: {ex.Message}");
+            return BadRequest(string.Format(Locale.ConvertFailed, ex.Message));
         }
     }
 
@@ -66,12 +66,12 @@ public class AudioConvertToolController : ControllerBase
         // 检查配对文件是否存在
         if (!System.IO.File.Exists(acbPath))
         {
-            return BadRequest($"找不到配对的 ACB 文件: {acbPath}");
+            return BadRequest(string.Format(Locale.AcbNotFound, acbPath));
         }
 
         if (!System.IO.File.Exists(awbPath))
         {
-            return BadRequest($"找不到配对的 AWB 文件: {awbPath}");
+            return BadRequest(string.Format(Locale.AwbNotFound, awbPath));
         }
 
         // 转换 ACB 到 WAV
@@ -83,7 +83,7 @@ public class AudioConvertToolController : ControllerBase
         // 将 WAV 数据转换为 MP3
         Audio.ConvertWavBytesToMp3(wavData, mp3Path);
 
-        return Ok(new { message = "转换完成！", outputPath = mp3Path });
+        return Ok(new { message = Locale.ConvertSuccess, outputPath = mp3Path });
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class AudioConvertToolController : ControllerBase
             // 执行转换
             Audio.ConvertToMai(actualInputFile, acbPath);
 
-            return Ok(new { message = "转换完成！", acbPath = acbPath, awbPath = awbPath });
+            return Ok(new { message = Locale.ConvertSuccess, acbPath = acbPath, awbPath = awbPath });
         }
         finally
         {

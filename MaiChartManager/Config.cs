@@ -9,4 +9,5 @@ public class Config
     public string AuthUsername { get; set; } = "";
     public string AuthPassword { get; set; } = "";
     public HashSet<string> HistoryPath { get; set; } = [];
+    public string? Locale { get; set; } = null;
 }

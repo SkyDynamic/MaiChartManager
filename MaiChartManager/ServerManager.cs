@@ -127,8 +127,8 @@ public static class ServerManager
             .AddProblemDetails(options =>
                 options.CustomizeProblemDetails = (context) =>
                 {
-                    context.ProblemDetails.Title = context.Exception?.GetType()?.FullName ?? "未知错误";
-                    context.ProblemDetails.Detail = context.Exception?.Message ?? "未知错误";
+                    context.ProblemDetails.Title = context.Exception?.GetType()?.FullName ?? Locale.UnknownError;
+                    context.ProblemDetails.Detail = context.Exception?.Message ?? Locale.UnknownError;
                 }
             )
             .AddControllers()

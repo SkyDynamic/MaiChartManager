@@ -98,7 +98,7 @@ public class MusicController(StaticSettings settings, ILogger<MusicController> l
             music.AddVersionId = value;
         }
     }
-    
+
     [HttpPost]
     public void EditMusicLong(int id, [FromBody] bool value, string assetDir)
     {
@@ -132,7 +132,7 @@ public class MusicController(StaticSettings settings, ILogger<MusicController> l
     {
         if (settings.GetMusic(id, assetDir) is not null)
         {
-            return "当前资源目录里已经存在这个 ID 了";
+            return Locale.MusicIdExists;
         }
 
         var music = MusicXmlWithABJacket.CreateNew(id, StaticSettings.GamePath, assetDir);
@@ -148,7 +148,7 @@ public class MusicController(StaticSettings settings, ILogger<MusicController> l
         var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
         if (!MusicXml.jacketExtensions.Contains(ext[1..]))
         {
-            return "不支持的图片格式";
+            return Locale.UnsupportedImageFormat;
         }
 
         var music = settings.GetMusic(id, assetDir);

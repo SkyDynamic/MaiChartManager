@@ -92,9 +92,9 @@ public partial class Launcher : Form
 
     private void StartClicked(object sender, EventArgs e)
     {
-        if (button2.Text == "停止")
+        if (button2.Text == Locale.LauncherStop)
         {
-            button2.Text = "启动";
+            button2.Text = Locale.LauncherStart;
             textBox1.Enabled = true;
             button1.Enabled = true;
             checkBox1.Enabled = true;
@@ -109,19 +109,19 @@ public partial class Launcher : Form
         if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
         if (!Path.Exists(textBox1.Text))
         {
-            MessageBox.Show("选择的路径不存在！");
+            MessageBox.Show(Locale.PathNotExist);
             return;
         }
 
         StaticSettings.GamePath = textBox1.Text;
         if (ContainsSpecialCharacters(StaticSettings.GamePath))
         {
-            MessageBox.Show("警告：路径中包含特殊字符或中文，可能会导致 MelonLoader 之类的工具出现兼容性问题，请将目录移动至英文路径！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(Locale.PathContainsSpecialChars, Locale.PathContainsSpecialCharsTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         if (!Path.Exists(StaticSettings.StreamingAssets))
         {
-            MessageBox.Show("选择的路径中看起来不包含游戏文件，请选择 Sinmai.exe 所在的文件夹");
+            MessageBox.Show(Locale.PathNotGameDir);
             return;
         }
 
@@ -146,7 +146,7 @@ public partial class Launcher : Form
         checkBoxLanAuth.Enabled = false;
         textBoxLanAuthUser.Enabled = false;
         textBoxLanAuthPass.Enabled = false;
-        button2.Text = "停止";
+        button2.Text = Locale.LauncherStop;
 
         ServerManager.StartApp(checkBox1.Checked, () =>
         {
@@ -235,17 +235,17 @@ public partial class Launcher : Form
         if ((ModifierKeys & Keys.Shift) != Keys.Shift) return;
         if (IapManager.License == IapManager.LicenseStatus.Active) return;
 
-        var input = Interaction.InputBox("请输入激活码", "离线激活");
+        var input = Interaction.InputBox(Locale.OfflineActivationPrompt, Locale.OfflineActivationTitle);
         if (string.IsNullOrWhiteSpace(input)) return;
 
         var verify = await OfflineReg.VerifyAsync(input);
         if (!verify.IsValid)
         {
-            MessageBox.Show("激活码无效");
+            MessageBox.Show(Locale.ActivationCodeInvalid);
             return;
         }
 
-        MessageBox.Show("赞助版功能已激活，谢谢你");
+        MessageBox.Show(Locale.ActivationSuccess);
 
         StaticSettings.Config.OfflineKey = input;
         await SaveConfigFileAsync();

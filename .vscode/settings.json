@@ -2,5 +2,25 @@
     "dotrush.roslyn.projectOrSolutionFiles": [
         "d:\\Projects\\mai\\Sitreamai\\Sitreamai.sln"
     ],
-    "dotnet.defaultSolution": "Sitreamai.sln"
+    "dotnet.defaultSolution": "Sitreamai.sln",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#f9c3d9",
+        "activityBar.background": "#f9c3d9",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#44910e",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#f9c3d9",
+        "statusBar.background": "#f594bb",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#f1659d",
+        "statusBarItem.remoteBackground": "#f594bb",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#f594bb",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#f594bb99",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#f594bb"
 }

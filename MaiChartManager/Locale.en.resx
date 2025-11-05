@@ -1,0 +1,155 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <!-- Music Controller -->
+    <data name="MusicIdExists" xml:space="preserve">
+    <value>Music with this ID already exists in current directory</value>
+  </data>
+    <data name="UnsupportedImageFormat" xml:space="preserve">
+    <value>Unsupported image format</value>
+  </data>
+    <!-- Genre Controller -->
+    <data name="GenreIdExists" xml:space="preserve">
+    <value>Genre with same ID already exists in this directory</value>
+  </data>
+    <data name="GenreIdExistsHigherPriority" xml:space="preserve">
+    <value>Genre with same ID exists in higher priority directory, new genre won't be recognized
+If you really want to create it, please delete the existing genre in the following directories first</value>
+  </data>
+    <!-- Version Controller -->
+    <data name="VersionIdExists" xml:space="preserve">
+    <value>Version with same ID already exists in this directory</value>
+  </data>
+    <data name="VersionIdExistsHigherPriority" xml:space="preserve">
+    <value>Version with same ID exists in higher priority directory, new version won't be recognized
+If you really want to create it, please delete the existing version in the following directories first</value>
+  </data>
+    <!-- Audio/Video Convert Controller -->
+    <data name="FileNotSelected" xml:space="preserve">
+    <value>No file selected</value>
+  </data>
+    <data name="BrowserNotInitialized" xml:space="preserve">
+    <value>Browser window not initialized</value>
+  </data>
+    <data name="ConvertSuccess" xml:space="preserve">
+    <value>Conversion complete!</value>
+  </data>
+    <data name="ConvertFailed" xml:space="preserve">
+    <value>Conversion failed: {0}</value>
+  </data>
+    <data name="AcbNotFound" xml:space="preserve">
+    <value>Cannot find paired ACB file: {0}</value>
+  </data>
+    <data name="AwbNotFound" xml:space="preserve">
+    <value>Cannot find paired AWB file: {0}</value>
+  </data>
+    <!-- AssetDir Controller -->
+    <data name="SelectAssetDirectory" xml:space="preserve">
+    <value>Please select resource directory (OPT)</value>
+  </data>
+    <!-- AppMain -->
+    <data name="ConfigCorrupted" xml:space="preserve">
+    <value>Config file appears corrupted... Reset to default</value>
+  </data>
+    <data name="ConfigCorruptedTitle" xml:space="preserve">
+    <value>Something's Wrong</value>
+  </data>
+    <data name="WebView2NotInstalled" xml:space="preserve">
+    <value>WebView2 runtime not installed, may result in blank screen...
+
+If you believe WebView2 is installed, try restarting your computer.
+
+Would you like to install WebView2?</value>
+  </data>
+    <data name="WebView2NotInstalledTitle" xml:space="preserve">
+    <value>WebView2 Not Installed</value>
+  </data>
+    <!-- Launcher -->
+    <data name="LauncherSelectGameDir" xml:space="preserve">
+    <value>Select Game Directory</value>
+  </data>
+    <data name="LauncherStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+    <data name="LauncherStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+    <data name="LauncherExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+    <data name="LauncherGameDir" xml:space="preserve">
+    <value>Game Directory</value>
+  </data>
+    <data name="LauncherOpenToLan" xml:space="preserve">
+    <value>Open to LAN</value>
+  </data>
+    <data name="LauncherStartup" xml:space="preserve">
+    <value>Start on Boot</value>
+  </data>
+    <data name="LauncherNeedLogin" xml:space="preserve">
+    <value>Require Login</value>
+  </data>
+    <data name="PathNotExist" xml:space="preserve">
+    <value>Selected path does not exist!</value>
+  </data>
+    <data name="PathContainsSpecialChars" xml:space="preserve">
+    <value>Warning: Path contains special characters or non-ASCII characters, may cause compatibility issues with tools like MelonLoader. Please move to an ASCII path!</value>
+  </data>
+    <data name="PathContainsSpecialCharsTitle" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+    <data name="PathNotGameDir" xml:space="preserve">
+    <value>Selected path doesn't appear to contain game files, please select the folder containing Sinmai.exe</value>
+  </data>
+    <data name="OfflineActivationPrompt" xml:space="preserve">
+    <value>Please enter activation code</value>
+  </data>
+    <data name="OfflineActivationTitle" xml:space="preserve">
+    <value>Offline Activation</value>
+  </data>
+    <data name="ActivationCodeInvalid" xml:space="preserve">
+    <value>Activation code invalid</value>
+  </data>
+    <data name="ActivationSuccess" xml:space="preserve">
+    <value>Premium features activated, thank you</value>
+  </data>
+    <!-- StaticSettings -->
+    <data name="GameDirNotSpecified" xml:space="preserve">
+    <value>Game directory not specified</value>
+  </data>
+    <data name="InitDataDirError" xml:space="preserve">
+    <value>Error initializing data directory</value>
+  </data>
+    <data name="LoadMusicDataFailed" xml:space="preserve">
+    <value>Failed to load music data {0}: {1}</value>
+  </data>
+    <data name="LoadGenreDataFailed" xml:space="preserve">
+    <value>Failed to load genre data {0}: {1}</value>
+  </data>
+    <data name="LoadVersionDataFailed" xml:space="preserve">
+    <value>Failed to load version data {0}: {1}</value>
+  </data>
+    <data name="GameVersionNotFound" xml:space="preserve">
+    <value>Cannot get game version, failed to parse data</value>
+  </data>
+    <data name="GameVersionNotFoundTitle" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+    <data name="GameVersionError" xml:space="preserve">
+    <value>Cannot get game version, A000\DataConfig.xml may be missing or invalid</value>
+  </data>
+    <!-- ServerManager -->
+    <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+</root>

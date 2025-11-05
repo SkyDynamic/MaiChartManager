@@ -1237,6 +1237,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Locale
+     * @name GetCurrentLocale
+     * @request GET:/MaiChartManagerServlet/GetCurrentLocaleApi
+     */
+    GetCurrentLocale: (params: RequestParams = {}) =>
+      this.request<string, any>({
+        path: `/MaiChartManagerServlet/GetCurrentLocaleApi`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Locale
+     * @name SetLocale
+     * @request POST:/MaiChartManagerServlet/SetLocaleApi
+     */
+    SetLocale: (data: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/MaiChartManagerServlet/SetLocaleApi`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Mod
      * @name IsMelonInstalled
      * @request GET:/MaiChartManagerServlet/IsMelonInstalledApi

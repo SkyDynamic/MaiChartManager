@@ -81,7 +81,7 @@ partial class Launcher
         button1.Name = "button1";
         button1.Size = new Size(194, 28);
         button1.TabIndex = 1;
-        button1.Text = "选择游戏目录";
+        button1.Text = Locale.LauncherSelectGameDir;
         button1.UseVisualStyleBackColor = true;
         button1.Click += button1_Click;
         // 
@@ -92,7 +92,7 @@ partial class Launcher
         button2.Name = "button2";
         button2.Size = new Size(194, 81);
         button2.TabIndex = 2;
-        button2.Text = "启动";
+        button2.Text = Locale.LauncherStart;
         button2.UseVisualStyleBackColor = true;
         button2.Click += StartClicked;
         // 
@@ -103,7 +103,7 @@ partial class Launcher
         button4.Name = "button4";
         button4.Size = new Size(194, 28);
         button4.TabIndex = 4;
-        button4.Text = "退出";
+        button4.Text = Locale.LauncherExit;
         button4.UseVisualStyleBackColor = true;
         button4.Click += button4_Click;
         // 
@@ -152,7 +152,7 @@ partial class Launcher
         label2.Name = "label2";
         label2.Size = new Size(154, 34);
         label2.TabIndex = 1;
-        label2.Text = "游戏目录";
+        label2.Text = Locale.LauncherGameDir;
         label2.TextAlign = ContentAlignment.MiddleRight;
         // 
         // tableLayoutPanel3
@@ -219,7 +219,7 @@ partial class Launcher
         checkBox1.Name = "checkBox1";
         checkBox1.Size = new Size(121, 23);
         checkBox1.TabIndex = 0;
-        checkBox1.Text = "开放到局域网";
+        checkBox1.Text = Locale.LauncherOpenToLan;
         checkBox1.UseVisualStyleBackColor = true;
         checkBox1.CheckedChanged += checkBox1_CheckedChanged;
         // 
@@ -230,7 +230,7 @@ partial class Launcher
         checkBox_startup.Name = "checkBox_startup";
         checkBox_startup.Size = new Size(121, 23);
         checkBox_startup.TabIndex = 2;
-        checkBox_startup.Text = "开机自动运行";
+        checkBox_startup.Text = Locale.LauncherStartup;
         toolTip1.SetToolTip(checkBox_startup, "开机自动以服务器模式运行并最小化到托盘");
         checkBox_startup.UseVisualStyleBackColor = true;
         checkBox_startup.Visible = false;
@@ -243,7 +243,7 @@ partial class Launcher
         checkBoxLanAuth.Name = "checkBoxLanAuth";
         checkBoxLanAuth.Size = new Size(91, 23);
         checkBoxLanAuth.TabIndex = 3;
-        checkBoxLanAuth.Text = "需要登录";
+        checkBoxLanAuth.Text = Locale.LauncherNeedLogin;
         checkBoxLanAuth.UseVisualStyleBackColor = true;
         checkBoxLanAuth.Visible = false;
         checkBoxLanAuth.CheckedChanged += checkBoxLanAuth_CheckedChanged;

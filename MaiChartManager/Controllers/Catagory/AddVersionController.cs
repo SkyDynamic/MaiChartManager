@@ -39,13 +39,12 @@ public class AddVersionController(StaticSettings settings, ILogger<StaticSetting
             var existed = StaticSettings.VersionList.First(x => x.Id == req.id);
             if (existed.AssetDir == req.assetDir)
             {
-                return "相同的资源目录里已经存在一个 ID 相同的版本了";
+                return Locale.VersionIdExists;
             }
 
             if (string.Compare(existed.AssetDir, req.assetDir, StringComparison.Ordinal) > 0)
             {
-                return "一个优先级更高的资源目录里已经存在一个 ID 相同的版本了，这样的话，新创建的版本不会被识别\n" +
-                       "如果要覆盖现有的版本，请在一个数字更大的资源目录中创建";
+                return Locale.VersionIdExistsHigherPriority;
             }
 
             StaticSettings.VersionList.Remove(existed);
