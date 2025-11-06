@@ -45,7 +45,7 @@ export default defineComponent({
                 configReadErrTitle.value = json.title;
               }
               if(configReadErrTitle.value === 'System.Reflection.TargetInvocationException' && compareVersions(modInfo.value?.aquaMaiVersion || '0.0.0', '1.6.0') < 0) {
-                configReadErr.value = 'AquaMai 版本过低，请更新到 1.6.0 以上';
+                configReadErr.value = t('mod.versionTooLow');
               }
               return
             } catch {
@@ -101,30 +101,30 @@ export default defineComponent({
     return () => <NModal
       preset="card"
       class={["w-[min(99dvw,100em)]", styles.modal]}
-      title="Mod 管理"
+      title={t('mod.title')}
       v-model:show={show.value}
     >
       {!!modInfo.value && <NFlex vertical>
         <NFlex align="center">
           <span class="max-[1060px]:hidden">MelonLoader:</span>
-          {modInfo.value.melonLoaderInstalled ? <span class="c-green-6 max-[1060px]:hidden">已安装</span> : <span class="c-red-6">未安装</span>}
-          {!modInfo.value.melonLoaderInstalled && <NButton secondary loading={installingMelonLoader.value} onClick={installMelonLoader}>安装</NButton>}
+          {modInfo.value.melonLoaderInstalled ? <span class="c-green-6 max-[1060px]:hidden">{t('mod.installed')}</span> : <span class="c-red-6">{t('mod.notInstalled')}</span>}
+          {!modInfo.value.melonLoaderInstalled && <NButton secondary loading={installingMelonLoader.value} onClick={installMelonLoader}>{t('mod.install')}</NButton>}
           <div class={["w-8", "max-[1060px]:hidden"]}/>
           <span class="max-[1060px]:hidden">AquaMai:</span>
           {modInfo.value.aquaMaiInstalled ?
-            !shouldShowUpdate.value ? <span class="c-green-6 max-[1060px]:hidden">已安装</span> : <span class="c-orange">可更新</span> :
-            <span class="c-red-6">未安装</span>}
+            !shouldShowUpdate.value ? <span class="c-green-6 max-[1060px]:hidden">{t('mod.installed')}</span> : <span class="c-orange">{t('mod.updateAvailable')}</span> :
+            <span class="c-red-6">{t('mod.notInstalled')}</span>}
           <ModInstallDropdown updateAquaMaiConfig={updateAquaMaiConfig}/>
-          <span class="max-[1060px]:hidden">已安装:</span>
+          <span class="max-[1060px]:hidden">{t('mod.installedVersion')}:</span>
           <span class="max-[450px]:hidden">v{modInfo.value.aquaMaiVersion}</span>
-          <span class="max-[1060px]:hidden">可安装:</span>
+          <span class="max-[1060px]:hidden">{t('mod.availableVersion')}:</span>
           <span class={[shouldShowUpdate.value && "c-orange", "max-[1060px]:hidden"]}>{latestVersion.value.version}</span>
           <NButton secondary onClick={() => api.KillGameProcess()}>
-            关闭游戏进程
+            {t('mod.killGameProcess')}
           </NButton>
         </NFlex>
         {configReadErr.value ? <NFlex vertical justify="center" align="center" class="min-h-100">
-          <div class="text-8">AquaMai 未安装或需要更新</div>
+          <div class="text-8">{t('mod.needInstallOrUpdate')}</div>
           <div class="c-gray-5 text-lg">{configReadErr.value}</div>
           <div class="c-gray-4 text-sm">{configReadErrTitle.value}</div>
         </NFlex> : <AquaMaiConfigurator config={config.value!} useNewSort={true}/>}

@@ -18,6 +18,8 @@ common:
   processing: Processing...
   ok: OK
   management: Management
+  dismiss: Dismiss
+  longMusic: LongMusic
 assetDir:
   title: Opt Management
   create: Create Directory
@@ -115,6 +117,14 @@ music:
       Positive value adds black frame at beginning, negative value trims
       beginning
     importPvError: Import PV error
+    previewChart: Preview Chart
+    previewChartWarning: Chart preview does not represent actual gameplay, please test in-game
+    audioPreviewCtrlShiftClick: Ctrl / Shift + Click to set start / end time directly at click position
+    audioPreviewSelectRegion: Selection
+    includeB35: Include in B35
+    includeB15: Include in B15
+    versionHint: 'If game version is 1.{gameVersion}, numbers >= {b15ver} will appear in B15, otherwise in B35'
+    idConflictWarning: 'ID conflicts in following directories'
   batch:
     title: Batch Actions
     batchAndSearch: Batch Actions & Search
@@ -136,6 +146,8 @@ music:
     exporting: Exporting...
     notChange: Not Change
     editFailed: Batch edit failed
+    currentProgress: 'Current Progress'
+    currentProcessing: 'Currently Processing'
   delete:
     confirm: Confirm
     confirmDelete: Confirm Delete
@@ -279,6 +291,12 @@ mod:
   installMelonLoaderFailed: Failed to install MelonLoader
   saveConfigFailed: Failed to save AquaMai config
   reinstallUpdate: Reinstall / Update
+  versionTooLow: AquaMai version too low, please update to 1.6.0 or above
+  installed: Installed
+  installedVersion: Installed
+  availableVersion: Available
+  killGameProcess: Kill Game Process
+  needInstallOrUpdate: AquaMai not installed or needs update
   adxHid:
     disabled: Disabled
     select1P: 1P Select
@@ -296,6 +314,27 @@ mod:
     button3Desc: Downward triangle button
     button4: Button 4
     button4Desc: Bottom round button
+  touchSensitivity:
+    applyPresetToGlobal: Apply Preset to Global
+    settingsFor: '{area} Sensitivity Settings'
+    applyToGlobal: Apply to Global
+    applyToArea: 'Apply to {area} Area'
+    selectAreaHint: Select an area on the left to fine-tune sensitivity here
+    helpText: |-
+      Sensitivity in Test mode is not linear
+      Area A default sensitivity: 90, 80, 70, 60, 50, 40, 30, 26, 23, 20, 10
+      Other areas default sensitivity: 70, 60, 50, 40, 30, 20, 15, 10, 5, 1, 1
+      Test 0 corresponds to 40, 20 level, -5 is 90, 70, +5 is 10, 1
+      Higher level in Test, lower number here = higher sensitivity for official cabinet
+      ADX sensitivity is reversed, so higher number here = higher sensitivity for ADX
+  keyMap:
+    button1P: '1P Button {index}'
+    button2P: '2P Button {index}'
+    select1P: 1P Select
+    select2P: 2P Select
+  judgeAccuracyInfo:
+    author: 'Author: '
+    viewDoc: View Documentation
 tools:
   title: Tools
   audioConvert: Audio Convert (ACB + AWB)

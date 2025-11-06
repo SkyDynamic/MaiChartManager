@@ -1,5 +1,6 @@
 import { defineComponent, ref } from "vue";
 import { NFlex, NProgress } from "naive-ui";
+import { useI18n } from 'vue-i18n';
 
 export const progressCurrent = ref(0);
 export const progressAll = ref(100);
@@ -7,9 +8,10 @@ export const currentProcessItem = ref('');
 
 export default defineComponent({
   setup(props) {
+    const { t } = useI18n();
     return () => <NFlex vertical>
-      <div>当前进度：{progressCurrent.value}/{progressAll.value}</div>
-      <div>当前处理：{currentProcessItem.value}</div>
+      <div>{t('music.batch.currentProgress')}：{progressCurrent.value}/{progressAll.value}</div>
+      <div>{t('music.batch.currentProcessing')}：{currentProcessItem.value}</div>
       <NProgress
         type="line"
         status="success"

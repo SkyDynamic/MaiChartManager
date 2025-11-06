@@ -9,6 +9,7 @@ import ConfigEntry from './ConfigEntry';
 import { getSectionPanelOverride, getNameForPath } from './utils';
 import comments from "./modComments.yaml";
 import { useI18n } from 'vue-i18n';
+import { t } from "@/locales";
 
 const ConfigSection = defineComponent({
   props: {

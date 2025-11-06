@@ -18,6 +18,8 @@ common:
   processing: 處理中…
   ok: 知道了
   management: 管理
+  dismiss: 放棄
+  longMusic: LongMusic
 assetDir:
   title: Opt 管理
   create: 建立目錄
@@ -109,6 +111,14 @@ music:
     pvFileHint: 任何 FFmpeg 支援的影片格式或單張圖片（贊助版功能），或者已經自行轉換好的 DAT 檔案
     offsetHint: 設為正數可以在影片前面添加黑場空白，設為負數則裁掉影片前面的一部分
     importPvError: 匯入 PV 出錯
+    previewChart: 預覽譜面
+    previewChartWarning: 譜面預覽不代表上機效果，請以實際為準
+    audioPreviewCtrlShiftClick: Ctrl / Shift + 點擊可直接將點擊位置設為開始 / 結束時間
+    audioPreviewSelectRegion: 選區
+    includeB35: 計入 B35
+    includeB15: 計入 B15
+    versionHint: 如果遊戲版本是 1.{gameVersion} 的話，這裡的數字大於等於 {b15ver} 就會讓歌出現在 B15 裡面，否則就會出現在 B35 裡面
+    idConflictWarning: 以下目錄中存在衝突的 ID
   batch:
     title: 批次操作
     batchAndSearch: 批次操作與搜尋
@@ -130,6 +140,8 @@ music:
     exporting: 匯出中…
     notChange: 不修改
     editFailed: 批次修改失敗
+    currentProgress: 目前進度
+    currentProcessing: 目前處理
   delete:
     confirm: 確認
     confirmDelete: 確認刪除
@@ -256,6 +268,12 @@ mod:
   installMelonLoaderFailed: 安裝 MelonLoader 失敗
   saveConfigFailed: 儲存 AquaMai 設定失敗
   reinstallUpdate: 重新安裝 / 更新
+  versionTooLow: AquaMai 版本過低，請更新到 1.6.0 以上
+  installed: 已安裝
+  installedVersion: 已安裝
+  availableVersion: 可安裝
+  killGameProcess: 關閉遊戲處理程序
+  needInstallOrUpdate: AquaMai 未安裝或需要更新
   adxHid:
     disabled: 停用
     select1P: 1P 選擇
@@ -273,6 +291,27 @@ mod:
     button3Desc: 向下的三角鍵
     button4: 按鍵 4
     button4Desc: 最下方的圓形按鍵
+  touchSensitivity:
+    applyPresetToGlobal: 套用預設到全域
+    settingsFor: '{area} 的靈敏度設定'
+    applyToGlobal: 套用到全域
+    applyToArea: '套用到 {area} 區域'
+    selectAreaHint: 在左側選擇區域後，可以在這裡進行靈敏度微調
+    helpText: |-
+      在 Test 模式下調整的靈敏度不是線性的
+      A 區預設靈敏度 90, 80, 70, 60, 50, 40, 30, 26, 23, 20, 10
+      其他區域預設靈敏度 70, 60, 50, 40, 30, 20, 15, 10, 5, 1, 1
+      Test 裡設定的 0 對應的是 40, 20 這一檔，-5 是 90, 70，+5 是 10, 1
+      Test 裡的檔位更高，這裡的數字越小，對於官機來說，靈敏度更大
+      而 ADX 的靈敏度是反的，所以對於 ADX，這裡的數字越大，靈敏度越大
+  keyMap:
+    button1P: '1P 按鍵 {index}'
+    button2P: '2P 按鍵 {index}'
+    select1P: 1P 選擇鍵
+    select2P: 2P 選擇鍵
+  judgeAccuracyInfo:
+    author: 作者：
+    viewDoc: 檢視說明檔案
 tools:
   title: 工具
   audioConvert: 音訊轉換（ACB + AWB）

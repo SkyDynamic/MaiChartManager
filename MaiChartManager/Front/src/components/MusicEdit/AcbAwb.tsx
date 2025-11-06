@@ -1,14 +1,12 @@
 import { computed, defineComponent, PropType, ref } from "vue";
 import { HttpResponse, MusicXmlWithABJacket } from "@/client/apiGen";
 import { NButton, NDrawer, NDrawerContent, NFlex, NForm, NFormItem, NInputNumber, NModal, NPopover, NRadio, useDialog } from "naive-ui";
-import noJacket from "@/assets/noJacket.webp";
 import { globalCapture, selectedADir } from "@/store/refs";
 import FileTypeIcon from "@/components/FileTypeIcon";
-import stdIcon from "@/assets/stdIcon.png";
-import dxIcon from "@/assets/dxIcon.png";
 import api, { getUrl } from "@/client/api";
 import AudioPreviewEditorButton from "@/components/MusicEdit/AudioPreviewEditorButton";
 import SetMovieButton from "@/components/MusicEdit/SetMovieButton";
+import { t } from "@/locales";
 
 export default defineComponent({
   props: {

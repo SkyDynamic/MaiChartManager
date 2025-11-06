@@ -7,6 +7,7 @@ import { aquaMaiConfig, globalCapture, selectedADir, showNeedPurchaseDialog, ver
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { defaultSavedOptions, MOVIE_CODEC } from "@/components/ImportCreateChartButton/ImportChartButton/types";
 import { useStorage } from "@vueuse/core";
+import { t } from "@/locales";
 
 enum STEP {
   None,

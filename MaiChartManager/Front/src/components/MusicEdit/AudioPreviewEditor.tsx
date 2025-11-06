@@ -9,6 +9,7 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline'
 import api, { getUrl } from "@/client/api";
 import { AudioPreviewTime } from "@/client/apiGen";
 import { useMagicKeys } from "@vueuse/core";
+import { t } from "@/locales";
 
 export default defineComponent({
   props: {
@@ -111,7 +112,7 @@ export default defineComponent({
 
     return () => <NSpin show={dataLoad.value}>
       <NFlex vertical size="large">
-        Ctrl / Shift + 点击可直接将点击位置设为开始 / 结束时间
+        {t('music.edit.audioPreviewCtrlShiftClick')}
         <div ref={waveSurferContainer}/>
         <NFlex justify="center">
           <NButton secondary onClick={() => {
@@ -128,15 +129,15 @@ export default defineComponent({
             region.value?.play()
           }}>
             <span class="i-mdi-play text-lg m-r-2"/>
-            选区
+            {t('music.edit.audioPreviewSelectRegion')}
           </NButton>
         </NFlex>
         <NFlex justify="end">
           <NButton type="error" secondary onClick={props.closeModel as any} disabled={load.value}>
-            放弃
+            {t('common.dismiss')}
           </NButton>
           <NButton secondary onClick={save} loading={load.value}>
-            保存
+            {t('common.save')}
           </NButton>
         </NFlex>
       </NFlex>

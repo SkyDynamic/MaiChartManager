@@ -9,6 +9,7 @@ import { NButton, NFlex, NInputNumber, NModal } from "naive-ui";
 import UnityVue from 'unity-webgl/vue'
 import { selectedADir } from "@/store/refs";
 import { getUrl } from "@/client/api";
+import { t } from "@/locales";
 
 export default defineComponent({
   props: {
@@ -32,7 +33,7 @@ export default defineComponent({
     })
 
     return () => <NButton secondary onClick={() => show.value = true}>
-      预览谱面
+      {t('music.edit.previewChart')}
       <NModal
         preset="card"
         class="w-60vw"
@@ -40,7 +41,7 @@ export default defineComponent({
         v-model:show={show.value}
       >
         <NFlex vertical>
-          谱面预览不代表上机效果，请以实际为准
+          {t('music.edit.previewChartWarning')}
           <UnityVue unity={unityContext} height="32vw"/>
         </NFlex>
       </NModal>

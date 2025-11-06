@@ -15,6 +15,7 @@ import VersionInput from "@/components/VersionInput";
 import { captureException } from "@sentry/vue"
 import noJacket from "@/assets/noJacket.webp";
 import { getUrl } from "@/client/api";
+import { t } from "@/locales";
 
 const Component = defineComponent({
   setup() {
@@ -72,7 +73,7 @@ const Component = defineComponent({
                     <div class="flex items-center gap-2 w-full">
                         <NInput v-model:value={info.value.name} class="w-0 grow"/>
                         <NSwitch v-model:value={info.value.longMusic}/>
-                        LongMusic
+                        {t('common.longMusic')}
                     </div>
                 </NFormItem>
                 <NFormItem label={t('music.edit.artist')}>

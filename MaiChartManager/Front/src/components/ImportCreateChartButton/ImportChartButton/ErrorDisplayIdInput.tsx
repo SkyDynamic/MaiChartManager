@@ -22,7 +22,7 @@ export default defineComponent({
   },
   setup(props, {emit}) {
     const { t } = useI18n();
-    
+
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -47,16 +47,16 @@ export default defineComponent({
               props.errors.map((error, i) => {
                 if ('first' in error) {
                   if (error.padding > 0 && props.tempOptions.shift === ShiftMethod.Legacy) {
-                    return <NAlert key={i} type="info" title={error.name}>将在音频前面加上 {error.padding.toFixed(3)} 秒空白以保证第一押在第二小节</NAlert>
+                    return <NAlert key={i} type="info" title={error.name}>{t('chart.import.addPadding', {padding: error.padding.toFixed(3)})}</NAlert>
                   }
                   if (error.padding < 0 && props.tempOptions.shift === ShiftMethod.Legacy) {
-                    return <NAlert key={i} type="info" title={error.name}>将裁剪 {(-error.padding).toFixed(3)} 秒音频以保证第一押在第二小节</NAlert>
+                    return <NAlert key={i} type="info" title={error.name}>{t('chart.import.trimPadding', {padding: (-error.padding).toFixed(3)})}</NAlert>
                   }
                   if (error.first > 0 && props.tempOptions.shift === ShiftMethod.NoShift) {
-                    return <NAlert key={i} type="info" title={error.name}>将裁剪 {error.first.toFixed(3)} 秒音频以对应 &first 的值</NAlert>
+                    return <NAlert key={i} type="info" title={error.name}>{t('chart.import.trimFirst', {first: error.first.toFixed(3)})}</NAlert>
                   }
                   if (error.first < 0 && props.tempOptions.shift === ShiftMethod.NoShift) {
-                    return <NAlert key={i} type="info" title={error.name}>将在音频前面加上 {(-error.first).toFixed(3)} 秒空白以对应 &first 的值</NAlert>
+                    return <NAlert key={i} type="info" title={error.name}>{t('chart.import.addFirst', {first: (-error.first).toFixed(3)})}</NAlert>
                   }
                   return <></>
                 }
