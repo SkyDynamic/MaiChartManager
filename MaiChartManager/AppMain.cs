@@ -107,13 +107,14 @@ public class AppMain : ISingleInstance
                 StaticSettings.CurrentLocale = StaticSettings.Config.Locale;
             }
 
-            // 设置当前线程的 Culture
+            // 设置 Locale 资源管理器的 Culture（这会影响所有线程）
             var culture = StaticSettings.CurrentLocale switch
             {
                 "zh" => new System.Globalization.CultureInfo("zh-CN"),
                 "zh-TW" => new System.Globalization.CultureInfo("zh-TW"),
                 _ => new System.Globalization.CultureInfo("en-US")
             };
+            Locale.Culture = culture;
             System.Globalization.CultureInfo.CurrentCulture = culture;
             System.Globalization.CultureInfo.CurrentUICulture = culture;
 

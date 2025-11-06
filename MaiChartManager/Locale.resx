@@ -284,7 +284,5 @@ If you notice any issues with the conversion result, you can try testing it in A
     <data name="AquaMaiNotInstalled" xml:space="preserve">
     <value>AquaMai is not installed</value>
   </data>
-    <data name="qwq" xml:space="preserve">
-      <value />
-    </data>
+
 </root>

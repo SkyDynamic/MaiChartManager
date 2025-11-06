@@ -25,13 +25,14 @@ public class LocaleController(StaticSettings settings, ILogger<LocaleController>
         StaticSettings.CurrentLocale = locale;
         StaticSettings.Config.Locale = locale;
         
-        // 设置当前线程的 Culture
+        // 设置 Locale 资源管理器的 Culture（这会影响所有线程）
         var culture = locale switch
         {
             "zh" => new CultureInfo("zh-CN"),
             "zh-TW" => new CultureInfo("zh-TW"),
             _ => new CultureInfo("en-US")
         };
+        Locale.Culture = culture;
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
         
