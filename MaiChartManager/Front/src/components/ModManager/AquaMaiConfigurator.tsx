@@ -6,10 +6,10 @@ import ProblemsDisplay from "@/components/ProblemsDisplay";
 import configSortStub from './configSort.yaml'
 import { useMagicKeys, whenever } from "@vueuse/core";
 import ConfigEntry from './ConfigEntry';
-import { getSectionPanelOverride, getNameForPath } from './utils';
+import { getSectionPanelOverride, getNameForPath, getBigSectionName } from './utils';
 import comments from "./modComments.yaml";
 import { useI18n } from 'vue-i18n';
-import { t } from "@/locales";
+import { locale } from "@/locales";
 
 const ConfigSection = defineComponent({
   props: {
@@ -18,7 +18,19 @@ const ConfigSection = defineComponent({
     sectionState: { type: Object as PropType<ISectionState>, required: true },
   },
   setup(props, { emit }) {
+    const { t, te } = useI18n();
+
     const CustomPanel = getSectionPanelOverride(props.section.path!);
+    const comment = computed(() => {
+      const localeKey = 'mod.commentOverrides.' + props.section.path!.replace(/\./g, '_');
+      if (te(localeKey)) {
+        return t(localeKey);
+      }
+      if (locale.value.startsWith('zh')) {
+        return props.section.attribute?.comment?.commentZh;
+      }
+      return props.section.attribute?.comment?.commentEn;
+    })
 
     return () => <NFlex vertical class="p-1 border-transparent border-solid border-1px rd hover:border-yellow-5">
       {!props.section.attribute!.alwaysEnabled && <NFormItem label={getNameForPath(props.section.path!, props.section.path!.split('.').pop()!, props.section.attribute?.comment?.nameZh)} labelPlacement="left" labelWidth="9em" showFeedback={false}
@@ -30,7 +42,7 @@ const ConfigSection = defineComponent({
             <NSwitch v-model:value={props.sectionState.enabled}/>
             {comments.shouldEnableOptions[props.section.path!] && !props.sectionState.enabled && <ProblemsDisplay problems={[t('mod.needEnableOption')]}/>}
           </NFlex>
-          {comments.commentOverrides[props.section.path!] || props.section.attribute?.comment?.commentZh}
+          {comment.value}
         </NFlex>
       </NFormItem>}
       {props.sectionState.enabled && (
@@ -92,9 +104,9 @@ export default defineComponent({
       return filteredSections.value?.filter(it => !knownSections.includes(it.path!) && !it.attribute!.exampleHidden) || [];
     });
 
-    return () => <div class="grid cols-[14em_auto] max-[900px]:cols-1">
+    return () => <div class="grid cols-[15em_auto] max-[900px]:cols-1">
       <NAnchor type="block" offsetTarget="#scroll" class={["max-[900px]:hidden"]}>
-        {bigSections.value.map((key) => <NAnchorLink key={key} title={key} href={`#${key}`}/>)}
+        {bigSections.value.map((key) => <NAnchorLink key={key} title={getBigSectionName(key!)} href={`#${key}`}/>)}
         {otherSection.value.length > 0 && <NAnchorLink key={t('mod.other')} title={t('mod.other')} href={`#${t('mod.other')}`}/>}
       </NAnchor>
       <NScrollbar class="h-[calc(100dvh-160px)] p-2 relative"
@@ -106,7 +118,7 @@ export default defineComponent({
             <NPopover trigger="click">{{
               trigger: () => <NButton secondary size="small"><span class="i-ic-baseline-menu text-lg"/></NButton>,
               default: () => <NAnchor type="block" offsetTarget="#scroll">
-                {bigSections.value.map((key) => <NAnchorLink key={key} title={key} href={`#${key}`}/>)}
+                {bigSections.value.map((key) => <NAnchorLink key={key} title={getBigSectionName(key!)} href={`#${key}`}/>)}
                 {otherSection.value.length > 0 && <NAnchorLink key={t('mod.other')} title={t('mod.other')} href={`#${t('mod.other')}`}/>}
               </NAnchor>
             }}</NPopover>
@@ -117,7 +129,7 @@ export default defineComponent({
           <NDivider titlePlacement="left" class="mt-0! pt-8 sticky top-0! bg-white/80! z-1"
             // @ts-ignore
             onClick={() => location.href = `#${big}`}
-          >{big}</NDivider>
+          >{getBigSectionName(big!)}</NDivider>
           {filteredSections.value?.filter(it => {
             if (props.useNewSort) {
               return configSort.value[big!].includes(it.path!);

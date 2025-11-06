@@ -21,7 +21,7 @@ export default defineComponent({
       load.value = false
     }
 
-    return () => <NFlex class="p-l-10em translate-y--5" align="center">
+    return () => <NFlex class="p-l-10em" align="center">
       {modInfo.value?.isJudgeDisplay4BInstalled ? <NFlex class="c-green-6">{t('mod.resourcesInstalled')}</NFlex> : <NFlex class="c-orange">{t('mod.resourcesNotInstalled')}</NFlex>}
       <NButton secondary onClick={installAssets} loading={load.value}>
         {modInfo.value?.isJudgeDisplay4BInstalled ? t('mod.reinstall') : t('mod.installResources')}

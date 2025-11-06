@@ -13,13 +13,18 @@ options:
     - value: en
       label: Let's speak English!
 
-commentOverrides:
-  Fancy.GamePlay.JudgeDisplay4B: |
-    更精细的判定表示
-    需开启 CustomSkins 并安装资源文件
-    作者 @Minepig
-  GameSettings.TouchSensitivity: |
-    使用自定义的触摸灵敏度
-    这里启用之后 Test 里的设置就不再起作用了，不过还是可以使用 Test 测试（使用测试需要关闭 1P 模式）
-    如果你的手台有对应的上位机，建议使用上位机调整
+commentOverrides: {}
 nameOverrides: {}
+
+sectionNameEn:
+  常用: Common
+  新功能！: New Features!
+  全解和跳过: Unlock & Skip
+  美化: Beautification
+  实用工具: Utilities
+  系统修改: System Modifications
+  调试工具: Debug Tools
+  键位和灵敏度: Keys & Sensitivity
+  高级设置: Advanced Settings
+  过新过热: Too New Too Hot
+  不建议关闭: Not Recommend to Disable

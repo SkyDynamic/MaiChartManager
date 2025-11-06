@@ -312,6 +312,15 @@ mod:
   judgeAccuracyInfo:
     author: 作者：
     viewDoc: 查看说明文件
+  commentOverrides:
+    Fancy_GamePlay_JudgeDisplay4B: |
+      更精细的判定表示
+      需开启 CustomSkins 并安装资源文件
+      作者 {'@'}Minepig
+    GameSettings_TouchSensitivity: |
+      使用自定义的触摸灵敏度
+      这里启用之后 Test 里的设置就不再起作用了，不过还是可以使用 Test 测试（使用测试需要关闭 1P 模式）
+      如果你的手台有对应的上位机，建议使用上位机调整
 tools:
   title: 工具
   audioConvert: 音频转换（ACB + AWB）

@@ -1,12 +1,13 @@
 import { IEntryState, Entry } from "@/client/apiGen";
 import { NFormItem, NFlex, NSelect, NSwitch, NInput, NInputNumber } from "naive-ui";
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import ProblemsDisplay from "../ProblemsDisplay";
 import { KeyCodeName } from "./types/KeyCodeName";
 import { getNameForPath } from "./utils";
 import comments from "./modComments.yaml";
 import { KeyCodeID } from "./types/KeyCodeID";
 import { useI18n } from 'vue-i18n';
+import { locale } from "@/locales";
 
 export default defineComponent({
   props: {
@@ -14,7 +15,19 @@ export default defineComponent({
     entryState: { type: Object as PropType<IEntryState>, required: true },
   },
   setup(props, { emit }) {
-    const { t } = useI18n();
+    const { t, te } = useI18n();
+
+    const comment = computed(() => {
+      const localeKey = 'mod.commentOverrides.' + props.entry.path!.replace(/\./g, '_');
+      if (te(localeKey)) {
+        return t(localeKey);
+      }
+      if (locale.value.startsWith('zh')) {
+        return props.entry.attribute?.comment?.commentZh;
+      }
+      return props.entry.attribute?.comment?.commentEn;
+    })
+
     return () => <NFormItem label={getNameForPath(props.entry.path!, props.entry.name!, props.entry.attribute?.comment?.nameZh)} labelPlacement="left" labelWidth="9em" showFeedback={false}
       // @ts-ignore
                             title={props.entry.path!}
@@ -51,7 +64,7 @@ export default defineComponent({
           })()}
           {comments.shouldEnableOptions[props.entry.path!] && !props.entryState.value && <ProblemsDisplay problems={[t('mod.needEnableOption')]}/>}
         </NFlex>
-        {comments.commentOverrides[props.entry.path!] || props.entry.attribute?.comment?.commentZh}
+        {comment.value}
       </NFlex>
     </NFormItem>;
   },

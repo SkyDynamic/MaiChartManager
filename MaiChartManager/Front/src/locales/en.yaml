@@ -335,6 +335,15 @@ mod:
   judgeAccuracyInfo:
     author: 'Author: '
     viewDoc: View Documentation
+  commentOverrides:
+    Fancy_GamePlay_JudgeDisplay4B: |
+      More detailed judge display
+      Requires CustomSkins enabled and resource files installed
+      Author {'@'}Minepig
+    GameSettings_TouchSensitivity: |
+      Use custom touch sensitivity
+      After enabling this, the settings in Test menu will no longer work, but you can still test (testing requires disabling 1P mode)
+      If your cabinet has corresponding host software, it's recommended to use it for adjustments
 tools:
   title: Tools
   audioConvert: Audio Convert (ACB + AWB)
