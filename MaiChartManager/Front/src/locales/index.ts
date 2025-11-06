@@ -18,8 +18,8 @@ const localeMessages: Record<string, any> = {
 // 创建 i18n 实例，初始语言先设为 zh，会在应用启动后从后端获取
 const i18n = createI18n({
   legacy: false, // 使用 Composition API
-  locale: 'zh', // 默认语言，会被后端设置覆盖
-  fallbackLocale: 'zh',
+  locale: 'en', // 默认语言，会被后端设置覆盖
+  fallbackLocale: 'en',
   messages: localeMessages,
   globalInjection: true, // 全局注入 $t
 });
@@ -52,6 +52,7 @@ export const loadLocaleFromBackend = async () => {
 };
 
 // 导出全局 t 函数
+// @ts-ignore
 export const t = i18n.global.t;
 
 // 导出 locale，可以直接访问当前语言

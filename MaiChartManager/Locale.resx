@@ -21,144 +21,144 @@
 
     <!-- Music Controller -->
     <data name="MusicIdExists" xml:space="preserve">
-    <value>当前资源目录里已经存在这个 ID 了</value>
+    <value>Music with this ID already exists in current directory</value>
   </data>
     <data name="UnsupportedImageFormat" xml:space="preserve">
-    <value>不支持的图片格式</value>
+    <value>Unsupported image format</value>
   </data>
     <!-- Genre Controller -->
     <data name="GenreIdExists" xml:space="preserve">
-    <value>相同的资源目录里已经存在一个 ID 相同的流派了</value>
+    <value>Genre with same ID already exists in this directory</value>
   </data>
     <data name="GenreIdExistsHigherPriority" xml:space="preserve">
-    <value>一个优先级更高的资源目录里已经存在一个 ID 相同的流派了，这样的话，新创建的流派不会被识别
-如果你确实想新建的话，请先删除以下目录中已存在的流派</value>
+    <value>Genre with same ID exists in higher priority directory, new genre won't be recognized
+If you really want to create it, please delete the existing genre in the following directories first</value>
   </data>
     <!-- Version Controller -->
     <data name="VersionIdExists" xml:space="preserve">
-    <value>相同的资源目录里已经存在一个 ID 相同的版本了</value>
+    <value>Version with same ID already exists in this directory</value>
   </data>
     <data name="VersionIdExistsHigherPriority" xml:space="preserve">
-    <value>一个优先级更高的资源目录里已经存在一个 ID 相同的版本了，这样的话，新创建的版本不会被识别
-如果你确实想新建的话，请先删除以下目录中已存在的版本</value>
+    <value>Version with same ID exists in higher priority directory, new version won't be recognized
+If you really want to create it, please delete the existing version in the following directories first</value>
   </data>
     <!-- Audio/Video Convert Controller -->
     <data name="FileNotSelected" xml:space="preserve">
-    <value>未选择文件</value>
+    <value>No file selected</value>
   </data>
     <data name="BrowserNotInitialized" xml:space="preserve">
-    <value>浏览器窗口未初始化</value>
+    <value>Browser window not initialized</value>
   </data>
     <data name="ConvertSuccess" xml:space="preserve">
-    <value>转换完成！</value>
+    <value>Conversion complete!</value>
   </data>
     <data name="ConvertFailed" xml:space="preserve">
-    <value>转换失败: {0}</value>
+    <value>Conversion failed: {0}</value>
   </data>
     <data name="AcbNotFound" xml:space="preserve">
-    <value>找不到配对的 ACB 文件: {0}</value>
+    <value>Cannot find paired ACB file: {0}</value>
   </data>
     <data name="AwbNotFound" xml:space="preserve">
-    <value>找不到配对的 AWB 文件: {0}</value>
+    <value>Cannot find paired AWB file: {0}</value>
   </data>
     <!-- AssetDir Controller -->
     <data name="SelectAssetDirectory" xml:space="preserve">
-    <value>请选择资源目录（OPT）的文件夹</value>
+    <value>Please select resource directory (OPT)</value>
   </data>
     <!-- AppMain -->
     <data name="ConfigCorrupted" xml:space="preserve">
-    <value>看起来配置文件损坏了…已经重置配置文件</value>
+    <value>Config file appears corrupted... Reset to default</value>
   </data>
     <data name="ConfigCorruptedTitle" xml:space="preserve">
-    <value>不太对劲</value>
+    <value>Something's Wrong</value>
   </data>
     <data name="WebView2NotInstalled" xml:space="preserve">
-    <value>WebView2 运行时未安装，在启动之后可能会白屏…
+    <value>WebView2 runtime not installed, may result in blank screen...
 
-如果你觉得你已经安装了 WebView2 运行时，请尝试重启电脑。
+If you believe WebView2 is installed, try restarting your computer.
 
-要尝试安装一下 WebView2 吗？</value>
+Would you like to install WebView2?</value>
   </data>
     <data name="WebView2NotInstalledTitle" xml:space="preserve">
-    <value>WebView2 未安装</value>
+    <value>WebView2 Not Installed</value>
   </data>
     <!-- Launcher -->
     <data name="LauncherSelectGameDir" xml:space="preserve">
-    <value>选择游戏目录</value>
+    <value>Select Game Directory</value>
   </data>
     <data name="LauncherStart" xml:space="preserve">
-    <value>启动</value>
+    <value>Start</value>
   </data>
     <data name="LauncherStop" xml:space="preserve">
-    <value>停止</value>
+    <value>Stop</value>
   </data>
     <data name="LauncherExit" xml:space="preserve">
-    <value>退出</value>
+    <value>Exit</value>
   </data>
     <data name="LauncherGameDir" xml:space="preserve">
-    <value>游戏目录</value>
+    <value>Game Directory</value>
   </data>
     <data name="LauncherOpenToLan" xml:space="preserve">
-    <value>开放到局域网</value>
+    <value>Open to LAN</value>
   </data>
     <data name="LauncherStartup" xml:space="preserve">
-    <value>开机自动运行</value>
+    <value>Start on Boot</value>
   </data>
     <data name="LauncherNeedLogin" xml:space="preserve">
-    <value>需要登录</value>
+    <value>Require Login</value>
   </data>
     <data name="PathNotExist" xml:space="preserve">
-    <value>选择的路径不存在！</value>
+    <value>Selected path does not exist!</value>
   </data>
     <data name="PathContainsSpecialChars" xml:space="preserve">
-    <value>警告：路径中包含特殊字符或中文，可能会导致 MelonLoader 之类的工具出现兼容性问题，请将目录移动至英文路径！</value>
+    <value>Warning: Path contains special characters or non-ASCII characters, may cause compatibility issues with tools like MelonLoader. Please move to an ASCII path!</value>
   </data>
     <data name="PathContainsSpecialCharsTitle" xml:space="preserve">
-    <value>警告</value>
+    <value>Warning</value>
   </data>
     <data name="PathNotGameDir" xml:space="preserve">
-    <value>选择的路径中看起来不包含游戏文件，请选择 Sinmai.exe 所在的文件夹</value>
+    <value>Selected path doesn't appear to contain game files, please select the folder containing Sinmai.exe</value>
   </data>
     <data name="OfflineActivationPrompt" xml:space="preserve">
-    <value>请输入激活码</value>
+    <value>Please enter activation code</value>
   </data>
     <data name="OfflineActivationTitle" xml:space="preserve">
-    <value>离线激活</value>
+    <value>Offline Activation</value>
   </data>
     <data name="ActivationCodeInvalid" xml:space="preserve">
-    <value>激活码无效</value>
+    <value>Activation code invalid</value>
   </data>
     <data name="ActivationSuccess" xml:space="preserve">
-    <value>赞助版功能已激活，谢谢你</value>
+    <value>Premium features activated, thank you</value>
   </data>
     <!-- StaticSettings -->
     <data name="GameDirNotSpecified" xml:space="preserve">
-    <value>未指定游戏目录</value>
+    <value>Game directory not specified</value>
   </data>
     <data name="InitDataDirError" xml:space="preserve">
-    <value>初始化数据目录时出错</value>
+    <value>Error initializing data directory</value>
   </data>
     <data name="LoadMusicDataFailed" xml:space="preserve">
-    <value>加载乐曲数据 {0} 失败: {1}</value>
+    <value>Failed to load music data {0}: {1}</value>
   </data>
     <data name="LoadGenreDataFailed" xml:space="preserve">
-    <value>加载分类数据 {0} 失败: {1}</value>
+    <value>Failed to load genre data {0}: {1}</value>
   </data>
     <data name="LoadVersionDataFailed" xml:space="preserve">
-    <value>加载版本数据 {0} 失败: {1}</value>
+    <value>Failed to load version data {0}: {1}</value>
   </data>
     <data name="GameVersionNotFound" xml:space="preserve">
-    <value>无法获取游戏版本号，解析数据失败</value>
+    <value>Cannot get game version, failed to parse data</value>
   </data>
     <data name="GameVersionNotFoundTitle" xml:space="preserve">
-    <value>提示</value>
+    <value>Notice</value>
   </data>
     <data name="GameVersionError" xml:space="preserve">
-    <value>无法获取游戏版本号，可能是因为 A000\DataConfig.xml 找不到或者有错误</value>
+    <value>Cannot get game version, A000\DataConfig.xml may be missing or invalid</value>
   </data>
     <!-- ServerManager -->
     <data name="UnknownError" xml:space="preserve">
-    <value>未知错误</value>
+    <value>Unknown error</value>
   </data>
 
 </root>

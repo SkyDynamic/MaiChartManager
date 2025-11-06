@@ -60,7 +60,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 找不到配对的 ACB 文件: {0}.
+        ///   Looks up a localized string similar to Cannot find paired ACB file: {0}.
         /// </summary>
         internal static string AcbNotFound {
             get {
@@ -69,7 +69,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 激活码无效.
+        ///   Looks up a localized string similar to Activation code invalid.
         /// </summary>
         internal static string ActivationCodeInvalid {
             get {
@@ -78,7 +78,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 赞助版功能已激活，谢谢你.
+        ///   Looks up a localized string similar to Premium features activated, thank you.
         /// </summary>
         internal static string ActivationSuccess {
             get {
@@ -87,7 +87,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 找不到配对的 AWB 文件: {0}.
+        ///   Looks up a localized string similar to Cannot find paired AWB file: {0}.
         /// </summary>
         internal static string AwbNotFound {
             get {
@@ -96,7 +96,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 浏览器窗口未初始化.
+        ///   Looks up a localized string similar to Browser window not initialized.
         /// </summary>
         internal static string BrowserNotInitialized {
             get {
@@ -105,7 +105,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 看起来配置文件损坏了…已经重置配置文件.
+        ///   Looks up a localized string similar to Config file appears corrupted... Reset to default.
         /// </summary>
         internal static string ConfigCorrupted {
             get {
@@ -114,7 +114,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 不太对劲.
+        ///   Looks up a localized string similar to Something&apos;s Wrong.
         /// </summary>
         internal static string ConfigCorruptedTitle {
             get {
@@ -123,7 +123,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 转换失败: {0}.
+        ///   Looks up a localized string similar to Conversion failed: {0}.
         /// </summary>
         internal static string ConvertFailed {
             get {
@@ -132,7 +132,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 转换完成！.
+        ///   Looks up a localized string similar to Conversion complete!.
         /// </summary>
         internal static string ConvertSuccess {
             get {
@@ -141,7 +141,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 未选择文件.
+        ///   Looks up a localized string similar to No file selected.
         /// </summary>
         internal static string FileNotSelected {
             get {
@@ -150,7 +150,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 未指定游戏目录.
+        ///   Looks up a localized string similar to Game directory not specified.
         /// </summary>
         internal static string GameDirNotSpecified {
             get {
@@ -159,7 +159,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 无法获取游戏版本号，可能是因为 A000\DataConfig.xml 找不到或者有错误.
+        ///   Looks up a localized string similar to Cannot get game version, A000\DataConfig.xml may be missing or invalid.
         /// </summary>
         internal static string GameVersionError {
             get {
@@ -168,7 +168,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 无法获取游戏版本号，解析数据失败.
+        ///   Looks up a localized string similar to Cannot get game version, failed to parse data.
         /// </summary>
         internal static string GameVersionNotFound {
             get {
@@ -177,7 +177,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 提示.
+        ///   Looks up a localized string similar to Notice.
         /// </summary>
         internal static string GameVersionNotFoundTitle {
             get {
@@ -186,7 +186,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 相同的资源目录里已经存在一个 ID 相同的流派了.
+        ///   Looks up a localized string similar to Genre with same ID already exists in this directory.
         /// </summary>
         internal static string GenreIdExists {
             get {
@@ -195,8 +195,8 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 一个优先级更高的资源目录里已经存在一个 ID 相同的流派了，这样的话，新创建的流派不会被识别
-        ///如果你确实想新建的话，请先删除以下目录中已存在的流派.
+        ///   Looks up a localized string similar to Genre with same ID exists in higher priority directory, new genre won&apos;t be recognized
+        ///If you really want to create it, please delete the existing genre in the following directories first.
         /// </summary>
         internal static string GenreIdExistsHigherPriority {
             get {
@@ -205,7 +205,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 初始化数据目录时出错.
+        ///   Looks up a localized string similar to Error initializing data directory.
         /// </summary>
         internal static string InitDataDirError {
             get {
@@ -214,7 +214,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 退出.
+        ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string LauncherExit {
             get {
@@ -223,7 +223,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 游戏目录.
+        ///   Looks up a localized string similar to Game Directory.
         /// </summary>
         internal static string LauncherGameDir {
             get {
@@ -232,7 +232,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 需要登录.
+        ///   Looks up a localized string similar to Require Login.
         /// </summary>
         internal static string LauncherNeedLogin {
             get {
@@ -241,7 +241,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 开放到局域网.
+        ///   Looks up a localized string similar to Open to LAN.
         /// </summary>
         internal static string LauncherOpenToLan {
             get {
@@ -250,7 +250,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 选择游戏目录.
+        ///   Looks up a localized string similar to Select Game Directory.
         /// </summary>
         internal static string LauncherSelectGameDir {
             get {
@@ -259,7 +259,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 启动.
+        ///   Looks up a localized string similar to Start.
         /// </summary>
         internal static string LauncherStart {
             get {
@@ -268,7 +268,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 开机自动运行.
+        ///   Looks up a localized string similar to Start on Boot.
         /// </summary>
         internal static string LauncherStartup {
             get {
@@ -277,7 +277,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 停止.
+        ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string LauncherStop {
             get {
@@ -286,7 +286,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加载分类数据 {0} 失败: {1}.
+        ///   Looks up a localized string similar to Failed to load genre data {0}: {1}.
         /// </summary>
         internal static string LoadGenreDataFailed {
             get {
@@ -295,7 +295,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加载乐曲数据 {0} 失败: {1}.
+        ///   Looks up a localized string similar to Failed to load music data {0}: {1}.
         /// </summary>
         internal static string LoadMusicDataFailed {
             get {
@@ -304,7 +304,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加载版本数据 {0} 失败: {1}.
+        ///   Looks up a localized string similar to Failed to load version data {0}: {1}.
         /// </summary>
         internal static string LoadVersionDataFailed {
             get {
@@ -313,7 +313,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 当前资源目录里已经存在这个 ID 了.
+        ///   Looks up a localized string similar to Music with this ID already exists in current directory.
         /// </summary>
         internal static string MusicIdExists {
             get {
@@ -322,7 +322,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 请输入激活码.
+        ///   Looks up a localized string similar to Please enter activation code.
         /// </summary>
         internal static string OfflineActivationPrompt {
             get {
@@ -331,7 +331,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 离线激活.
+        ///   Looks up a localized string similar to Offline Activation.
         /// </summary>
         internal static string OfflineActivationTitle {
             get {
@@ -340,7 +340,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 警告：路径中包含特殊字符或中文，可能会导致 MelonLoader 之类的工具出现兼容性问题，请将目录移动至英文路径！.
+        ///   Looks up a localized string similar to Warning: Path contains special characters or non-ASCII characters, may cause compatibility issues with tools like MelonLoader. Please move to an ASCII path!.
         /// </summary>
         internal static string PathContainsSpecialChars {
             get {
@@ -349,7 +349,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 警告.
+        ///   Looks up a localized string similar to Warning.
         /// </summary>
         internal static string PathContainsSpecialCharsTitle {
             get {
@@ -358,7 +358,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 选择的路径不存在！.
+        ///   Looks up a localized string similar to Selected path does not exist!.
         /// </summary>
         internal static string PathNotExist {
             get {
@@ -367,7 +367,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 选择的路径中看起来不包含游戏文件，请选择 Sinmai.exe 所在的文件夹.
+        ///   Looks up a localized string similar to Selected path doesn&apos;t appear to contain game files, please select the folder containing Sinmai.exe.
         /// </summary>
         internal static string PathNotGameDir {
             get {
@@ -376,7 +376,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 请选择资源目录（OPT）的文件夹.
+        ///   Looks up a localized string similar to Please select resource directory (OPT).
         /// </summary>
         internal static string SelectAssetDirectory {
             get {
@@ -385,7 +385,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 未知错误.
+        ///   Looks up a localized string similar to Unknown error.
         /// </summary>
         internal static string UnknownError {
             get {
@@ -394,7 +394,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 不支持的图片格式.
+        ///   Looks up a localized string similar to Unsupported image format.
         /// </summary>
         internal static string UnsupportedImageFormat {
             get {
@@ -403,7 +403,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 相同的资源目录里已经存在一个 ID 相同的版本了.
+        ///   Looks up a localized string similar to Version with same ID already exists in this directory.
         /// </summary>
         internal static string VersionIdExists {
             get {
@@ -412,8 +412,8 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 一个优先级更高的资源目录里已经存在一个 ID 相同的版本了，这样的话，新创建的版本不会被识别
-        ///如果你确实想新建的话，请先删除以下目录中已存在的版本.
+        ///   Looks up a localized string similar to Version with same ID exists in higher priority directory, new version won&apos;t be recognized
+        ///If you really want to create it, please delete the existing version in the following directories first.
         /// </summary>
         internal static string VersionIdExistsHigherPriority {
             get {
@@ -422,11 +422,11 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WebView2 运行时未安装，在启动之后可能会白屏…
+        ///   Looks up a localized string similar to WebView2 runtime not installed, may result in blank screen...
         ///
-        ///如果你觉得你已经安装了 WebView2 运行时，请尝试重启电脑。
+        ///If you believe WebView2 is installed, try restarting your computer.
         ///
-        ///要尝试安装一下 WebView2 吗？.
+        ///Would you like to install WebView2?.
         /// </summary>
         internal static string WebView2NotInstalled {
             get {
@@ -435,7 +435,7 @@ namespace MaiChartManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WebView2 未安装.
+        ///   Looks up a localized string similar to WebView2 Not Installed.
         /// </summary>
         internal static string WebView2NotInstalledTitle {
             get {

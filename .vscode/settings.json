@@ -1,7 +1,4 @@
 {
-    "dotrush.roslyn.projectOrSolutionFiles": [
-        "d:\\Projects\\mai\\Sitreamai\\Sitreamai.sln"
-    ],
     "dotnet.defaultSolution": "Sitreamai.sln",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#f9c3d9",
@@ -24,7 +21,6 @@
     },
     "peacock.color": "#f594bb",
     "i18n-ally.localesPaths": [
-        "D:/Projects/mai/Sitreamai/MaiChartManager/Front/src/locales",
         "MaiChartManager/Front/src/locales"
     ],
     "i18n-ally.sourceLanguage": "zh",

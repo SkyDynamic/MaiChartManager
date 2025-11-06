@@ -147,5 +147,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Locale.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+      <EmbeddedResource Remove="Properties\Resources.zh-hant.resx"/>
+      <EmbeddedResource Remove="Properties\Resources.zh-hans.resx"/>
+      <EmbeddedResource Remove="Launcher.zh-hant.resx"/>
+      <EmbeddedResource Remove="Launcher.zh-hans.resx"/>
+      <EmbeddedResource Remove="Browser.zh-hant.resx"/>
+      <EmbeddedResource Remove="Browser.zh-hans.resx"/>
+      <EmbeddedResource Update="Locale.zh-hans.resx">
+          <DependentUpon>Locale.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Locale.zh-hant.resx">
+          <DependentUpon>Locale.resx</DependentUpon>
+      </EmbeddedResource>
   </ItemGroup>
 </Project>

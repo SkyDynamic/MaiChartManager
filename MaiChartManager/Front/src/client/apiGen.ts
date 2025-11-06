@@ -16,6 +16,7 @@ export interface AppVersionResult {
   license?: LicenseStatus;
   hardwareAcceleration?: HardwareAccelerationStatus;
   h264Encoder?: string | null;
+  locale?: string | null;
 }
 
 export enum AssetType {

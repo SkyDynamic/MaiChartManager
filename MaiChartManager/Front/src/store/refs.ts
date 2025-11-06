@@ -5,6 +5,7 @@ import { captureException } from "@sentry/vue";
 import posthog from "posthog-js";
 import { useStorage, useWindowFocus, whenever } from "@vueuse/core";
 import deniedOgg from "@/assets/Denied.ogg";
+import { locale } from "@/locales";
 
 export const error = ref();
 export const errorId = ref<string>();
@@ -100,6 +101,7 @@ export const updateAssetDirs = async () => {
 
 export const updateVersion = async () => {
   version.value = (await api.GetAppVersion()).data;
+  locale.value = version.value?.locale || 'en';
 }
 
 export const updateModInfo = async () => {
@@ -132,10 +134,10 @@ export const updateModUpdateInfo = async () => {
 
 
 export const updateAll = async () => Promise.all([
+  updateVersion(),
   updateGenreList(),
   updateAddVersionList(),
   updateAssetDirs(),
-  updateVersion(),
   updateMusicList(),
   updateModInfo(),
   updateModUpdateInfo(),
