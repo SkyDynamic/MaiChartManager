@@ -160,7 +160,7 @@ music:
 genre:
   title: Genre
   management: Genre Management
-  categoryManagement: Category Management
+  categoryManagement: Category
   showBuiltIn: Show Built-in
   create: Create Genre
   createFailed: Creation failed
@@ -265,7 +265,7 @@ chart:
     title: Preview Chart
     loading: Loading...
 mod:
-  title: Mod Management
+  title: Mods
   notInstalled: Not Installed
   notInstalledWarning: AquaMai or MelonLoader not installed
   updateAvailable: Update Available

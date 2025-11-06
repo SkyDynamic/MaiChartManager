@@ -67,7 +67,7 @@ export default defineComponent({
       {
         title: t('music.list.tableVersion'),
         key: 'version',
-        width: '8em',
+        width: '9.5em',
         sorter: 'default',
         filterOptions: ['B35', 'B15'].map(it => ({ label: it, value: it })),
         filter: (value, row) => {

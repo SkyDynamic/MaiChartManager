@@ -108,9 +108,9 @@ public class ModController(StaticSettings settings, ILogger<ModController> logge
         }
     }
 
-    public class UnsupportedConfigApiVersionException() : Exception("无法兼容的配置文件版本");
+    public class UnsupportedConfigApiVersionException() : Exception(Locale.UnsupportedConfigVersion);
 
-    public class AquaMaiNotInstalledException() : Exception("AquaMai 没有安装");
+    public class AquaMaiNotInstalledException() : Exception(Locale.AquaMaiNotInstalled);
 
     [NonAction]
     private static void CheckConfigApiVersion(HeadlessConfigInterface configInterface)

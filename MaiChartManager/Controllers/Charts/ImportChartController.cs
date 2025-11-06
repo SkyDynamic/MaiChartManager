@@ -73,7 +73,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
         try
         {
             var chart = SimaiConvert.Deserialize(FixChartSimaiSharp(chartText));
-            errors.Add(new ImportChartMessage($"尝试修正了一些谱面难度 {level} 中的小错误", MessageLevel.Info));
+            errors.Add(new ImportChartMessage(string.Format(Locale.ChartFixedMinorErrors, level), MessageLevel.Info));
             return chart;
         }
         catch (Exception e)
@@ -125,13 +125,12 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
             }
 
             var maiLibChart = new SimaiParser().ChartOfToken(tokens);
-            errors.Add(new ImportChartMessage($"尝试修正了一些谱面难度 {level} 中的小错误", MessageLevel.Info));
+            errors.Add(new ImportChartMessage(string.Format(Locale.ChartFixedMinorErrors, level), MessageLevel.Info));
             return maiLibChart;
         }
         catch (Exception e)
         {
-            errors.Add(new ImportChartMessage($"MaiLib 解析谱面难度 {level} 时报错：\n{MaiLibErrMsgRegex().Replace(e.Message, "")}\n" +
-                                              $"这往往是谱面中的语句不够规范导致的，您可尝试根据报错对谱面进行修复。", MessageLevel.Warning));
+            errors.Add(new ImportChartMessage(string.Format(Locale.ChartMaiLibParseError, level, MaiLibErrMsgRegex().Replace(e.Message, "")), MessageLevel.Warning));
             logger.LogWarning(e, "无法在手动修正错误后解析谱面");
         }
 
@@ -145,14 +144,13 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
             var reSerialized = SimaiConvert.Serialize(simaiSharpChart);
             reSerialized = reSerialized.Replace("{0}", "{4}");
             var maiLibChart = new SimaiParser().ChartOfToken(new SimaiTokenizer().TokensFromText(reSerialized));
-            errors.Add(new ImportChartMessage($"就算修正了一些已知错误，MaiLib 还是无法解析谱面难度 {level}，我们尝试通过 AstroDX 的 SimaiSharp 解析。" +
-                                              "如果转换结果发现有什么问题的话，可以试试在 AstroDX 中有没有同样的问题并告诉我们（不试也没关系）", MessageLevel.Warning));
+            errors.Add(new ImportChartMessage(string.Format(Locale.ChartSimaiSharpFallback, level), MessageLevel.Warning));
             return maiLibChart;
         }
         catch (Exception e)
         {
             SentrySdk.CaptureException(e);
-            errors.Add(new ImportChartMessage($"试了各种办法都无法解析谱面难度 {level}，请检查谱面是否有问题", MessageLevel.Fatal));
+            errors.Add(new ImportChartMessage(string.Format(Locale.ChartParseFailed, level), MessageLevel.Fatal));
             return null;
         }
     }
@@ -162,7 +160,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
         var bpm = chart.TimingChanges[0].tempo;
         if (bpm == 0)
         {
-            throw new DivideByZeroException("BPM 等于 0");
+            throw new DivideByZeroException(Locale.ChartBpmZero);
         }
 
         return 60 / bpm * 4;
@@ -210,7 +208,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
             var title = maiData.GetValueOrDefault("title");
             if (string.IsNullOrWhiteSpace(maiData.GetValueOrDefault("title")))
             {
-                errors.Add(new ImportChartMessage("乐曲没有标题", MessageLevel.Fatal));
+                errors.Add(new ImportChartMessage(Locale.MusicNoTitle, MessageLevel.Fatal));
                 fatal = true;
             }
 
@@ -229,8 +227,8 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
 
             if (levels.Any(it => it))
             {
-                string[] levelNames = ["绿", "黄", "红", "紫", "白"];
-                var message = "将导入以下难度：";
+                string[] levelNames = [Locale.DifficultyBasic, Locale.DifficultyAdvanced, Locale.DifficultyExpert, Locale.DifficultyMaster, Locale.DifficultyReMaster];
+                var message = Locale.ImportingDifficulties;
                 for (var i = 0; i < 5; i++)
                 {
                     if (levels[i])
@@ -249,27 +247,27 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
                 if (!levels[3])
                 {
                     levels[3] = true;
-                    errors.Add(new ImportChartMessage($"有一个难度为 {i} 的谱面，将导入为紫谱", MessageLevel.Warning));
+                    errors.Add(new ImportChartMessage(string.Format(Locale.DifficultyImportedAsMaster, i), MessageLevel.Warning));
                 }
                 else if (!levels[4])
                 {
                     levels[4] = true;
-                    errors.Add(new ImportChartMessage($"有一个难度为 {i} 的谱面，将导入为白谱", MessageLevel.Warning));
+                    errors.Add(new ImportChartMessage(string.Format(Locale.DifficultyImportedAsReMaster, i), MessageLevel.Warning));
                 }
                 else if (!levels[0])
                 {
                     levels[0] = true;
-                    errors.Add(new ImportChartMessage($"有一个难度为 {i} 的谱面，将导入为绿谱", MessageLevel.Warning));
+                    errors.Add(new ImportChartMessage(string.Format(Locale.DifficultyImportedAsBasic, i), MessageLevel.Warning));
                 }
                 else
                 {
-                    errors.Add(new ImportChartMessage($"有一个难度为 {i} 的谱面将被忽略", MessageLevel.Warning));
+                    errors.Add(new ImportChartMessage(string.Format(Locale.DifficultyIgnored, i), MessageLevel.Warning));
                 }
             }
 
             if (!levels.Any(it => it))
             {
-                errors.Add(new ImportChartMessage("乐曲没有谱面", MessageLevel.Fatal));
+                errors.Add(new ImportChartMessage(Locale.MusicNoCharts, MessageLevel.Fatal));
                 fatal = true;
                 return new ImportChartCheckResult(!fatal, errors, 0, false, title, 0, 0);
             }
@@ -287,7 +285,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
                     if (!float.TryParse(measure.Groups[1].Value, out var measureValue)) continue;
                     if (measureValue > 384)
                     {
-                        errors.Add(new ImportChartMessage($"谱面难度 {kvp.Key} 存在 {measureValue} 分音符，这个数值不能大于 384。绝大多数这样的情况都是可以修改谱面解决的", MessageLevel.Fatal));
+                        errors.Add(new ImportChartMessage(string.Format(Locale.ChartInvalidMeasure, kvp.Key, measureValue), MessageLevel.Fatal));
                         fatal = true;
                         goto foreachAllChartTextContinue;
                     }
@@ -299,13 +297,13 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
                     paddings.Add(Converter.CalcMusicPadding(chart, first));
 
                     var candidate = TryParseChart(chartText, chart, kvp.Key, errors);
-                    if (candidate is null) throw new Exception("解析谱面失败");
+                    if (candidate is null) throw new Exception(Locale.ChartParseGenericError);
                     isDx = isDx || candidate.IsDxChart;
                 }
                 catch (Exception e)
                 {
                     logger.LogError(e, "解析谱面失败");
-                    errors.Add(new ImportChartMessage($"谱面难度 {kvp.Key} 解析失败", MessageLevel.Fatal));
+                    errors.Add(new ImportChartMessage(string.Format(Locale.ChartDifficultyParseFailed, kvp.Key), MessageLevel.Fatal));
                     fatal = true;
                 }
 
@@ -322,7 +320,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
         catch (Exception e)
         {
             logger.LogError(e, "解析谱面失败（大）");
-            errors.Add(new ImportChartMessage("谱面解析失败（大）", MessageLevel.Fatal));
+            errors.Add(new ImportChartMessage(Locale.ChartParseFailedGlobal, MessageLevel.Fatal));
             fatal = true;
             return new ImportChartCheckResult(!fatal, errors, 0, false, "", 0, 0);
         }
@@ -507,9 +505,9 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
                 {
                     SentrySdk.CaptureEvent(new SentryEvent(e)
                     {
-                        Message = "谱面偏移 ShiftByOffset 遇到问题"
+                        Message = Locale.ChartShiftByOffsetError
                     });
-                    errors.Add(new ImportChartMessage("平移谱面时遇到问题，可以试试在导入的高级选项中开启避免平移谱面", MessageLevel.Fatal));
+                    errors.Add(new ImportChartMessage(Locale.ChartShiftError, MessageLevel.Fatal));
                     return new ImportChartResult(errors, true);
                 }
             }
@@ -518,7 +516,7 @@ public partial class ImportChartController(StaticSettings settings, ILogger<Stat
 
             if (shiftedConverted.Split('\n').Length != originalConverted.Split('\n').Length)
             {
-                errors.Add(new ImportChartMessage("看起来有音符被吃掉了！不出意外的话是遇到了 Bug，如果你能提供谱面文件的话我们会很感谢！", MessageLevel.Warning));
+                errors.Add(new ImportChartMessage(Locale.ChartNotesMissing, MessageLevel.Warning));
                 logger.LogWarning("BUG! shiftedConverted: {shiftedLen}, originalConverted: {originalLen}", shiftedConverted.Split('\n').Length, originalConverted.Split('\n').Length);
             }
 

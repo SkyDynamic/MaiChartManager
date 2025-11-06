@@ -161,4 +161,130 @@ Would you like to install WebView2?</value>
     <value>Unknown error</value>
   </data>
 
+    <!-- ImportChartController -->
+    <data name="ChartFixedMinorErrors" xml:space="preserve">
+    <value>Fixed some minor errors in chart difficulty {0}</value>
+  </data>
+    <data name="ChartMaiLibParseError" xml:space="preserve">
+    <value>MaiLib error parsing chart difficulty {0}:
+{1}
+This is usually caused by non-standard syntax in the chart. You can try to fix the chart based on this error message.</value>
+  </data>
+    <data name="ChartSimaiSharpFallback" xml:space="preserve">
+    <value>Even after fixing known errors, MaiLib still cannot parse chart difficulty {0}. Falling back to AstroDX's SimaiSharp parser.
+If you notice any issues with the conversion result, you can try testing it in AstroDX and let us know (though this is optional)</value>
+  </data>
+    <data name="ChartParseFailed" xml:space="preserve">
+    <value>Failed to parse chart difficulty {0} despite all attempts, please check if the chart has issues</value>
+  </data>
+    <data name="MusicNoTitle" xml:space="preserve">
+    <value>Music has no title</value>
+  </data>
+    <data name="ImportingDifficulties" xml:space="preserve">
+    <value>Will import the following difficulties: </value>
+  </data>
+    <data name="DifficultyImportedAsMaster" xml:space="preserve">
+    <value>A chart with difficulty {0} will be imported as Master</value>
+  </data>
+    <data name="DifficultyImportedAsReMaster" xml:space="preserve">
+    <value>A chart with difficulty {0} will be imported as Re:Master</value>
+  </data>
+    <data name="DifficultyImportedAsBasic" xml:space="preserve">
+    <value>A chart with difficulty {0} will be imported as Basic</value>
+  </data>
+    <data name="DifficultyIgnored" xml:space="preserve">
+    <value>A chart with difficulty {0} will be ignored</value>
+  </data>
+    <data name="MusicNoCharts" xml:space="preserve">
+    <value>Music has no charts</value>
+  </data>
+    <data name="ChartInvalidMeasure" xml:space="preserve">
+    <value>Chart difficulty {0} contains {1}-note division, this value cannot exceed 384. Most cases can be fixed by modifying the chart</value>
+  </data>
+    <data name="ChartDifficultyParseFailed" xml:space="preserve">
+    <value>Failed to parse chart difficulty {0}</value>
+  </data>
+    <data name="ChartParseFailedGlobal" xml:space="preserve">
+    <value>Chart parsing failed (global)</value>
+  </data>
+    <data name="ChartShiftError" xml:space="preserve">
+    <value>Encountered an issue while shifting the chart. Try enabling "Avoid shifting chart" in advanced import options</value>
+  </data>
+    <data name="ChartNotesMissing" xml:space="preserve">
+    <value>It looks like some notes were lost! This is likely a bug. We'd really appreciate it if you could provide the chart file!</value>
+  </data>
+    <data name="ChartBpmZero" xml:space="preserve">
+    <value>BPM equals 0</value>
+  </data>
+    <data name="ChartParseGenericError" xml:space="preserve">
+    <value>Failed to parse chart</value>
+  </data>
+    <data name="ChartShiftByOffsetError" xml:space="preserve">
+    <value>Chart shift ShiftByOffset encountered an issue</value>
+  </data>
+    <!-- Chart Difficulty Names -->
+    <data name="DifficultyBasic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+    <data name="DifficultyAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+    <data name="DifficultyExpert" xml:space="preserve">
+    <value>Expert</value>
+  </data>
+    <data name="DifficultyMaster" xml:space="preserve">
+    <value>Master</value>
+  </data>
+    <data name="DifficultyReMaster" xml:space="preserve">
+    <value>Re:Master</value>
+  </data>
+
+    <!-- MusicTransferController -->
+    <data name="SelectTargetLocation" xml:space="preserve">
+    <value>Please select target location</value>
+  </data>
+    <data name="Exporting" xml:space="preserve">
+    <value>Exporting...</value>
+  </data>
+    <data name="ExportingMultipleMusic" xml:space="preserve">
+    <value>Exporting {0} music tracks...</value>
+  </data>
+    <data name="Cancelling" xml:space="preserve">
+    <value>Cancelling...</value>
+  </data>
+
+    <!-- CueConvertController -->
+    <data name="AcbRequiresAwb" xml:space="preserve">
+    <value>ACB file must be paired with AWB file</value>
+  </data>
+    <data name="AudioFileNotFound" xml:space="preserve">
+    <value>Audio file not found</value>
+  </data>
+
+    <!-- AudioConvertToolController -->
+    <data name="SelectAudioToConvert" xml:space="preserve">
+    <value>Please select audio file to convert</value>
+  </data>
+    <data name="AudioFileFilter" xml:space="preserve">
+    <value>Audio Files|*.wav;*.mp3;*.aac;*.ogg;*.flac;*.m4a;*.wma;*.ape;*.acb;*.awb;*.mp4</value>
+  </data>
+
+    <!-- VideoConvertToolController -->
+    <data name="SelectVideoToConvert" xml:space="preserve">
+    <value>Please select video file to convert</value>
+  </data>
+    <data name="VideoFileFilter" xml:space="preserve">
+    <value>Video or Image|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm</value>
+  </data>
+
+    <!-- ModController -->
+    <data name="UnsupportedConfigVersion" xml:space="preserve">
+    <value>Incompatible configuration file version</value>
+  </data>
+    <data name="AquaMaiNotInstalled" xml:space="preserve">
+    <value>AquaMai is not installed</value>
+  </data>
+    <data name="qwq" xml:space="preserve">
+      <value />
+    </data>
 </root>

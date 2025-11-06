@@ -152,4 +152,129 @@
     <data name="UnknownError" xml:space="preserve">
     <value>未知錯誤</value>
   </data>
+
+    <!-- ImportChartController -->
+    <data name="ChartFixedMinorErrors" xml:space="preserve">
+    <value>嘗試修正了一些譜面難度 {0} 中的小錯誤</value>
+  </data>
+    <data name="ChartMaiLibParseError" xml:space="preserve">
+    <value>MaiLib 解析譜面難度 {0} 時報錯：
+{1}
+這往往是譜面中的語句不夠規範導致的，您可嘗試根據報錯對譜面進行修復。</value>
+  </data>
+    <data name="ChartSimaiSharpFallback" xml:space="preserve">
+    <value>就算修正了一些已知錯誤，MaiLib 還是無法解析譜面難度 {0}，我們嘗試通過 AstroDX 的 SimaiSharp 解析。
+如果轉換結果發現有什麼問題的話，可以試試在 AstroDX 中有沒有同樣的問題並告訴我們（不試也沒關係）</value>
+  </data>
+    <data name="ChartParseFailed" xml:space="preserve">
+    <value>試了各種辦法都無法解析譜面難度 {0}，請檢查譜面是否有問題</value>
+  </data>
+    <data name="MusicNoTitle" xml:space="preserve">
+    <value>樂曲沒有標題</value>
+  </data>
+    <data name="ImportingDifficulties" xml:space="preserve">
+    <value>將匯入以下難度：</value>
+  </data>
+    <data name="DifficultyImportedAsMaster" xml:space="preserve">
+    <value>有一個難度為 {0} 的譜面，將匯入為紫譜</value>
+  </data>
+    <data name="DifficultyImportedAsReMaster" xml:space="preserve">
+    <value>有一個難度為 {0} 的譜面，將匯入為白譜</value>
+  </data>
+    <data name="DifficultyImportedAsBasic" xml:space="preserve">
+    <value>有一個難度為 {0} 的譜面，將匯入為綠譜</value>
+  </data>
+    <data name="DifficultyIgnored" xml:space="preserve">
+    <value>有一個難度為 {0} 的譜面將被忽略</value>
+  </data>
+    <data name="MusicNoCharts" xml:space="preserve">
+    <value>樂曲沒有譜面</value>
+  </data>
+    <data name="ChartInvalidMeasure" xml:space="preserve">
+    <value>譜面難度 {0} 存在 {1} 分音符，這個數值不能大於 384。絕大多數這樣的情況都是可以修改譜面解決的</value>
+  </data>
+    <data name="ChartDifficultyParseFailed" xml:space="preserve">
+    <value>譜面難度 {0} 解析失敗</value>
+  </data>
+    <data name="ChartParseFailedGlobal" xml:space="preserve">
+    <value>譜面解析失敗（大）</value>
+  </data>
+    <data name="ChartShiftError" xml:space="preserve">
+    <value>平移譜面時遇到問題，可以試試在匯入的進階選項中開啟避免平移譜面</value>
+  </data>
+    <data name="ChartNotesMissing" xml:space="preserve">
+    <value>看起來有音符被吃掉了！不出意外的話是遇到了 Bug，如果你能提供譜面檔案的話我們會很感謝！</value>
+  </data>
+    <data name="ChartBpmZero" xml:space="preserve">
+    <value>BPM 等於 0</value>
+  </data>
+    <data name="ChartParseGenericError" xml:space="preserve">
+    <value>解析譜面失敗</value>
+  </data>
+    <data name="ChartShiftByOffsetError" xml:space="preserve">
+    <value>譜面偏移 ShiftByOffset 遇到問題</value>
+  </data>
+    <!-- Chart Difficulty Names -->
+    <data name="DifficultyBasic" xml:space="preserve">
+    <value>綠</value>
+  </data>
+    <data name="DifficultyAdvanced" xml:space="preserve">
+    <value>黃</value>
+  </data>
+    <data name="DifficultyExpert" xml:space="preserve">
+    <value>紅</value>
+  </data>
+    <data name="DifficultyMaster" xml:space="preserve">
+    <value>紫</value>
+  </data>
+    <data name="DifficultyReMaster" xml:space="preserve">
+    <value>白</value>
+  </data>
+
+    <!-- MusicTransferController -->
+    <data name="SelectTargetLocation" xml:space="preserve">
+    <value>請選擇目標位置</value>
+  </data>
+    <data name="Exporting" xml:space="preserve">
+    <value>正在匯出…</value>
+  </data>
+    <data name="ExportingMultipleMusic" xml:space="preserve">
+    <value>正在匯出 {0} 首樂曲…</value>
+  </data>
+    <data name="Cancelling" xml:space="preserve">
+    <value>正在取消…</value>
+  </data>
+
+    <!-- CueConvertController -->
+    <data name="AcbRequiresAwb" xml:space="preserve">
+    <value>acb 檔案必須搭配 awb 檔案</value>
+  </data>
+    <data name="AudioFileNotFound" xml:space="preserve">
+    <value>音訊檔案不存在</value>
+  </data>
+
+    <!-- AudioConvertToolController -->
+    <data name="SelectAudioToConvert" xml:space="preserve">
+    <value>請選擇要轉換的音訊檔案</value>
+  </data>
+    <data name="AudioFileFilter" xml:space="preserve">
+    <value>音訊檔案|*.wav;*.mp3;*.aac;*.ogg;*.flac;*.m4a;*.wma;*.ape;*.acb;*.awb;*.mp4</value>
+  </data>
+
+    <!-- VideoConvertToolController -->
+    <data name="SelectVideoToConvert" xml:space="preserve">
+    <value>請選擇要轉換的影片檔案</value>
+  </data>
+    <data name="VideoFileFilter" xml:space="preserve">
+    <value>影片或者圖片|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm</value>
+  </data>
+
+    <!-- ModController -->
+    <data name="UnsupportedConfigVersion" xml:space="preserve">
+    <value>無法相容的設定檔案版本</value>
+  </data>
+    <data name="AquaMaiNotInstalled" xml:space="preserve">
+    <value>AquaMai 沒有安裝</value>
+  </data>
+
 </root>

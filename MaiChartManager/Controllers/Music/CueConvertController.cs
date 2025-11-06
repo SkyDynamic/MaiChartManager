@@ -34,7 +34,7 @@ public class CueConvertController(StaticSettings settings, ILogger<CueConvertCon
 
         if (Path.GetExtension(file.FileName).Equals(".acb", StringComparison.InvariantCultureIgnoreCase))
         {
-            if (awb is null) throw new Exception("acb 文件必须搭配 awb 文件");
+            if (awb is null) throw new Exception(Locale.AcbRequiresAwb);
             using var write = System.IO.File.Open(targetAcbPath, FileMode.Create);
             file.CopyTo(write);
             using var writeAwb = System.IO.File.Open(targetAwbPath, FileMode.Create);
@@ -58,7 +58,7 @@ public class CueConvertController(StaticSettings settings, ILogger<CueConvertCon
         id %= 10000;
         var cachePath = await AudioConvert.GetCachedWavPath(id);
         var targetAcbPath = StaticSettings.AcbAwb[$"music{id:000000}.acb"];
-        if (cachePath is null) throw new Exception("音频文件不存在");
+        if (cachePath is null) throw new Exception(Locale.AudioFileNotFound);
 
         var loopStart = TimeSpan.FromSeconds(request.StartTime);
         var loopEnd = TimeSpan.FromSeconds(request.EndTime);

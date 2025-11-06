@@ -91,13 +91,13 @@ export default defineComponent({
                   {props.meta.map((meta, i) => <MusicIdInput key={i} meta={meta} utage={props.savedOptions.genreId === UTAGE_GENRE}/>)}
                 </NFlex>
             </NScrollbar>
-            <NFormItem label={t('music.edit.genre')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.genre')} labelPlacement="left" labelWidth="10em" showFeedback={false}>
                 <GenreInput options={genreList.value} v-model:value={props.savedOptions.genreId}/>
             </NFormItem>
-            <NFormItem label={t('music.edit.versionCategory')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.versionCategory')} labelPlacement="left" labelWidth="10em" showFeedback={false}>
                 <GenreInput options={addVersionList.value} v-model:value={props.savedOptions.addVersionId}/>
             </NFormItem>
-            <NFormItem label={t('music.edit.version')} labelPlacement="left" labelWidth="5em" showFeedback={false}>
+            <NFormItem label={t('music.edit.version')} labelPlacement="left" labelWidth="10em" showFeedback={false}>
                 <VersionInput v-model:value={props.savedOptions.version}/>
             </NFormItem>
             <NCheckbox v-model:checked={props.savedOptions.ignoreLevel}>

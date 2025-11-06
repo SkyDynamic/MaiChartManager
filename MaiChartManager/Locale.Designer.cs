@@ -69,6 +69,15 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACB file must be paired with AWB file.
+        /// </summary>
+        internal static string AcbRequiresAwb {
+            get {
+                return ResourceManager.GetString("AcbRequiresAwb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation code invalid.
         /// </summary>
         internal static string ActivationCodeInvalid {
@@ -87,6 +96,33 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AquaMai is not installed.
+        /// </summary>
+        internal static string AquaMaiNotInstalled {
+            get {
+                return ResourceManager.GetString("AquaMaiNotInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio Files|*.wav;*.mp3;*.aac;*.ogg;*.flac;*.m4a;*.wma;*.ape;*.acb;*.awb;*.mp4.
+        /// </summary>
+        internal static string AudioFileFilter {
+            get {
+                return ResourceManager.GetString("AudioFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio file not found.
+        /// </summary>
+        internal static string AudioFileNotFound {
+            get {
+                return ResourceManager.GetString("AudioFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find paired AWB file: {0}.
         /// </summary>
         internal static string AwbNotFound {
@@ -101,6 +137,126 @@ namespace MaiChartManager {
         internal static string BrowserNotInitialized {
             get {
                 return ResourceManager.GetString("BrowserNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelling....
+        /// </summary>
+        internal static string Cancelling {
+            get {
+                return ResourceManager.GetString("Cancelling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BPM equals 0.
+        /// </summary>
+        internal static string ChartBpmZero {
+            get {
+                return ResourceManager.GetString("ChartBpmZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to parse chart difficulty {0}.
+        /// </summary>
+        internal static string ChartDifficultyParseFailed {
+            get {
+                return ResourceManager.GetString("ChartDifficultyParseFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed some minor errors in chart difficulty {0}.
+        /// </summary>
+        internal static string ChartFixedMinorErrors {
+            get {
+                return ResourceManager.GetString("ChartFixedMinorErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart difficulty {0} contains {1}-note division, this value cannot exceed 384. Most cases can be fixed by modifying the chart.
+        /// </summary>
+        internal static string ChartInvalidMeasure {
+            get {
+                return ResourceManager.GetString("ChartInvalidMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MaiLib error parsing chart difficulty {0}:
+        ///{1}
+        ///This is usually caused by non-standard syntax in the chart. You can try to fix the chart based on this error message..
+        /// </summary>
+        internal static string ChartMaiLibParseError {
+            get {
+                return ResourceManager.GetString("ChartMaiLibParseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It looks like some notes were lost! This is likely a bug. We&apos;d really appreciate it if you could provide the chart file!.
+        /// </summary>
+        internal static string ChartNotesMissing {
+            get {
+                return ResourceManager.GetString("ChartNotesMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to parse chart difficulty {0} despite all attempts, please check if the chart has issues.
+        /// </summary>
+        internal static string ChartParseFailed {
+            get {
+                return ResourceManager.GetString("ChartParseFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart parsing failed (global).
+        /// </summary>
+        internal static string ChartParseFailedGlobal {
+            get {
+                return ResourceManager.GetString("ChartParseFailedGlobal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to parse chart.
+        /// </summary>
+        internal static string ChartParseGenericError {
+            get {
+                return ResourceManager.GetString("ChartParseGenericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart shift ShiftByOffset encountered an issue.
+        /// </summary>
+        internal static string ChartShiftByOffsetError {
+            get {
+                return ResourceManager.GetString("ChartShiftByOffsetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encountered an issue while shifting the chart. Try enabling &quot;Avoid shifting chart&quot; in advanced import options.
+        /// </summary>
+        internal static string ChartShiftError {
+            get {
+                return ResourceManager.GetString("ChartShiftError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Even after fixing known errors, MaiLib still cannot parse chart difficulty {0}. Falling back to AstroDX&apos;s SimaiSharp parser.
+        ///If you notice any issues with the conversion result, you can try testing it in AstroDX and let us know (though this is optional).
+        /// </summary>
+        internal static string ChartSimaiSharpFallback {
+            get {
+                return ResourceManager.GetString("ChartSimaiSharpFallback", resourceCulture);
             }
         }
         
@@ -137,6 +293,105 @@ namespace MaiChartManager {
         internal static string ConvertSuccess {
             get {
                 return ResourceManager.GetString("ConvertSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        internal static string DifficultyAdvanced {
+            get {
+                return ResourceManager.GetString("DifficultyAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic.
+        /// </summary>
+        internal static string DifficultyBasic {
+            get {
+                return ResourceManager.GetString("DifficultyBasic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert.
+        /// </summary>
+        internal static string DifficultyExpert {
+            get {
+                return ResourceManager.GetString("DifficultyExpert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A chart with difficulty {0} will be ignored.
+        /// </summary>
+        internal static string DifficultyIgnored {
+            get {
+                return ResourceManager.GetString("DifficultyIgnored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A chart with difficulty {0} will be imported as Basic.
+        /// </summary>
+        internal static string DifficultyImportedAsBasic {
+            get {
+                return ResourceManager.GetString("DifficultyImportedAsBasic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A chart with difficulty {0} will be imported as Master.
+        /// </summary>
+        internal static string DifficultyImportedAsMaster {
+            get {
+                return ResourceManager.GetString("DifficultyImportedAsMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A chart with difficulty {0} will be imported as Re:Master.
+        /// </summary>
+        internal static string DifficultyImportedAsReMaster {
+            get {
+                return ResourceManager.GetString("DifficultyImportedAsReMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        internal static string DifficultyMaster {
+            get {
+                return ResourceManager.GetString("DifficultyMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re:Master.
+        /// </summary>
+        internal static string DifficultyReMaster {
+            get {
+                return ResourceManager.GetString("DifficultyReMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting....
+        /// </summary>
+        internal static string Exporting {
+            get {
+                return ResourceManager.GetString("Exporting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting {0} music tracks....
+        /// </summary>
+        internal static string ExportingMultipleMusic {
+            get {
+                return ResourceManager.GetString("ExportingMultipleMusic", resourceCulture);
             }
         }
         
@@ -201,6 +456,15 @@ namespace MaiChartManager {
         internal static string GenreIdExistsHigherPriority {
             get {
                 return ResourceManager.GetString("GenreIdExistsHigherPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Will import the following difficulties: .
+        /// </summary>
+        internal static string ImportingDifficulties {
+            get {
+                return ResourceManager.GetString("ImportingDifficulties", resourceCulture);
             }
         }
         
@@ -322,6 +586,24 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Music has no charts.
+        /// </summary>
+        internal static string MusicNoCharts {
+            get {
+                return ResourceManager.GetString("MusicNoCharts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Music has no title.
+        /// </summary>
+        internal static string MusicNoTitle {
+            get {
+                return ResourceManager.GetString("MusicNoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter activation code.
         /// </summary>
         internal static string OfflineActivationPrompt {
@@ -376,6 +658,15 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string qwq {
+            get {
+                return ResourceManager.GetString("qwq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select resource directory (OPT).
         /// </summary>
         internal static string SelectAssetDirectory {
@@ -385,11 +676,47 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select audio file to convert.
+        /// </summary>
+        internal static string SelectAudioToConvert {
+            get {
+                return ResourceManager.GetString("SelectAudioToConvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select target location.
+        /// </summary>
+        internal static string SelectTargetLocation {
+            get {
+                return ResourceManager.GetString("SelectTargetLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select video file to convert.
+        /// </summary>
+        internal static string SelectVideoToConvert {
+            get {
+                return ResourceManager.GetString("SelectVideoToConvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error.
         /// </summary>
         internal static string UnknownError {
             get {
                 return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible configuration file version.
+        /// </summary>
+        internal static string UnsupportedConfigVersion {
+            get {
+                return ResourceManager.GetString("UnsupportedConfigVersion", resourceCulture);
             }
         }
         
@@ -418,6 +745,15 @@ namespace MaiChartManager {
         internal static string VersionIdExistsHigherPriority {
             get {
                 return ResourceManager.GetString("VersionIdExistsHigherPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video or Image|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm.
+        /// </summary>
+        internal static string VideoFileFilter {
+            get {
+                return ResourceManager.GetString("VideoFileFilter", resourceCulture);
             }
         }
         

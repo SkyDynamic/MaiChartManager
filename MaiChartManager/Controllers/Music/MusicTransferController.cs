@@ -25,7 +25,7 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
         if (AppMain.BrowserWin is null) return;
         var dialog = new FolderBrowserDialog
         {
-            Description = "请选择目标位置"
+            Description = Locale.SelectTargetLocation
         };
         if (AppMain.BrowserWin.Invoke(() => dialog.ShowDialog(AppMain.BrowserWin)) != DialogResult.OK) return;
         var dest = dialog.SelectedPath;
@@ -37,9 +37,9 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
             progress = new ShellProgressDialog()
             {
                 AutoTimeEstimation = false,
-                Title = "正在导出…",
-                Description = $"正在导出 {request.music.Length} 首乐曲…",
-                CancelMessage = "正在取消…",
+                Title = Locale.Exporting,
+                Description = string.Format(Locale.ExportingMultipleMusic, request.music.Length),
+                CancelMessage = Locale.Cancelling,
                 HideTimeRemaining = true,
             };
             progress.Start(AppMain.BrowserWin);

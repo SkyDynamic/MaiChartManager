@@ -14,8 +14,8 @@ public class AudioConvertToolController : ControllerBase
 
         var dialog = new OpenFileDialog()
         {
-            Title = "请选择要转换的音频文件",
-            Filter = "音频文件|*.wav;*.mp3;*.aac;*.ogg;*.flac;*.m4a;*.wma;*.ape;*.acb;*.awb;*.mp4",
+            Title = Locale.SelectAudioToConvert,
+            Filter = Locale.AudioFileFilter,
         };
 
         if (AppMain.BrowserWin.Invoke(() => dialog.ShowDialog(AppMain.BrowserWin)) != DialogResult.OK)

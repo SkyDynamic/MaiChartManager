@@ -21,20 +21,20 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
 
         if (AppMain.BrowserWin is null)
         {
-            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: 浏览器窗口未初始化\n\n");
+            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: {Locale.BrowserNotInitialized}\n\n");
             await Response.Body.FlushAsync();
             return;
         }
 
         var dialog = new OpenFileDialog()
         {
-            Title = "请选择要转换的视频文件",
-            Filter = "视频或者图片|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm",
+            Title = Locale.SelectVideoToConvert,
+            Filter = Locale.VideoFileFilter,
         };
 
         if (AppMain.BrowserWin.Invoke(() => dialog.ShowDialog(AppMain.BrowserWin)) != DialogResult.OK)
         {
-            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: 未选择文件\n\n");
+            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: {Locale.FileNotSelected}\n\n");
             await Response.Body.FlushAsync();
             return;
         }
@@ -86,7 +86,7 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to convert video");
-            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: 转换失败：{ex.Message}\n\n");
+            await Response.WriteAsync($"event: {VideoConvertEventType.Error}\ndata: {string.Format(Locale.ConvertFailed, ex.Message)}\n\n");
             await Response.Body.FlushAsync();
         }
     }

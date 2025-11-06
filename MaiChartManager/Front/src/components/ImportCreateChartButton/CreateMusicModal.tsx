@@ -15,7 +15,7 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n();
-    
+
     const show = computed({
       get: () => props.show,
       set: (val) => props.closeModal()
@@ -41,7 +41,7 @@ export default defineComponent({
         title={t('chart.import.create')}
         v-model:show={show.value}
       >{{
-        default: () => <NForm label-placement="left" labelWidth="5em" showFeedback={false}>
+        default: () => <NForm label-placement="left" labelWidth="7em" showFeedback={false}>
           <NFlex vertical size="large">
             <NFormItem label="ID">
               <NFlex align="center" wrap={false}>
