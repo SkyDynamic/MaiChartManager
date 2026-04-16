@@ -136,6 +136,32 @@ public class MusicXmlWithABJacket(string filePath, string gamePath, string asset
             {
                 Console.WriteLine($"删除 jacket 失败: {RealJacketPath}");
             }
+
+            // Issue #42: AB jackets come with a companion jacket_s/ui_jacket_xxx_s.ab, delete it too to avoid orphan
+            if (AssetBundleJacket is not null)
+            {
+                var abDir = Path.GetDirectoryName(AssetBundleJacket);
+                var parentDir = string.IsNullOrWhiteSpace(abDir) ? null : Path.GetDirectoryName(abDir);
+                if (!string.IsNullOrWhiteSpace(parentDir))
+                {
+                    var jacketSPath = Path.Combine(parentDir, "jacket_s",
+                        Path.GetFileNameWithoutExtension(AssetBundleJacket) + "_s" + Path.GetExtension(AssetBundleJacket));
+                    if (File.Exists(jacketSPath) && !jacketSPath.Contains(@"\A000\", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        Console.WriteLine("删除 jacket_s: " + jacketSPath);
+                        try
+                        {
+                            FileSystem.DeleteFile(jacketSPath);
+                            if (File.Exists(jacketSPath + ".manifest"))
+                                FileSystem.DeleteFile(jacketSPath + ".manifest");
+                        }
+                        catch
+                        {
+                            Console.WriteLine($"删除 jacket_s 失败: {jacketSPath}");
+                        }
+                    }
+                }
+            }
         }
 
         if (StaticSettings.AcbAwb.TryGetValue($"music{NonDxId:000000}.acb", out var acb) && acb?.Contains(@"\A000\", StringComparison.InvariantCultureIgnoreCase) == false)

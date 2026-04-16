@@ -38,6 +38,25 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
         return Math.Max(1, Environment.ProcessorCount / 2);
     }
 
+    /// <summary>
+    /// Given an AssetBundle jacket path (e.g. ".../AssetBundleImages/jacket/ui_jacket_000123.ab"),
+    /// compute the companion small jacket path in the sibling "jacket_s" directory
+    /// (e.g. ".../AssetBundleImages/jacket_s/ui_jacket_000123_s.ab").
+    /// Returns null if the path shape is unexpected.
+    /// </summary>
+    private static string? GetAssetBundleJacketSmallPath(string assetBundleJacketPath)
+    {
+        var dir = Path.GetDirectoryName(assetBundleJacketPath);
+        if (string.IsNullOrWhiteSpace(dir)) return null;
+        var parentDir = Path.GetDirectoryName(dir);
+        if (string.IsNullOrWhiteSpace(parentDir)) return null;
+
+        var jacketSDir = Path.Combine(parentDir, "jacket_s");
+        var nameWithoutExt = Path.GetFileNameWithoutExtension(assetBundleJacketPath);
+        var ext = Path.GetExtension(assetBundleJacketPath);
+        return Path.Combine(jacketSDir, nameWithoutExt + "_s" + ext);
+    }
+
     private static readonly ConcurrentDictionary<string, string> FileHashCache = new(StringComparer.OrdinalIgnoreCase);
 
     private static string GetFileHash(FileInfo fileInfo)
@@ -203,6 +222,19 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
             if (System.IO.File.Exists(music.AssetBundleJacket + ".manifest"))
             {
                 CopySharedFileIfNeeded(music.AssetBundleJacket + ".manifest", Path.Combine(jacketRootDir, jacketFileName + ".manifest"), copiedSharedDestinations);
+            }
+
+            // Issue #42: jacket_s lives in a sibling directory, must be exported into AssetBundleImages/jacket_s/
+            var jacketSPath = GetAssetBundleJacketSmallPath(music.AssetBundleJacket);
+            if (jacketSPath is not null && System.IO.File.Exists(jacketSPath))
+            {
+                var jacketSRootDir = Path.Combine(Path.GetDirectoryName(jacketRootDir)!, "jacket_s");
+                var jacketSFileName = Path.GetFileName(jacketSPath);
+                CopySharedFileIfNeeded(jacketSPath, Path.Combine(jacketSRootDir, jacketSFileName), copiedSharedDestinations);
+                if (System.IO.File.Exists(jacketSPath + ".manifest"))
+                {
+                    CopySharedFileIfNeeded(jacketSPath + ".manifest", Path.Combine(jacketSRootDir, jacketSFileName + ".manifest"), copiedSharedDestinations);
+                }
             }
         }
         else if (music.PseudoAssetBundleJacket is not null)
@@ -399,6 +431,17 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
             {
                 zipArchive.CreateEntryFromFile(music.AssetBundleJacket + ".manifest", $"AssetBundleImages/jacket/{Path.GetFileName(music.AssetBundleJacket)}.manifest");
             }
+
+            // Issue #42: jacket_s lives in a sibling directory, must be exported into AssetBundleImages/jacket_s/
+            var jacketSPath = GetAssetBundleJacketSmallPath(music.AssetBundleJacket);
+            if (jacketSPath is not null && System.IO.File.Exists(jacketSPath))
+            {
+                zipArchive.CreateEntryFromFile(jacketSPath, $"AssetBundleImages/jacket_s/{Path.GetFileName(jacketSPath)}");
+                if (System.IO.File.Exists(jacketSPath + ".manifest"))
+                {
+                    zipArchive.CreateEntryFromFile(jacketSPath + ".manifest", $"AssetBundleImages/jacket_s/{Path.GetFileName(jacketSPath)}.manifest");
+                }
+            }
         }
         else if (music.PseudoAssetBundleJacket is not null)
         {
@@ -456,10 +499,11 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
         var newNonDxId = newId % 10000;
 
         var abJacketTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "AssetBundleImages", "jacket", $"ui_jacket_{newNonDxId:000000}.ab");
+        var abJacketSTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "AssetBundleImages", "jacket_s", $"ui_jacket_{newNonDxId:000000}_s.ab");
         var acbawbTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "SoundData", $"music{newNonDxId:000000}");
         var movieTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "MovieData", $"{newNonDxId:000000}");
         var newMusicDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, "music", $"music{newId:000000}");
-        DeleteIfExists(abJacketTarget, abJacketTarget + ".manifest", acbawbTarget + ".acb", acbawbTarget + ".awb", movieTarget + ".dat", movieTarget + ".mp4", newMusicDir);
+        DeleteIfExists(abJacketTarget, abJacketTarget + ".manifest", abJacketSTarget, abJacketSTarget + ".manifest", acbawbTarget + ".acb", acbawbTarget + ".awb", movieTarget + ".dat", movieTarget + ".mp4", newMusicDir);
         var abiDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, @"AssetBundleImages\jacket");
         Directory.CreateDirectory(abiDir);
 
@@ -480,9 +524,21 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
             logger.LogInformation("Convert jacket: {music.AssetBundleJacket} -> {abJacketTarget}", music.AssetBundleJacket, abJacketTarget);
             System.IO.File.WriteAllBytes(localJacketTarget, music.GetMusicJacketPngData()!);
             FileSystem.DeleteFile(music.AssetBundleJacket, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            // AB→PNG: the old .ab.manifest no longer has a matching .ab at the new ID, so just delete it instead of moving
             if (System.IO.File.Exists(music.AssetBundleJacket + ".manifest"))
             {
-                FileSystem.MoveFile(music.AssetBundleJacket + ".manifest", abJacketTarget + ".manifest", UIOption.OnlyErrorDialogs);
+                FileSystem.DeleteFile(music.AssetBundleJacket + ".manifest", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+
+            // Issue #42: also clean up the companion jacket_s AB so it doesn't stay orphaned under the old ID
+            var oldJacketSPath = GetAssetBundleJacketSmallPath(music.AssetBundleJacket);
+            if (oldJacketSPath is not null && System.IO.File.Exists(oldJacketSPath))
+            {
+                FileSystem.DeleteFile(oldJacketSPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                if (System.IO.File.Exists(oldJacketSPath + ".manifest"))
+                {
+                    FileSystem.DeleteFile(oldJacketSPath + ".manifest", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                }
             }
         }
 
@@ -583,7 +639,7 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
         }
 
         var ma2Contents = new List<(int, string[])>();
-        
+
         // 关于clock_count功能，我决定不走MaiLib了，而是我们自己解析。因为ma2.Compose返回的是裸谱面inote中的内容，没有办法合理的把clock信息插进去。因此，我们自己解析吧。
         // 选用最难的一张有效谱面的MET值作为全曲的&clock_count
         int clockCount = 0;
@@ -614,7 +670,7 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
         simaiFile.AppendLine($"&chartconverter=MaiChartManager v{Application.ProductVersion}");
         simaiFile.AppendLine("&ChartConvertTool=MaiChartManager");
         simaiFile.AppendLine($"&ChartConvertToolVersion={Application.ProductVersion}");
-        
+
         // 根据前面读取的结果，向simaiFile中最终写入谱面信息相关字段
         foreach (var (i, ma2Content) in ma2Contents)
         {
@@ -656,7 +712,7 @@ public class MusicTransferController(StaticSettings settings, ILogger<MusicTrans
             Comment = version?.GenreName,
             AlbumArt = img,
         };
-        
+
         if (!AudioConvert.TryResolveAcbAwb(GetAudioCandidateIds(music), out _, out var acbPath, out var awbPath) || acbPath is null || awbPath is null)
         {
             var message = BuildAudioResolveErrorMessage(music);
