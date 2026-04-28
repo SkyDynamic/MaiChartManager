@@ -33,7 +33,27 @@ export default defineComponent({
       return props.section.attribute?.comment?.commentEn;
     })
 
-    return () => <div class="flex flex-col p-1 border-transparent border-solid border-1px rd hover:border-[oklch(0.68_0.17_var(--hue))]">
+    const resetSection = () => {
+      props.section.entries?.forEach(entry => {
+        const state = props.entryStates[entry.path!];
+        if (state) {
+          state.value = state.defaultValue;
+          state.isDefault = true;
+        }
+      });
+    };
+
+    const isEnabled = computed(() => props.section.attribute!.alwaysEnabled || props.sectionState.enabled);
+
+    const resetIcon = () => isEnabled.value ? (
+      <div
+        class="i-carbon:reset text-lg cursor-pointer opacity-0 group-hover:opacity-50 hover:opacity-80 transition-opacity shrink-0"
+        title={t('mod.resetToDefault')}
+        onClick={resetSection}
+      />
+    ) : null;
+
+    return () => <div class={["flex flex-col p-1 border-transparent border-solid border-1px rd hover:border-[oklch(0.68_0.17_var(--hue))] group"]}>
       {!props.section.attribute!.alwaysEnabled && <div class="flex gap-2 items-start"
         // @ts-ignore
                                                        title={props.section.path!}
@@ -50,6 +70,8 @@ export default defineComponent({
                 <div class="text-sm whitespace-pre-line lh-1.7em">{t('mod.community.description')}</div>
               </div>
             }}</Popover>}
+            <div class="flex-1" />
+            {resetIcon()}
           </div>
           <div class="text-sm op-80">{comment.value}</div>
         </div>
