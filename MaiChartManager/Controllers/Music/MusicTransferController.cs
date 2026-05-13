@@ -506,6 +506,13 @@ public partial class MusicTransferController(StaticSettings settings, ILogger<Mu
         }
     }
 
+    private void DeleteAb(string abPath)
+    {
+        FileSystem.DeleteFile(abPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+        if (System.IO.File.Exists(abPath + ".manifest"))
+            FileSystem.DeleteFile(abPath + ".manifest", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+    }
+
     [HttpPost]
     public async Task ModifyId(int id, [FromBody] int newId, string assetDir)
     {
@@ -521,16 +528,18 @@ public partial class MusicTransferController(StaticSettings settings, ILogger<Mu
         }
         var newNonDxId = newId % 10000;
 
-        var abJacketTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "AssetBundleImages", "jacket", $"ui_jacket_{newNonDxId:000000}.ab");
-        var abJacketSTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "AssetBundleImages", "jacket_s", $"ui_jacket_{newNonDxId:000000}_s.ab");
+        var abiDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, @"AssetBundleImages\jacket");
+        var abiSDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, @"AssetBundleImages\jacket_s");
+        Directory.CreateDirectory(abiDir);
+        Directory.CreateDirectory(abiSDir);
+        var abJacketTarget = Path.Combine(abiDir, $"ui_jacket_{newNonDxId:000000}.ab");
+        var abJacketSTarget = Path.Combine(abiSDir, $"ui_jacket_{newNonDxId:000000}_s.ab");
         var acbawbTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "SoundData", $"music{newNonDxId:000000}");
         var movieTarget = Path.Combine(StaticSettings.StreamingAssets, assetDir, "MovieData", $"{newNonDxId:000000}");
         var newMusicDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, "music", $"music{newId:000000}");
         DeleteIfExists(abJacketTarget, abJacketTarget + ".manifest", abJacketSTarget, abJacketSTarget + ".manifest", acbawbTarget + ".acb", acbawbTarget + ".awb", movieTarget + ".dat", movieTarget + ".mp4", newMusicDir);
-        var abiDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, @"AssetBundleImages\jacket");
-        Directory.CreateDirectory(abiDir);
 
-        // jacket
+        #region 移动或重打包封面图
         var jacketSourcePath = music.JacketPath is not null ? music.JacketPath : music.PseudoAssetBundleJacket;
         if (jacketSourcePath is not null)
         {
@@ -542,29 +551,51 @@ public partial class MusicTransferController(StaticSettings settings, ILogger<Mu
         }
         else if (music.AssetBundleJacket is not null)
         {
-            // 否则需要执行转换逻辑
-            var localJacketTarget = Path.Combine(abiDir, $"ui_jacket_{newNonDxId:000000}.png");
-            logger.LogInformation("Convert jacket: {music.AssetBundleJacket} -> {abJacketTarget}", music.AssetBundleJacket, abJacketTarget);
-            System.IO.File.WriteAllBytes(localJacketTarget, music.GetMusicJacketPngData()!);
-            FileSystem.DeleteFile(music.AssetBundleJacket, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-            // AB→PNG: the old .ab.manifest no longer has a matching .ab at the new ID, so just delete it instead of moving
-            if (System.IO.File.Exists(music.AssetBundleJacket + ".manifest"))
+            var oldAb = music.AssetBundleJacket!;
+            var oldSmallAb = GetAssetBundleJacketSmallPath(oldAb);
+            var idPad = $"{newNonDxId:000000}";
+            logger.LogInformation("Repack jacket AB: {oldMainAb} -> {abJacketTarget}", oldAb, abJacketTarget);
+            
+            // 重打包大jacket
+            AssetBundleCreator.RepackTextureAssetBundle(
+                oldAb,
+                abJacketTarget,
+                $"UI_Jacket_{idPad}",
+                $"assets/assetbundle/jacket/ui_jacket_{idPad}.png",
+                $"jacket/ui_jacket_{idPad}.ab");
+            
+            // 对小jacket：如果存在，重打包；如果不存在，则从png重新缩放，重新CreateTextureAssetBundle
+            if (oldSmallAb is not null && System.IO.File.Exists(oldSmallAb))
             {
-                FileSystem.DeleteFile(music.AssetBundleJacket + ".manifest", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                AssetBundleCreator.RepackTextureAssetBundle(
+                    oldSmallAb,
+                    abJacketSTarget,
+                    $"UI_Jacket_{idPad}_s",
+                    $"assets/assetbundle/jacket_s/ui_jacket_{idPad}_s.png",
+                    $"jacket_s/ui_jacket_{idPad}_s.ab");
             }
+            else
+            {
+                var pngBytes = music.GetMusicJacketPngData();
+                AssetBundleCreator.CreateTextureAssetBundle(
+                    pngBytes,
+                    abJacketSTarget,
+                    $"UI_Jacket_{idPad}_s",
+                    $"assets/assetbundle/jacket_s/ui_jacket_{idPad}_s.png",
+                    $"jacket_s/ui_jacket_{idPad}_s.ab",
+                    resizeWidth: 200,
+                    resizeHeight: 200);
+            }
+            
+            DeleteAb(oldAb);
+            if (oldSmallAb is not null) DeleteAb(oldSmallAb);
 
-            // Issue #42: also clean up the companion jacket_s AB so it doesn't stay orphaned under the old ID
-            var oldJacketSPath = GetAssetBundleJacketSmallPath(music.AssetBundleJacket);
-            if (oldJacketSPath is not null && System.IO.File.Exists(oldJacketSPath))
-            {
-                FileSystem.DeleteFile(oldJacketSPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                if (System.IO.File.Exists(oldJacketSPath + ".manifest"))
-                {
-                    FileSystem.DeleteFile(oldJacketSPath + ".manifest", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                }
-            }
+            StaticSettings.AssetBundleJacketMap.Remove(music.NonDxId);
+            StaticSettings.AssetBundleJacketMap[newNonDxId] = abJacketTarget;
         }
+        #endregion
 
+        #region 移动音频和视频
         // 我也不知道它需不需要重新保存，先直接移动试试
         // 是可以的
         if (StaticSettings.AcbAwb.TryGetValue($"music{music.NonDxId:000000}.acb", out var acb))
@@ -585,6 +616,7 @@ public partial class MusicTransferController(StaticSettings settings, ILogger<Mu
             logger.LogInformation("Move movie: {movie} -> {movieTarget}", movie, movieTarget);
             FileSystem.MoveFile(movie, movieTarget + Path.GetExtension(movie), UIOption.OnlyErrorDialogs);
         }
+        #endregion
 
         // 谱面
         var oldMusicDir = Path.GetDirectoryName(music.FilePath)!;
