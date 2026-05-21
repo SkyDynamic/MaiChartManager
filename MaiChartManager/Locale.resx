@@ -285,6 +285,9 @@ If you notice any issues with the conversion result, you can try testing it in A
     <data name="BatchConvertPvNoFiles" xml:space="preserve">
     <value>No PV files found in the matching format</value>
   </data>
+    <data name="BatchConvertPvFolderNotFound" xml:space="preserve">
+    <value>Selected folder does not exist</value>
+  </data>
 
     <!-- ImageToAbToolController -->
     <data name="SelectImageFolder" xml:space="preserve">

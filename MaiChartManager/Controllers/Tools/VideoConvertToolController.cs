@@ -8,7 +8,7 @@ namespace MaiChartManager.Controllers.Tools;
 
 [ApiController]
 [Route("MaiChartManagerServlet/[action]Api")]
-public class VideoConvertToolController(ILogger<VideoConvertToolController> logger, StaticSettings settings) : ControllerBase
+public class VideoConvertToolController(ILogger<VideoConvertToolController> logger) : ControllerBase
 {
     public enum VideoConvertEventType
     {
@@ -117,13 +117,13 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
     private record BatchProgressPayload(int Processed, int Total, int FileProgress, string FileName, int Failed);
 
     /// <summary>
-    /// 批量转换 StreamingAssets 内所有 PV：USM/DAT ↔ MP4。
+    /// 批量转换用户选择的文件夹内所有 PV：USM/DAT ↔ MP4。
     /// 使用 SSE 实时推送整体进度（已处理/总数）+ 当前文件进度。
     /// 客户端断开连接时通过 RequestAborted 触发取消，循环在下一个文件之间退出。
     /// 所有 SSE 写入通过单写者 Channel 串行化，避免 Xabe 同步进度事件触发的 async-void 写入交错。
     /// </summary>
     [HttpPost]
-    public async Task BatchConvertPvTool([FromQuery] BatchConvertPvDirection direction)
+    public async Task BatchConvertPvTool([FromQuery] string folderPath, [FromQuery] BatchConvertPvDirection direction)
     {
         Response.Headers.Append("Content-Type", "text/event-stream");
 
@@ -135,12 +135,22 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
             return;
         }
 
-        // 直接枚举 MovieData 目录，绕过 MovieDataMap 的 ID 去重，覆盖所有源文件
+        if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
+        {
+            await Response.WriteAsync($"event: {BatchConvertPvEventType.Error}\ndata: {SanitizeSseLine(Locale.BatchConvertPvFolderNotFound)}\n\n");
+            await Response.Body.FlushAsync();
+            return;
+        }
+
+        // 直接枚举用户选择的文件夹（不递归），按方向筛选源扩展名
         var sourceExtensions = direction == BatchConvertPvDirection.UsmToMp4
             ? new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".dat", ".usm" }
             : new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".mp4" };
 
-        var files = EnumerateMoviePvs(sourceExtensions);
+        var files = Directory.EnumerateFiles(folderPath)
+            .Where(f => sourceExtensions.Contains(Path.GetExtension(f)))
+            .OrderBy(f => f, StringComparer.OrdinalIgnoreCase)
+            .ToList();
 
         if (files.Count == 0)
         {
@@ -293,34 +303,7 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
             {
                 // writer 自己负责吞掉客户端断开异常
             }
-
-            // 最终再扫描一遍，让 MovieDataMap 与磁盘状态一致
-            try
-            {
-                settings.ScanMovieData();
-            }
-            catch (Exception ex)
-            {
-                logger.LogWarning(ex, "Final ScanMovieData after batch convert failed");
-            }
         }
-    }
-
-    private static List<string> EnumerateMoviePvs(HashSet<string> sourceExtensions)
-    {
-        var result = new List<string>();
-        foreach (var assetDir in StaticSettings.AssetsDirs)
-        {
-            var movieDir = Path.Combine(StaticSettings.StreamingAssets, assetDir, "MovieData");
-            if (!Directory.Exists(movieDir)) continue;
-            foreach (var file in Directory.EnumerateFiles(movieDir))
-            {
-                if (!sourceExtensions.Contains(Path.GetExtension(file))) continue;
-                if (!int.TryParse(Path.GetFileNameWithoutExtension(file), out _)) continue;
-                result.Add(file);
-            }
-        }
-        return result;
     }
 
     private static string SanitizeSseLine(string data) =>

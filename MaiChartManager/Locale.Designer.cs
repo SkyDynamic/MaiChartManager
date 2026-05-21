@@ -811,6 +811,15 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected folder does not exist.
+        /// </summary>
+        internal static string BatchConvertPvFolderNotFound {
+            get {
+                return ResourceManager.GetString("BatchConvertPvFolderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error.
         /// </summary>
         internal static string UnknownError {

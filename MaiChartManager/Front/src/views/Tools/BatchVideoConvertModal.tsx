@@ -1,4 +1,4 @@
-import { getUrl } from '@/client/api';
+import api, { getUrl } from '@/client/api';
 import { Button, Modal, Progress, Radio, addToast } from '@munet/ui';
 import { computed, defineComponent, reactive, ref } from 'vue';
 import { LicenseStatus } from '@/client/apiGen';
@@ -37,6 +37,8 @@ export default defineComponent({
     const { t } = useI18n();
     const step = ref(STEP.None);
     const direction = ref<Direction>(Direction.UsmToMp4);
+    const folderPath = ref('');
+    const picking = ref(false);
 
     const state = reactive({
       completed: 0,
@@ -78,11 +80,12 @@ export default defineComponent({
     };
 
     const start = async () => {
+      if (!folderPath.value) return;
       resetProgressState();
       step.value = STEP.Progress;
 
       controller = new AbortController();
-      const url = `${getUrl('BatchConvertPvToolApi')}?direction=${direction.value}`;
+      const url = `${getUrl('BatchConvertPvToolApi')}?folderPath=${encodeURIComponent(folderPath.value)}&direction=${direction.value}`;
 
       let succeeded = false;
       let cancelled = false;
@@ -162,11 +165,12 @@ export default defineComponent({
           }
           return;
         }
-        // 已知的友好错误（无文件 / 需要赞助）：toast 提示并回到 Configure，不上报
+        // 已知的友好错误（无文件 / 需要赞助 / 文件夹不存在）：toast 提示并回到 Configure，不上报
         const message: string = e?.message ?? '';
         const friendlyMessages = [
           t('tools.batchPv.noFiles'),
           t('tools.batchPv.needLicense'),
+          t('tools.batchPv.folderNotFound'),
         ];
         if (friendlyMessages.includes(message)) {
           addToast({ message, type: 'warning' });
@@ -205,11 +209,29 @@ export default defineComponent({
       step.value = STEP.None;
     };
 
-    const trigger = () => {
+    const pickFolder = async () => {
+      if (picking.value) return;
+      picking.value = true;
+      try {
+        const res = await api.OpenFolderDialog();
+        if (res.data) {
+          folderPath.value = res.data;
+        }
+      } catch (e) {
+        console.log(e);
+        globalCapture(e, t('tools.batchPv.error'));
+      } finally {
+        picking.value = false;
+      }
+    };
+
+    const trigger = async () => {
       if (version.value?.license !== LicenseStatus.Active) {
         showNeedPurchaseDialog.value = true;
         return;
       }
+      await pickFolder();
+      if (!folderPath.value) return;
       resetProgressState();
       direction.value = Direction.UsmToMp4;
       step.value = STEP.Configure;
@@ -219,7 +241,14 @@ export default defineComponent({
 
     const renderConfigure = () => (
       <div class="flex flex-col gap-3">
-        <div class="font-medium">{t('tools.batchPv.direction')}</div>
+        <div class="font-medium">{t('tools.batchPv.selectedFolder')}</div>
+        <div class="flex items-center gap-2">
+          <code class="flex-1 px-2 py-1 rounded bg-[oklch(0.96_0.01_var(--hue))] text-xs break-all">{folderPath.value}</code>
+          <Button onClick={pickFolder} disabled={picking.value} size="small">
+            {t('tools.batchPv.changeFolder')}
+          </Button>
+        </div>
+        <div class="font-medium mt-2">{t('tools.batchPv.direction')}</div>
         <Radio k={Direction.UsmToMp4} v-model:value={direction.value}>
           <div class="flex flex-col">
             <span>{t('tools.batchPv.directionUsmToMp4')}</span>
@@ -234,7 +263,7 @@ export default defineComponent({
         </Radio>
         <div class="flex justify-end gap-2 mt-2">
           <Button onClick={() => (step.value = STEP.None)}>{t('tools.batchPv.cancel')}</Button>
-          <Button variant="primary" onClick={start}>{t('tools.batchPv.start')}</Button>
+          <Button variant="primary" onClick={start} disabled={!folderPath.value}>{t('tools.batchPv.start')}</Button>
         </div>
       </div>
     );
