@@ -464,6 +464,28 @@ tools:
   imageToAbError: 圖片轉 AB 出錯
   videoOptions:
     processing: 還在處理，別急…
+  batchPv:
+    label: 批次轉換 PV
+    title: 批次轉換 PV
+    direction: 轉換方向
+    directionUsmToMp4: USM / DAT → MP4
+    directionMp4ToUsm: MP4 → USM / DAT
+    directionUsmToMp4Hint: 在同目錄下產生對應的 MP4 檔案，原檔保留
+    directionMp4ToUsmHint: 在同目錄下產生對應的 DAT 檔案，原 MP4 會被移入資源回收筒
+    start: 開始轉換
+    cancel: 取消
+    cancelling: 正在取消…
+    cancelHint: 取消會在目前檔案轉換完成後生效
+    close: 關閉
+    overall: 總進度
+    currentFile: 目前檔案
+    currentFileProgress: 目前檔案進度
+    completedSummary: 轉換完成：成功 {success} / {total}（失敗 {failed}）
+    cancelledSummary: 已取消：已完成 {completed} / {total}
+    noFiles: 找不到符合格式的 PV 檔案
+    needLicense: 此功能需要贊助啟用
+    error: 批次轉換 PV 出錯
+    fileErrors: 處理過程中的檔案錯誤：
 error:
   title: 錯誤
   unknown: 發生未知錯誤

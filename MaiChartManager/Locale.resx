@@ -279,6 +279,12 @@ If you notice any issues with the conversion result, you can try testing it in A
     <data name="VideoFileFilter" xml:space="preserve">
     <value>Video or Image|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm</value>
   </data>
+    <data name="BatchConvertPvNeedLicense" xml:space="preserve">
+    <value>Batch PV conversion requires sponsor activation</value>
+  </data>
+    <data name="BatchConvertPvNoFiles" xml:space="preserve">
+    <value>No PV files found in the matching format</value>
+  </data>
 
     <!-- ImageToAbToolController -->
     <data name="SelectImageFolder" xml:space="preserve">

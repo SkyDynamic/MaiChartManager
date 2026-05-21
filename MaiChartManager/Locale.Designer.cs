@@ -793,6 +793,24 @@ namespace MaiChartManager {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch PV conversion requires sponsor activation.
+        /// </summary>
+        internal static string BatchConvertPvNeedLicense {
+            get {
+                return ResourceManager.GetString("BatchConvertPvNeedLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No PV files found in the matching format.
+        /// </summary>
+        internal static string BatchConvertPvNoFiles {
+            get {
+                return ResourceManager.GetString("BatchConvertPvNoFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error.
         /// </summary>
         internal static string UnknownError {

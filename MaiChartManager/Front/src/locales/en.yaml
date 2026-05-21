@@ -501,6 +501,28 @@ tools:
   imageToAbError: Image to AB conversion error
   videoOptions:
     processing: Still processing, please wait...
+  batchPv:
+    label: Batch Convert PVs
+    title: Batch Convert All PVs
+    direction: Conversion direction
+    directionUsmToMp4: USM / DAT → MP4
+    directionMp4ToUsm: MP4 → USM / DAT
+    directionUsmToMp4Hint: Writes a sibling .mp4 file next to each source; originals are kept
+    directionMp4ToUsmHint: Writes a sibling .dat file next to each source; source .mp4 files are moved to the recycle bin
+    start: Start
+    cancel: Cancel
+    cancelling: Cancelling...
+    cancelHint: Cancel takes effect after the current file finishes
+    close: Close
+    overall: Overall
+    currentFile: Current file
+    currentFileProgress: Current file progress
+    completedSummary: 'Completed: {success} / {total} succeeded ({failed} failed)'
+    cancelledSummary: 'Cancelled: {completed} / {total} done'
+    noFiles: No PV files found in the matching format
+    needLicense: This feature requires sponsor activation
+    error: Batch PV conversion error
+    fileErrors: 'File errors encountered:'
 error:
   title: Error
   unknown: Unknown error occurred
