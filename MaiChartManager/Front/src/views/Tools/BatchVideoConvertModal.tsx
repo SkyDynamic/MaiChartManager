@@ -210,16 +210,19 @@ export default defineComponent({
     };
 
     const pickFolder = async () => {
-      if (picking.value) return;
+      if (picking.value) return false;
       picking.value = true;
       try {
         const res = await api.OpenFolderDialog();
         if (res.data) {
           folderPath.value = res.data;
+          return true;
         }
+        return false;
       } catch (e) {
         console.log(e);
         globalCapture(e, t('tools.batchPv.error'));
+        return false;
       } finally {
         picking.value = false;
       }
@@ -230,8 +233,8 @@ export default defineComponent({
         showNeedPurchaseDialog.value = true;
         return;
       }
-      await pickFolder();
-      if (!folderPath.value) return;
+      const selected = await pickFolder();
+      if (!selected) return;
       resetProgressState();
       direction.value = Direction.UsmToMp4;
       step.value = STEP.Configure;

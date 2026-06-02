@@ -465,6 +465,12 @@ tools:
   videoConvertError: 影片轉換出錯
   imageToAb: 圖片轉 AssetBundle
   imageToAbError: 圖片轉 AB 出錯
+  pvConvert:
+    label: 轉換 PV
+    single: 單個轉換
+    singleHint: 選擇一個 PV 檔案，DAT/USM 轉 MP4，其他影片轉 DAT
+    batch: 批次轉換
+    batchHint: 選擇資料夾批次轉換，可選擇 DAT/USM 與 MP4 的轉換方向
   videoOptions:
     processing: 還在處理，別急…
   batchPv:

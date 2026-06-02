@@ -520,6 +520,12 @@ tools:
   videoConvertError: Video conversion error
   imageToAb: Image to AssetBundle
   imageToAbError: Image to AB conversion error
+  pvConvert:
+    label: Convert PV
+    single: Single convert
+    singleHint: Pick one PV file. DAT/USM to MP4, or another video format to DAT
+    batch: Batch convert
+    batchHint: Pick a folder for batch conversion, with DAT/USM and MP4 direction options
   videoOptions:
     processing: Still processing, please wait...
   batchPv:
