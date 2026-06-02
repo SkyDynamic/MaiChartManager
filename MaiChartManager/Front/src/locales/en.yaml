@@ -309,6 +309,9 @@ mod:
   update: Update
   search: Search
   searchPlaceholder: Search config...
+  favorite: Favorites
+  addFavorite: Add to favorites
+  removeFavorite: Remove from favorites
   other: Other
   needEnableOption: Need to enable this option
   unsupportedType: 'Unsupported type: {type}'

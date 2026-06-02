@@ -16,6 +16,8 @@ export default defineComponent({
     sectionState: { type: Object as PropType<ISectionState>, required: true },
     allSectionStates: { type: Object as PropType<Record<string, ISectionState>> },
     isCommunity: Boolean,
+    isFavorite: Boolean,
+    toggleFavorite: Function as PropType<() => void>,
   },
   setup(props, { emit }) {
     const { t, te } = useI18n();
@@ -45,6 +47,17 @@ export default defineComponent({
 
     const isEnabled = computed(() => props.section.attribute!.alwaysEnabled || props.sectionState.enabled);
 
+    const favoriteIcon = () => (
+      <div
+        class={[
+          props.isFavorite ? 'i-material-symbols:star-rounded c-yellow-4 opacity-90 hover:opacity-100' : 'i-material-symbols:star-outline-rounded opacity-0 group-hover:opacity-50 hover:opacity-80',
+          'text-lg cursor-pointer transition-opacity shrink-0',
+        ]}
+        title={props.isFavorite ? t('mod.removeFavorite') : t('mod.addFavorite')}
+        onClick={props.toggleFavorite}
+      />
+    );
+
     const resetIcon = () => isEnabled.value ? (
       <div
         class="i-carbon:reset text-lg cursor-pointer opacity-0 group-hover:opacity-50 hover:opacity-80 transition-opacity shrink-0"
@@ -71,6 +84,7 @@ export default defineComponent({
               </div>
             }}</Popover>}
             <div class="flex-1" />
+            {favoriteIcon()}
             {resetIcon()}
           </div>
           <div class="text-sm op-80">{comment.value}</div>
