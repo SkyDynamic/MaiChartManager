@@ -221,7 +221,7 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
                                 throw new Exception("Converted DAT is missing or empty");
                             }
 
-                            // 取消检查必须在覆盖/删除前，避免取消时仍然损毁源文件
+                            // 取消检查必须在覆盖目标前，避免取消时仍然损毁已有 DAT
                             cancellationToken.ThrowIfCancellationRequested();
 
                             if (System.IO.File.Exists(finalPath))
@@ -229,17 +229,6 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
                                 System.IO.File.Delete(finalPath);
                             }
                             System.IO.File.Move(tempPath, finalPath);
-
-                            // 源 MP4 送进回收站，而非永久删除，最大程度避免用户数据丢失
-                            try
-                            {
-                                FileSystem.DeleteFile(inputPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                            }
-                            catch (Exception delEx)
-                            {
-                                logger.LogWarning(delEx, "Failed to move source MP4 to recycle bin after batch convert: {Path}", inputPath);
-                                await EnqueueEvent(sseChannel.Writer, BatchConvertPvEventType.FileError, $"{fileName}: moved to .dat but failed to remove source MP4 ({delEx.Message})");
-                            }
                         }
                         catch
                         {

@@ -484,7 +484,7 @@ tools:
     directionUsmToMp4: USM / DAT → MP4
     directionMp4ToUsm: MP4 → USM / DAT
     directionUsmToMp4Hint: 在該資料夾內為每個 DAT/USM 產生對應的 MP4，原檔案保留
-    directionMp4ToUsmHint: 在該資料夾內為每個 MP4 產生對應的 DAT，原 MP4 會被移入資源回收筒
+    directionMp4ToUsmHint: 在該資料夾內為每個 MP4 產生對應的 DAT，原 MP4 保留
     start: 開始轉換
     cancel: 取消
     cancelling: 正在取消…

@@ -539,7 +539,7 @@ tools:
     directionUsmToMp4: USM / DAT → MP4
     directionMp4ToUsm: MP4 → USM / DAT
     directionUsmToMp4Hint: Writes a sibling .mp4 next to each DAT/USM in the chosen folder; originals are kept
-    directionMp4ToUsmHint: Writes a sibling .dat next to each MP4 in the chosen folder; source .mp4 files are moved to the recycle bin
+    directionMp4ToUsmHint: Writes a sibling .dat next to each MP4 in the chosen folder; source .mp4 files are kept
     start: Start
     cancel: Cancel
     cancelling: Cancelling...

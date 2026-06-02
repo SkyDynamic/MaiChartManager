@@ -192,20 +192,6 @@ export default defineComponent({
     };
 
     const closeDone = () => {
-      if (finishKind.value === FinishKind.Success) {
-        const [doneStr, failedStr] = finishSummary.value.split('|');
-        const [doneVal, totalVal] = doneStr.split('/').map(v => parseInt(v, 10));
-        const failedVal = parseInt(failedStr ?? '0', 10);
-        const succeeded = doneVal - failedVal;
-        addToast({
-          type: failedVal > 0 ? 'warning' : 'success',
-          message: t('tools.batchPv.completedSummary', {
-            success: succeeded,
-            total: totalVal,
-            failed: failedVal,
-          }),
-        });
-      }
       step.value = STEP.None;
     };
 
@@ -244,13 +230,6 @@ export default defineComponent({
 
     const renderConfigure = () => (
       <div class="flex flex-col gap-3">
-        <div class="font-medium">{t('tools.batchPv.selectedFolder')}</div>
-        <div class="flex items-center gap-2">
-          <code class="flex-1 px-2 py-1 rounded bg-[oklch(0.96_0.01_var(--hue))] text-xs break-all">{folderPath.value}</code>
-          <Button onClick={pickFolder} disabled={picking.value} size="small">
-            {t('tools.batchPv.changeFolder')}
-          </Button>
-        </div>
         <div class="font-medium mt-2">{t('tools.batchPv.direction')}</div>
         <Radio k={Direction.UsmToMp4} v-model:value={direction.value}>
           <div class="flex flex-col">
