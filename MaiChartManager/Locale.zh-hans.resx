@@ -274,6 +274,15 @@
     <data name="VideoFileFilter" xml:space="preserve">
     <value>视频或者图片|*.mp4;*.mov;*.avi;*.mkv;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.webp;*.svg;*.dat;*.usm</value>
   </data>
+    <data name="BatchConvertPvNeedLicense" xml:space="preserve">
+    <value>批量转换 PV 需要赞助激活</value>
+  </data>
+    <data name="BatchConvertPvNoFiles" xml:space="preserve">
+    <value>没有找到匹配格式的 PV 文件</value>
+  </data>
+    <data name="BatchConvertPvFolderNotFound" xml:space="preserve">
+    <value>选择的文件夹不存在</value>
+  </data>
 
     <!-- ImageToAbToolController -->
     <data name="SelectImageFolder" xml:space="preserve">

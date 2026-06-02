@@ -520,8 +520,40 @@ tools:
   videoConvertError: Video conversion error
   imageToAb: Image to AssetBundle
   imageToAbError: Image to AB conversion error
+  pvConvert:
+    label: Convert PV
+    single: Single convert
+    singleHint: Pick one PV file. DAT/USM to MP4, or another video format to DAT
+    batch: Batch convert
+    batchHint: Pick a folder for batch conversion, with DAT/USM and MP4 direction options
   videoOptions:
     processing: Still processing, please wait...
+  batchPv:
+    label: Batch Convert PVs
+    title: Batch Convert PVs
+    selectFolder: Pick folder
+    changeFolder: Change folder
+    selectedFolder: Selected folder
+    folderNotFound: Selected folder does not exist
+    direction: Conversion direction
+    directionUsmToMp4: USM / DAT → MP4
+    directionMp4ToUsm: MP4 → USM / DAT
+    directionUsmToMp4Hint: Writes a sibling .mp4 next to each DAT/USM in the chosen folder; originals are kept
+    directionMp4ToUsmHint: Writes a sibling .dat next to each MP4 in the chosen folder; source .mp4 files are kept
+    start: Start
+    cancel: Cancel
+    cancelling: Cancelling...
+    cancelHint: Cancel takes effect after the current file finishes
+    close: Close
+    overall: Overall
+    currentFile: Current file
+    currentFileProgress: Current file progress
+    completedSummary: 'Completed: {success} / {total} succeeded ({failed} failed)'
+    cancelledSummary: 'Cancelled: {completed} / {total} done'
+    noFiles: No PV files in that folder match the selected direction
+    needLicense: This feature requires sponsor activation
+    error: Batch PV conversion error
+    fileErrors: 'File errors encountered:'
 error:
   title: Error
   unknown: Unknown error occurred

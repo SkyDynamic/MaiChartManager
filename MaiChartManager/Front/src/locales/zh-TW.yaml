@@ -465,8 +465,40 @@ tools:
   videoConvertError: 影片轉換出錯
   imageToAb: 圖片轉 AssetBundle
   imageToAbError: 圖片轉 AB 出錯
+  pvConvert:
+    label: 轉換 PV
+    single: 單個轉換
+    singleHint: 選擇一個 PV 檔案，DAT/USM 轉 MP4，其他影片轉 DAT
+    batch: 批次轉換
+    batchHint: 選擇資料夾批次轉換，可選擇 DAT/USM 與 MP4 的轉換方向
   videoOptions:
     processing: 還在處理，別急…
+  batchPv:
+    label: 批次轉換 PV
+    title: 批次轉換 PV
+    selectFolder: 選擇資料夾
+    changeFolder: 重新選擇
+    selectedFolder: 已選擇的資料夾
+    folderNotFound: 選擇的資料夾不存在
+    direction: 轉換方向
+    directionUsmToMp4: USM / DAT → MP4
+    directionMp4ToUsm: MP4 → USM / DAT
+    directionUsmToMp4Hint: 在該資料夾內為每個 DAT/USM 產生對應的 MP4，原檔案保留
+    directionMp4ToUsmHint: 在該資料夾內為每個 MP4 產生對應的 DAT，原 MP4 保留
+    start: 開始轉換
+    cancel: 取消
+    cancelling: 正在取消…
+    cancelHint: 取消會在目前檔案轉換完成後生效
+    close: 關閉
+    overall: 總進度
+    currentFile: 目前檔案
+    currentFileProgress: 目前檔案進度
+    completedSummary: 轉換完成：成功 {success} / {total}（失敗 {failed}）
+    cancelledSummary: 已取消：已完成 {completed} / {total}
+    noFiles: 該資料夾下找不到符合方向的 PV 檔案
+    needLicense: 此功能需要贊助啟用
+    error: 批次轉換 PV 出錯
+    fileErrors: 處理過程中的檔案錯誤：
 error:
   title: 錯誤
   unknown: 發生未知錯誤
