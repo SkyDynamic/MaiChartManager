@@ -115,6 +115,15 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
     };
 
     private record BatchProgressPayload(int Processed, int Total, int FileProgress, string FileName, int Failed);
+    private record BatchErrorPayload(string Code, string Message);
+
+    private static class BatchConvertPvErrorCode
+    {
+        public const string NeedLicense = "NEED_LICENSE";
+        public const string NoFiles = "NO_FILES";
+        public const string FolderNotFound = "FOLDER_NOT_FOUND";
+        public const string ConvertFailed = "CONVERT_FAILED";
+    }
 
     /// <summary>
     /// 批量转换用户选择的文件夹内所有 PV：USM/DAT ↔ MP4。
@@ -130,15 +139,13 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
         // PV 转换属于赞助功能
         if (IapManager.License != IapManager.LicenseStatus.Active)
         {
-            await Response.WriteAsync($"event: {BatchConvertPvEventType.Error}\ndata: {SanitizeSseLine(Locale.BatchConvertPvNeedLicense)}\n\n");
-            await Response.Body.FlushAsync();
+            await WriteBatchError(BatchConvertPvErrorCode.NeedLicense, Locale.BatchConvertPvNeedLicense);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
         {
-            await Response.WriteAsync($"event: {BatchConvertPvEventType.Error}\ndata: {SanitizeSseLine(Locale.BatchConvertPvFolderNotFound)}\n\n");
-            await Response.Body.FlushAsync();
+            await WriteBatchError(BatchConvertPvErrorCode.FolderNotFound, Locale.BatchConvertPvFolderNotFound);
             return;
         }
 
@@ -154,8 +161,7 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
 
         if (files.Count == 0)
         {
-            await Response.WriteAsync($"event: {BatchConvertPvEventType.Error}\ndata: {SanitizeSseLine(Locale.BatchConvertPvNoFiles)}\n\n");
-            await Response.Body.FlushAsync();
+            await WriteBatchError(BatchConvertPvErrorCode.NoFiles, Locale.BatchConvertPvNoFiles);
             return;
         }
 
@@ -274,7 +280,7 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
             SentrySdk.CaptureException(ex);
             try
             {
-                await EnqueueEvent(sseChannel.Writer, BatchConvertPvEventType.Error, string.Format(Locale.ConvertFailed, ex.Message));
+                await EnqueueError(sseChannel.Writer, BatchConvertPvErrorCode.ConvertFailed, string.Format(Locale.ConvertFailed, ex.Message));
             }
             catch
             {
@@ -298,8 +304,20 @@ public class VideoConvertToolController(ILogger<VideoConvertToolController> logg
     private static string SanitizeSseLine(string data) =>
         data.Replace("\r", " ").Replace("\n", " ");
 
+    private static string CreateBatchErrorData(string code, string message) =>
+        JsonSerializer.Serialize(new BatchErrorPayload(code, message), BatchJsonOptions);
+
+    private async Task WriteBatchError(string code, string message)
+    {
+        await Response.WriteAsync($"event: {BatchConvertPvEventType.Error}\ndata: {SanitizeSseLine(CreateBatchErrorData(code, message))}\n\n");
+        await Response.Body.FlushAsync();
+    }
+
     private static ValueTask EnqueueEvent(ChannelWriter<string> writer, BatchConvertPvEventType eventType, string data) =>
         writer.WriteAsync($"event: {eventType}\ndata: {SanitizeSseLine(data)}\n\n");
+
+    private static ValueTask EnqueueError(ChannelWriter<string> writer, string code, string message) =>
+        EnqueueEvent(writer, BatchConvertPvEventType.Error, CreateBatchErrorData(code, message));
 
     private static ValueTask EnqueueProgress(ChannelWriter<string> writer, int processed, int total, int fileProgress, string fileName, int failed)
     {

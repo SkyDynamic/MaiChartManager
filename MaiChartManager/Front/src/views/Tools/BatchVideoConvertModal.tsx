@@ -32,6 +32,29 @@ interface ProgressPayload {
   failed: number;
 }
 
+interface BatchErrorPayload {
+  code: string;
+  message: string;
+}
+
+interface BatchError extends Error {
+  code?: string;
+}
+
+const createBatchError = (data: string): BatchError => {
+  try {
+    const payload = JSON.parse(data) as Partial<BatchErrorPayload>;
+    if (payload.code && payload.message) {
+      const error = new Error(payload.message) as BatchError;
+      error.code = payload.code;
+      return error;
+    }
+  } catch {
+    // fallback to legacy plain-text error data
+  }
+  return new Error(data);
+};
+
 export default defineComponent({
   setup(_, { expose }) {
     const { t } = useI18n();
@@ -58,6 +81,12 @@ export default defineComponent({
     const overallPercent = computed(() =>
       state.total === 0 ? 0 : Math.floor((state.completed / state.total) * 100),
     );
+
+    const friendlyErrorLocaleKeys: Record<string, string> = {
+      NEED_LICENSE: 'tools.batchPv.needLicense',
+      NO_FILES: 'tools.batchPv.noFiles',
+      FOLDER_NOT_FOUND: 'tools.batchPv.folderNotFound',
+    };
 
     const show = computed({
       get: () => step.value !== STEP.None,
@@ -146,7 +175,7 @@ export default defineComponent({
                 }
                 case 'Error': {
                   controller?.abort();
-                  reject(new Error(e.data));
+                  reject(createBatchError(e.data));
                   break;
                 }
               }
@@ -166,14 +195,9 @@ export default defineComponent({
           return;
         }
         // 已知的友好错误（无文件 / 需要赞助 / 文件夹不存在）：toast 提示并回到 Configure，不上报
-        const message: string = e?.message ?? '';
-        const friendlyMessages = [
-          t('tools.batchPv.noFiles'),
-          t('tools.batchPv.needLicense'),
-          t('tools.batchPv.folderNotFound'),
-        ];
-        if (friendlyMessages.includes(message)) {
-          addToast({ message, type: 'warning' });
+        const friendlyErrorLocaleKey = friendlyErrorLocaleKeys[e?.code as string];
+        if (friendlyErrorLocaleKey) {
+          addToast({ message: t(friendlyErrorLocaleKey), type: 'warning' });
           step.value = STEP.Configure;
           return;
         }
