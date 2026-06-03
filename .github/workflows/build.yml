@@ -50,47 +50,31 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
-    - name: Checkout Assets
-      uses: clansty/checkout@main
-      with:
-        repository: MuNET-OSS/AquaMai-Build-Assets
-        token: ${{ secrets.BUILD_ASSETS_PAT }}
-        path: build-assets
-        max-attempts: 50
-        min-retry-interval: 1
-        max-retry-interval: 5
-
-    - name: Copy Assets
-      shell: powershell
-      run: |
-        Write-Host "Copying assets..."
-        Copy-Item -Path "build-assets/SDEZ/*" -Destination "AquaMai/Libs/" -Recurse -Force
-
-    - name: Setup Nuget
-      run: |
-        dotnet nuget list source
-        if (-not (dotnet nuget list source | Select-String "nuget.org")) {
-            dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
-        }
-
     - name: Download wwwroot
       uses: actions/download-artifact@v4
       with:
         name: wwwroot
         path: MaiChartManager/wwwroot
 
-    - name: Build
+    # --- 修改开始 ---
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # 请根据你的项目实际版本修改，如 6.0.x 或 9.0.x
+
+    - name: Build and Publish (Crack Mode)
       shell: powershell
       run: |
-        .\Packaging\Build.ps1 -Mode Canary
+        # 假设你的主项目文件路径是 MaiChartManager/MaiChartManager.csproj
+        # -p:BuildType=crack 用于传递自定义的构建属性
+        dotnet publish MaiChartManager/MaiChartManager.csproj -c Release -o ./publish -p:BuildType=crack
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: MaiChartManager
-        path: Packaging
+        name: MaiChartManager-Crack
+        path: ./publish
+    # --- 修改结束 ---
 
-    - name: Delete wwwroot artifact
-      uses: geekyeggo/delete-artifact@v5
-      with:
-        name: wwwroot
+    # 注意：这里删除了原本删除 wwwroot artifact 的步骤
+    # 因为 wwwroot 已经被打包进 ./publish 目录中，不再需要单独处理或清理
