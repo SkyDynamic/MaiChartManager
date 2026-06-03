@@ -67,7 +67,7 @@ jobs:
       run: |
         # 假设你的主项目文件路径是 MaiChartManager/MaiChartManager.csproj
         # -p:BuildType=crack 用于传递自定义的构建属性
-        dotnet publish MaiChartManager/MaiChartManager.csproj -c Release -o ./publish -p:BuildType=crack
+        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -o ./publish
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
