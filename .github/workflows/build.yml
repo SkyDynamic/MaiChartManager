@@ -71,6 +71,24 @@ jobs:
         dotnet build SonicAudioTools/Source/SonicAudioLib/SonicAudioLib.csproj -c Release
         dotnet build XV2-Tools/LB_Common/LB_Common.csproj -c Release
         dotnet build XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj -c Release
+
+        New-Item -ItemType Directory -Force -Path "XV2-Tools/LB_Common/bin/Crack/"
+        Copy-Item "XV2-Tools/LB_Common/bin/Release/netstandard2.1/LB_Common.dll" -Destination "XV2-Tools/LB_Common/bin/Crack/LB_Common.dll" -Force
+        
+        New-Item -ItemType Directory -Force -Path "MaiLib/obj/Crack/net9.0/ref/"
+        Copy-Item "MaiLib/bin/Release/net9.0/ref/MaiLib.dll" -Destination "MaiLib/obj/Crack/net9.0/ref/MaiLib.dll" -Force
+        
+        New-Item -ItemType Directory -Force -Path "MuConvert/obj/Crack/net10.0/win-x64/ref/"
+        Copy-Item "MuConvert/bin/Release/net10.0/win-x64/ref/MuConvert.dll" -Destination "MuConvert/obj/Crack/net10.0/win-x64/ref/MuConvert.dll" -Force
+        
+        New-Item -ItemType Directory -Force -Path "SimaiSharp/SimaiSharp/bin/Crack/netstandard2.1/"
+        Copy-Item "SimaiSharp/SimaiSharp/bin/Release/netstandard2.1/SimaiSharp.dll" -Destination "SimaiSharp/SimaiSharp/bin/Crack/netstandard2.1/SimaiSharp.dll" -Force
+        
+        New-Item -ItemType Directory -Force -Path "SonicAudioTools/Source/SonicAudioLib/bin/Crack/"
+        Copy-Item "SonicAudioTools/Source/SonicAudioLib/bin/Release/SonicAudioLib.dll" -Destination "SonicAudioTools/Source/SonicAudioLib/bin/Crack/SonicAudioLib.dll" -Force
+        
+        New-Item -ItemType Directory -Force -Path "XV2-Tools/Xv2CoreLib/bin/Crack/"
+        Copy-Item "XV2-Tools/Xv2CoreLib/bin/Release/Xv2CoreLib.dll" -Destination "XV2-Tools/Xv2CoreLib/bin/Crack/Xv2CoreLib.dll" -Force
         
         dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -o ./publish /p:BuildProjectReferences=false
         
