@@ -64,11 +64,15 @@ jobs:
     - name: Build and Publish
       shell: powershell
       run: |
-        dotnet build XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj -c Release
-        dotnet build XV2-Tools/LB_Common/LB_Common.csproj -c Release
+        dotnet build AquaMai/AquaMai.Config.HeadlessLoader/AquaMai.Config.HeadlessLoader.csproj -c Release
+        dotnet build MaiLib/MaiLib.csproj -c Release
+        dotnet build SimaiSharp/SimaiSharp/SimaiSharp.csproj -c Release
+        dotnet build MuConvert/MuConvert.csproj -c Release
         dotnet build SonicAudioTools/Source/SonicAudioLib/SonicAudioLib.csproj -c Release
+        dotnet build XV2-Tools/LB_Common/LB_Common.csproj -c Release
+        dotnet build XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj -c Release
         
-        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -p:OutputPath=./publish/
+        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -o ./publish /p:BuildProjectReferences=false
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
