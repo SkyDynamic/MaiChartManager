@@ -39,7 +39,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: self-hosted
+    runs-on: windows-latest
     needs: build-frontend
     
     steps:
