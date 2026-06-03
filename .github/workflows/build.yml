@@ -56,23 +56,18 @@ jobs:
         name: wwwroot
         path: MaiChartManager/wwwroot
 
-    # --- 修改开始 ---
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # 请根据你的项目实际版本修改，如 6.0.x 或 9.0.x
+        dotnet-version: '8.0.x'
 
     - name: Build and Publish
       shell: powershell
       run: |
-        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -p:Configuration=Release -o ./publish
-
+        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -p:OutputPath=./publish/
+        
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: MaiChartManager-Crack
         path: ./publish
-    # --- 修改结束 ---
-
-    # 注意：这里删除了原本删除 wwwroot artifact 的步骤
-    # 因为 wwwroot 已经被打包进 ./publish 目录中，不再需要单独处理或清理
