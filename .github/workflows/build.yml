@@ -62,12 +62,10 @@ jobs:
       with:
         dotnet-version: '8.0.x' # 请根据你的项目实际版本修改，如 6.0.x 或 9.0.x
 
-    - name: Build and Publish (Crack Mode)
+    - name: Build and Publish
       shell: powershell
       run: |
-        # 假设你的主项目文件路径是 MaiChartManager/MaiChartManager.csproj
-        # -p:BuildType=crack 用于传递自定义的构建属性
-        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -o ./publish
+        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -p:Configuration=Release -o ./publish
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
