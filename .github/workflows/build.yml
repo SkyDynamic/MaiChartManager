@@ -84,47 +84,11 @@ jobs:
       run: |
         .\Packaging\Build.ps1 -Mode Canary
 
-    - name: Upload to Alist
-      shell: pwsh
-      env:
-        ALIST_TOKEN: ${{ secrets.ALIST_TOKEN }}
-      run: |
-        $alistUrl = "https://alist.c5y.moe"
-        
-        # 找到构建产物
-        $appxFile = Get-ChildItem -Path "Packaging" -Filter "MaiChartManager_Canary_*.appx" | Select-Object -First 1
-        if (-not $appxFile) {
-            throw "No appx file found!"
-        }
-        
-        Write-Host "Uploading $($appxFile.Name)..."
-        
-        # 上传文件
-        $remotePath = "/SBGA/MaiChartManager Canary/$($appxFile.Name)"
-        $encodedPath = [System.Uri]::EscapeDataString($remotePath)
-        
-        $headers = @{
-            "Authorization" = $env:ALIST_TOKEN
-            "File-Path" = $encodedPath
-        }
-        
-        Invoke-RestMethod -Uri "$alistUrl/api/fs/put" -Method Put -InFile $appxFile.FullName -Headers $headers
-        
-        Write-Host "Upload complete: $remotePath"
-
-    - name: Update AppInstaller Config
-      shell: powershell
-      run: |
-        # 1. 获取构建好的 Appx 文件名来提取版本号
-        $appxFile = Get-ChildItem -Path "Packaging" -Filter "MaiChartManager_Canary_*.appx" | Select-Object -First 1
-        if (-not $appxFile) { throw "Appx file not found for version extraction!" }
-        
-        # 2. 提取版本号 (假设文件名格式为 MaiChartManager_Canary_1.2.3.4.appx)
-        $version = $appxFile.Name -replace 'MaiChartManager_Canary_', '' -replace '.appx', ''
-        Write-Host "Detected Version: $version"
-        
-        # 3. 执行更新脚本
-        & "D:\sign\mcm-canary-update.ps1" -Version $version
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MaiChartManager
+        path: Packaging
 
     - name: Delete wwwroot artifact
       uses: geekyeggo/delete-artifact@v5
