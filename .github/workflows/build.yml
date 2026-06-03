@@ -64,6 +64,10 @@ jobs:
     - name: Build and Publish
       shell: powershell
       run: |
+        dotnet build XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj -c Release
+        dotnet build XV2-Tools/LB_Common/LB_Common.csproj -c Release
+        dotnet build SonicAudioTools/Source/SonicAudioLib/SonicAudioLib.csproj -c Release
+        
         dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -p:OutputPath=./publish/
         
     - name: Upload Artifact
