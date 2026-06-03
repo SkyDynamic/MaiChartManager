@@ -64,44 +64,7 @@ jobs:
     - name: Build and Publish
       shell: powershell
       run: |
-        # 定义需要修复的项目文件路径
-        $projects = @(
-          "AquaMai/AquaMai.Config.HeadlessLoader/AquaMai.Config.HeadlessLoader.csproj",
-          "MaiLib/MaiLib.csproj",
-          "SimaiSharp/SimaiSharp/SimaiSharp.csproj",
-          "MuConvert/MuConvert.csproj",
-          "SonicAudioTools/Source/SonicAudioLib/SonicAudioLib.csproj",
-          "XV2-Tools/LB_Common/LB_Common.csproj",
-          "XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj"
-        )
-        
-        # 定义要注入的 XML 配置（为 Crack 配置指定输出路径）
-        $crackConfig = @'
-          <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Crack|AnyCPU'">
-            <OutputPath>bin\Crack\</OutputPath>
-          </PropertyGroup>
-        '@
-        
-        # 遍历所有项目，将 Crack 配置注入到 .csproj 文件中
-        foreach ($proj in $projects) {
-          $content = Get-Content $proj -Raw
-          # 检查是否已经包含 Crack 配置，如果没有则注入
-          if ($content -notmatch "Configuration.*==.*'Crack") {
-            $content = $content -replace '</Project>', "$crackConfig`n</Project>"
-            Set-Content -Path $proj -Value $content -NoNewline
-            Write-Host "已为 $proj 注入 Crack 配置"
-          }
-        }
-        
-        dotnet build AquaMai/AquaMai.Config.HeadlessLoader/AquaMai.Config.HeadlessLoader.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build MaiLib/MaiLib.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build SimaiSharp/SimaiSharp/SimaiSharp.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build MuConvert/MuConvert.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build SonicAudioTools/Source/SonicAudioLib/SonicAudioLib.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build XV2-Tools/LB_Common/LB_Common.csproj -c Release -p:OutputPath=bin/Crack/
-        dotnet build XV2-Tools/Xv2CoreLib/Xv2CoreLib.csproj -c Release -p:OutputPath=bin/Crack/
-        
-        dotnet publish MaiChartManager/MaiChartManager.csproj -c Crack -o ./publish
+        dotnet publish -c Debug -o ./publish
         
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
